@@ -1,0 +1,9 @@
+.custom-vis-layout.mstrvisd3cartogram .land {
+  fill: #fff;
+  stroke: #ccc;
+}
+
+.custom-vis-layout.mstrvisd3cartogram .state {
+  fill: #ccc;
+  stroke: #666;
+}

@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">
+        <visualization id="MstrVisCircularHeatChart" desc="D3 Circular Heat Chart" scope="19" projects="" style-name="MstrVisCircularHeatChart" is-mojo="true"/>
+    </visualization-list>
+</visualizations>

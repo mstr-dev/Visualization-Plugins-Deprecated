@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE StyleCatalog SYSTEM "styleCatalog.dtd">
+<StyleCatalog version="2.0">
+    <Styles>
+        <Style name="MstrVisD3BubbleChart" description="D3 Bubble Chart Demo" transform="ReportAjaxMojoVisualizationTransform">
+            <ActualParameters>
+                <ActualParameter name="documentStyle" type="1" value="RWGridJsonStyle" />
+                <ActualParameter name="reportXMLStyle" type="1" value="VisualizationDataStyle" />
+                <ActualParameter name="mojoClassName" type="1" value="plugins.MstrVisD3BubbleChart.MstrVisD3BubbleChart"/>
+            </ActualParameters>
+            <Layouts>
+                <Layout layout_source="AppLayoutSourceFile" order="1">
+                    <![CDATA[/WEB-INF/xml/layouts/MojoVisualizationLayout.xml]]>
+                </Layout>
+            </Layouts>
+        </Style>
+    </Styles>
+</StyleCatalog>

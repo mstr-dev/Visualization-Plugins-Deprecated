@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">
+        <visualization id="MstrVisD3Calendar" desc="D3 Calendar" scope="19" projects="" style-name="MstrVisD3Calendar" is-mojo="true"/>
+    </visualization-list>
+</visualizations>
