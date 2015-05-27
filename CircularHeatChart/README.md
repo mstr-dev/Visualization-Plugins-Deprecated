@@ -10,7 +10,7 @@
 
 **Original Author's Contact Info.:** 
 
-**Original Widget Source Link:** [link](http://prcweb.co.uk/lab/circularheat/)
+**Original Widget Source Link:** <a href = "http://prcweb.co.uk/lab/circularheat/" target = "_blank">Link</a>
 
 **Usage:** This widget needs 2 or 3 attributes and 1 metric.
 
