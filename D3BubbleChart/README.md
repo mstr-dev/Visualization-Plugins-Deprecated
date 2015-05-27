@@ -17,5 +17,6 @@
 **Description:** A circular heat chart displays quantitative data as an array of circular segments, coloured according to value.
 
 **Sceenshot:**
+
 ![Alt text][screenshot]
 [screenshot]: ./style/images/screenshot.png?raw=true
