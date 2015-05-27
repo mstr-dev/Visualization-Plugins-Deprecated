@@ -10,7 +10,7 @@
 
 **Original Author's Contact Info.:** <mike@ocks.org>
 
-**Original Widget Source Link:** [link](http://bl.ocks.org/mbostock/4063269)
+**Original Widget Source Link:** <a href = "http://bl.ocks.org/mbostock/4063269" target = "_blank">Link</a>
 
 **Usage:** This widget needs 1 or more attributes and 1 metric.
 
