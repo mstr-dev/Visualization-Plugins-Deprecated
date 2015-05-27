@@ -14,7 +14,9 @@
 
 **Usage:** This widget needs 1 or more attributes and 1 metric.
 
-**Description:** Bubble charts encode data in the area of circles. Although less perceptually-accurate than bar charts, they can pack hundreds of values into a small space. Implementation based on work by [Jeff Heer](http://homes.cs.washington.edu/~jheer/). 
+**Description:** Bubble charts encode data in the area of circles. Although less perceptually-accurate than bar charts, they can pack hundreds of values into a small space. Implementation based on work by [Jeff Heer](http://homes.cs.washington.edu/~jheer/).
+
+
 **Sceenshot:**
 
 ![Alt text][screenshot]
