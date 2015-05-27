@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">
+        <visualization id="BubbleChart" desc="D3 Bubble Chart" scope="19" projects="" style-name="BubbleChart" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
+</visualizations>
