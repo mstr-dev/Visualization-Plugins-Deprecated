@@ -12,7 +12,7 @@
 
 **Original Widget Source Link:** [link](http://prcweb.co.uk/lab/circularheat/)
 
-**Usage:** This widgets needs 2 or 3 attributes and 1 metric.
+**Usage:** This widget needs 2 or 3 attributes and 1 metric.
 
 **Description:** A circular heat chart displays quantitative data as an array of circular segments, coloured according to value.
 
