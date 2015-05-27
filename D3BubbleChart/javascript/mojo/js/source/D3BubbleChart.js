@@ -1,6 +1,6 @@
 (function () {
-    if (!mstrmojo.plugins.BubbleChart) {
-        mstrmojo.plugins.BubbleChart = {};
+    if (!mstrmojo.plugins.D3BubbleChart) {
+        mstrmojo.plugins.D3BubbleChart = {};
     }
 
     mstrmojo.requiresCls(
@@ -8,13 +8,13 @@
         "mstrmojo.models.template.DataInterface"
     );
 
-    mstrmojo.plugins.BubbleChart.BubbleChart = mstrmojo.declare(
+    mstrmojo.plugins.D3BubbleChart.D3BubbleChart = mstrmojo.declare(
         mstrmojo.CustomVisBase,
         null,
         {
-            scriptClass: "mstrmojo.plugins.BubbleChart.BubbleChart",
+            scriptClass: "mstrmojo.plugins.D3BubbleChart.D3BubbleChart",
 
-            cssClass: "bubblechart",
+            cssClass: "d3bubblechart",
 
             errorDetails: "This visualization requires one or more attributes and one metric.",
 
