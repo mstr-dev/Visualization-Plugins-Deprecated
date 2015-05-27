@@ -1,5 +1,0 @@
-<visualizations>
-    <visualization-list name="ajax">
-        <visualization id="MstrVisD3Cartogram" desc="D3 Cartogram" scope="19" projects="" style-name="MstrVisD3Cartogram" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
-    </visualization-list>
-</visualizations>
