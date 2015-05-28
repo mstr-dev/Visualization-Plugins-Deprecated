@@ -14,3 +14,5 @@ Steps to share:
 1. Fork this repo and clone it in your PC.
 2. Add your visulization or fix issues.
 3. Send a pull request.
+
+For more info. Please refer to the [Wiki](.\wiki?raw=true)
