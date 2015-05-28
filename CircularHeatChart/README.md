@@ -1,4 +1,4 @@
-**Contributor:** MicroStrategy
+**Contributor:** MicroStrategy, Inc.
 
 **Contributor's Contact Info.:** <fding@microstrategy.com>
 
