@@ -2,7 +2,7 @@
 
 **Contributor's Contact Info.:** <fding@microstrategy.com>
 
-**Contributor's Orgnization:** Microstrategy, Inc.
+**Contributor's Orgnization:** MicroStrategy, Inc.
 
 **Original Author:** Mike Bostock
 
