@@ -1,5 +1,5 @@
 ###Description
-Goal of this repo is to share/collect customer created/customized Visualizations for MicroStrategy dashboards. MicroStrategy provides several out-of-box Visulizations in our platform. Now you can extend the visualization pool and have more choices. Visualization in MicrStrategy platform is based on JavaScript, so it is possible to create or adjust existing visualizations to fit in MicroStrategy platform. Some great work such as [D3](https://github.com/mbostock/d3) makes it even more convenient.
+Goal of this repo is to share/collect customer created/customized visualizations of MicroStrategy dashboards. MicroStrategy provides several out-of-box visulizations in our platform. Now, you can extend your visualization pool with more choices. MicroStrategy visualizations are based on JavaScript, so it is possible to create or adjust existing visualizations to fit the platform. Some great work such as [D3](https://github.com/mbostock/d3) makes it even more convenient.
 
 ###How To Use
 Steps to use visualization plugins in this repo:
@@ -12,10 +12,11 @@ You can follow the [introduction](https://lw.microstrategy.com/MSDZ/MSDL/10/docs
 
 ###Sharing Strategy
 Sharing your visualizations is highly encouraged.
+
 Steps to share:
 
 1. Fork this repo and clone it in your PC.
 2. Add your visualization or fix issues.
 3. Send a pull request.
 
-For more info. Please refer to the Wiki
+For more info, please refer to the Wiki.
