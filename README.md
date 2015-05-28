@@ -6,4 +6,11 @@ Steps to use visulization plugins in this repo:
 
 1. Clone the repo and copy the visulization folders you like to `{Web folder}/plugins`,
 2. Restart the web server.
+
 ###Sharing strategy
+Sharing your visulization is highly encouraged.
+Steps to share:
+
+1. Fork this repo and clone it in your PC.
+2. Add your visulization or fix issues.
+3. Send a pull request.
