@@ -6,7 +6,7 @@
 
 **Original Author:** 
 
-**Original Author's Orgnization:** 
+**Original Author's Orgnization:** Google, Inc.
 
 **Original Author's Contact Info.:** 
 
