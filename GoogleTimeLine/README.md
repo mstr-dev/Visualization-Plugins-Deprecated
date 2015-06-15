@@ -12,9 +12,9 @@
 
 **Original Visualization Source Link:** 
 
-**Usage:**  This visualization requires 1 date attribute and 1 or more metrics.
+**Usage:**  This visualization requires 1 date attribute and 1 or more metrics. 
 
-**Description:** Usually used to show the trend of metrics over time. User can display one or more lines on the chart. Each row represents an X position on the chart—that is, a specific time.
+**Description:** Usually used to show the trend of metrics over time. User can display one or more lines on the chart. Each row represents an X position on the chart—that is, a specific time. This is a Flash based visualization, it would require Flash player to display it. Currently there is an issue with Chrome Browser. The macro view slider can not be dragged, if there are more than one visualization in same VI sheet. IE works fine with this case.  
 
 **Screenshot:**
 
