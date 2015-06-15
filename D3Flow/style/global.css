@@ -1,0 +1,45 @@
+.custom-vis-layout.D3Flow text {
+    font: 10px sans-serif;
+}
+.custom-vis-layout.D3Flow body {
+  background: #000;
+}
+
+.custom-vis-layout.D3Flow ellipse {
+  fill: #fff;
+}
+
+.custom-vis-layout.D3Flow path {
+  fill: none;
+  stroke: #fff;
+  stroke-linecap: butt;
+}
+
+.custom-vis-layout.D3Flow .mid {
+  stroke-width: 4px;
+}
+
+.custom-vis-layout.D3Flow .tail {
+  stroke-width: 2px;
+}
+
+.custom-vis-layout.D3Flow .node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.custom-vis-layout.D3Flow .node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.custom-vis-layout.D3Flow .link {
+  fill: none;
+  stroke: #000;
+  stroke-opacity: .2;
+}
+
+.custom-vis-layout.D3Flow .link:hover {
+  stroke-opacity: .5;
+}

@@ -1,0 +1,34 @@
+
+.custom-vis-layout.SequenceSunburst .sidebar {
+    float: right;
+    width: 100px;
+}
+
+
+.custom-vis-layout.SequenceSunburst .sequence {
+    float: inherit;
+    width: 100px;
+}
+
+.custom-vis-layout.SequenceSunburst .div.legend {
+    padding: 10px 0 0 3px;
+}
+
+.custom-vis-layout.SequenceSunburst path {
+    stroke: #fff;
+}
+
+.custom-vis-layout.SequenceSunburst .div.sequence text, .div.legend text {
+    font-weight: 600;
+    fill: #fff;
+}
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgSequenceSunburst {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgSequenceSunburst{
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
