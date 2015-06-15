@@ -4,13 +4,13 @@
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 
-**Original Author:** 
+**Original Author:** Mike Bostock
 
-**Original Author's Orgnization:** 
+**Original Author's Orgnization:** The New York Times
 
-**Original Author's Contact Info.:** 
+**Original Author's Contact Info.:** <mike@ocks.org>
 
-**Original Visualization Source Link:** 
+**Original Visualization Source Link:** [Link](http://bl.ocks.org/mbostock/4063318)
 
 **Usage:** This visualization needs 1 attribute for dates and 1 metric.
 
