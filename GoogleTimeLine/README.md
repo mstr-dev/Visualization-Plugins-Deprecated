@@ -10,7 +10,7 @@
 
 **Original Author's Contact Info.:** 
 
-**Original Visualization Source Link:** 
+**Original Visualization Source Link:** <a href ="https://developers.google.com/chart/interactive/docs/gallery/annotatedtimeline" target = "_blank">Link</a>
 
 **Usage:**  This visualization requires 1 date attribute and 1 or more metrics. 
 
