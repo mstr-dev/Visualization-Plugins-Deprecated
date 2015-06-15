@@ -14,7 +14,7 @@
 
 **Usage:** This visualization needs 1 or more attributes and 1 metric.
 
-**Description:A bar chart presents data with rectangular bars with lengths proportional to the values that they represent. It is a simple yet perceptually-accurate way to visualize data.
+**Description:** A bar chart presents data with rectangular bars with lengths proportional to the values that they represent. It is a simple yet perceptually-accurate way to visualize data.
 
 **Screenshot:**
 
