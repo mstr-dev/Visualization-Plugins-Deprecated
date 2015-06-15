@@ -12,7 +12,7 @@
 
 **Original Visualization Source Link:** <a href = "http://bost.ocks.org/mike/sankey/" target = "_blank">Link</a>
 
-**Usage:** This visualization needs 1 or more attributes and 1 metric.
+**Usage:** This visualization needs 2 or more attributes and 1 or more metrics.
 
 **Description:** Sankey diagrams visualize the magnitude of flow between nodes in a network.
 
