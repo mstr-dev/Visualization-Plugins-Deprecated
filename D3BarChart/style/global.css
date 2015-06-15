@@ -1,0 +1,21 @@
+.custom-vis-layout.d3barchart .bar {
+    fill: steelblue;
+}
+
+.custom-vis-layout.d3barchart .bar:hover {
+    fill: brown;
+}
+
+.custom-vis-layout.d3barchart .axis {
+    font: 10px sans-serif;
+}
+
+.custom-vis-layout.d3barchart .axis path, .axis line {
+    fill: none;
+    stroke: #000000;
+    shape-rendering: crispEdges;
+}
+
+.custom-vis-layout.d3barchart .x.axis path {
+    display: none;
+}
