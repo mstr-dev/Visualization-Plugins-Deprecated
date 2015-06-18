@@ -8,7 +8,7 @@ Steps to use visualization plugins in this repo:
 2. Restart the web server.
 
 ###Create Customized Visualiztions 
-You can follow the [introduction](https://lw.microstrategy.com/MSDZ/MSDL/10/docs/projects/VisSDK_All/Default.htm#topics/HTML5/Creating_an_HTML5_visualization.htm%3FTocPath%3DVisualization%2520SDK%7CHTML5%2520Visualizations%7C_____0) to create a new customized visualization.
+You can follow the [introduction](https://lw.microstrategy.com/msdz/MSDL/10/docs/projects/VisSDK_All/default.htm#topics/HTML5/Creating_an_HTML5_visualization.htm) to create a new customized visualization.
 
 ###Sharing Your Visualizations
 Sharing your visualizations is highly encouraged. We would appreciate your contribution to the MicroStrategy community.
