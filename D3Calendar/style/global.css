@@ -25,3 +25,14 @@
 .custom-vis-layout.d3calendar .RdYlGn .q8-11{fill:rgb(102,189,99)}
 .custom-vis-layout.d3calendar .RdYlGn .q9-11{fill:rgb(26,152,80)}
 .custom-vis-layout.d3calendar .RdYlGn .q10-11{fill:rgb(0,104,55)}
+
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgD3Calendar {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3Calendar {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
