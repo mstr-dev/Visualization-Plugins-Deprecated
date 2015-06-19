@@ -43,3 +43,14 @@
 .custom-vis-layout.D3Flow .link:hover {
   stroke-opacity: .5;
 }
+
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgD3Flow {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3Flow{
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
