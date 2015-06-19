@@ -20,6 +20,6 @@ Steps to share:
 3. Send a pull request.
 
 ###License of Visualizations
-For all the Custom Visualizations submitted to this GitHub Repository, we assume that they are aligned to the open source principle and allowed to share to the MSTR community. If you have a specific license statement, please put it at the begining of your Visualization Java Script code. 
+For all the Custom Visualizations submitted to this GitHub Repository, we assume that they are aligned to the open source principle and allowed to share to the MSTR community. If you have a specific license statement, please put it at the begining of your Visualization JavaScript code. 
 
 For more info, please refer to the [Wiki Site](https://github.com/mstr-dev/Visualization-Plugins/wiki).
