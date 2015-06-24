@@ -1,4 +1,4 @@
-###Note:
+###Note
 This branch is used to host all the visualizations customized for MicroStrategy 9.4.1. In MicroStrategy 9.4.1, although the Visual Insight is programmed with Flash, it doesn't support the Java Script based 3rd party visualizations. The interactive mode document can support those 3rd party visualizations. You can plugin the visualizations in this repo and enable them in document interactive mode.  
 
 ###Description
