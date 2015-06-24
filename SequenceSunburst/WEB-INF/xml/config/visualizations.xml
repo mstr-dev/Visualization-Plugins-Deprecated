@@ -1,5 +1,0 @@
-<visualizations>
-    <visualization-list name="ajax">
-        <visualization id="SequenceSunburst" desc="SequenceSunburst" scope="19" projects="" style-name="SequenceSunburst" is-mojo="true" attribute-minimum="0" metric-minimum="0"/>
-    </visualization-list>
-</visualizations>

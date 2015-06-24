@@ -1,5 +1,0 @@
-<visualizations>
-    <visualization-list name="ajax">
-        <visualization id="D3Flow" desc="D3 Flow Diagram" scope="19" projects="" style-name="D3Flow" is-mojo="true" attribute-minimum="2" metric-minimum="1"/>
-    </visualization-list>
-</visualizations>
