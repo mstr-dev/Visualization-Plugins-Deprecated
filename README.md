@@ -7,6 +7,8 @@ Steps to use visualization plugins in this repo:
 1. Clone the repo and copy the visualization folders you like to `{Web folder}/plugins`,
 2. Restart the web server.
 
+Note: The visualizations in this branch are designed for MicroStrategy 10. They should work in Document Express/Interactive Mode(Web) and Visual Insight Dashboard(Web/Desktop). If you are looking for visualizations customized for MicroStrategy 9.4.1, please check the [9.4.1 branch](https://github.com/mstr-dev/Visualization-Plugins/tree/9.4.1).
+
 ###Create Customized Visualiztions 
 You can follow the [introduction](https://lw.microstrategy.com/msdz/MSDL/10/docs/projects/VisSDK_All/default.htm#topics/HTML5/Creating_an_HTML5_visualization.htm) to create a new customized visualization.
 
