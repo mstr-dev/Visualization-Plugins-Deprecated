@@ -1,5 +1,5 @@
 ###Note:
-This branch is for Microstrategy v941. 
+This branch is used to host all the visualizations customized for MicroStrategy 9.4.1. In MicroStrategy 9.4.1, although the Visual Insight is programmed with Flash, it doesn't support the Java Script based 3rd party visualizations. The interactive mode document can support those 3rd party visualizations. You can plugin the visualizations in this repo and enable them in document interactive mode.  
 
 ###Description
 Goal of this repo is to share/collect customer created/customized visualizations of MicroStrategy dashboards. MicroStrategy provides several out-of-box visulizations in our platform. Now, you can extend your visualization pool with more choices. MicroStrategy visualizations are based on JavaScript, so it is possible to create or adjust existing visualizations to fit the platform. Some great work such as [D3](https://github.com/mbostock/d3) makes it even more convenient.
