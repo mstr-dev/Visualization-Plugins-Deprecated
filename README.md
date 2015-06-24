@@ -1,3 +1,6 @@
+###Note:
+This branch is for Microstrategy v941. 
+
 ###Description
 Goal of this repo is to share/collect customer created/customized visualizations of MicroStrategy dashboards. MicroStrategy provides several out-of-box visulizations in our platform. Now, you can extend your visualization pool with more choices. MicroStrategy visualizations are based on JavaScript, so it is possible to create or adjust existing visualizations to fit the platform. Some great work such as [D3](https://github.com/mbostock/d3) makes it even more convenient.
 
