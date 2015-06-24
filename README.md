@@ -7,7 +7,7 @@ Steps to use visualization plugins in this repo:
 1. Clone the repo and copy the visualization folders you like to `{Web folder}/plugins`,
 2. Restart the web server.
 
-Note: The visualizations in this branch are designed for MicroStrategy 9.4.1. In MicroStrategy 9.4.1, since the Visual Insight is programmed with Flash, it doesn't support the Java Script based 3rd party visualizations. However, the interactive mode document can support those 3rd party visualizations. You can plug in the visualizations in this branch and enable them in Document Interactive Mode(Web). If you are looking for visualizations customized for MicroStrategy 10, please check the [master branch](https://github.com/mstr-dev/Visualization-Plugins/tree/master).
+Note: The visualizations in this branch are designed for MicroStrategy 9.4.1. In MicroStrategy 9.4.1, since the Visual Insight is programmed with Flash, it doesn't support the Java Script based 3rd party visualizations. However, the Document Interactive Mode can support those 3rd party visualizations. You can plug in the visualizations in this branch and enable them in Document Interactive Mode(Web). If you are looking for visualizations customized for MicroStrategy 10, please check the [master branch](https://github.com/mstr-dev/Visualization-Plugins/tree/master).
 
 ###Create Customized Visualiztions 
 You can follow the [introduction](https://lw.microstrategy.com/msdz/MSDL/10/docs/projects/VisSDK_All/default.htm#topics/HTML5/Creating_an_HTML5_visualization.htm) to create a new customized visualization.
