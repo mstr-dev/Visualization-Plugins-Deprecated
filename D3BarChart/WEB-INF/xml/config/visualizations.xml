@@ -1,5 +1,0 @@
-<visualizations>
-  <visualization-list name="ajax" show-in-web="true" view-mode="51">
-      <visualization desc="Bar chart with D3js" id="D3BarChart" is-mojo="true" scope="18" style-name="D3BarChart" attribute-minimum="1" metric-minimum="1"/>
-  </visualization-list>
-</visualizations>
