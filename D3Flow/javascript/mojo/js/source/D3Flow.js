@@ -203,8 +203,8 @@
 // add the link titles
                 link.append("title")
                     .text(function(d) {
-                        return d.source.name + " → " +
-                            d.target.name + "\n" + format(d.value); });
+                        return mstrmojo.string.decodeHtmlString(d.source.name) + " → " +
+                            mstrmojo.string.decodeHtmlString(d.target.name) + "\n" + format(d.value); });
 
 // add in the nodes
                 var node = svg.append("g").selectAll(".node")
@@ -231,7 +231,7 @@ console.log(this);
                         return d3.rgb(d.color).darker(2); })
                     .append("title")
                     .text(function(d) {
-                        return d.name + "\n" + format(d.value); });
+                        return mstrmojo.string.decodeHtmlString(d.name) + "\n" + format(d.value); });
 
 // add in the title for the nodes
                 node.append("text")
@@ -240,7 +240,7 @@ console.log(this);
                     .attr("dy", ".35em")
                     .attr("text-anchor", "end")
                     .attr("transform", null)
-                    .text(function(d) { return d.name; })
+                    .text(function(d) { return mstrmojo.string.decodeHtmlString(d.name); })
                     .style("font-family", "arial")
                     .filter(function(d) { return d.x < width / 2; })
                     .attr("x", 6 + sankey.nodeWidth())

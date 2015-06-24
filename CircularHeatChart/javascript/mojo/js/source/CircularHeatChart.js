@@ -331,7 +331,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                     text.transition()
                         .duration(duration)
                         .text(function (d) {
-                            return d.key;
+                            return mstrmojo.string.decodeHtmlString(d.key);
                         })
                         .attr("transform", "translate(" + -30 + "," + -1 * (r1 + r2) / 2 + ")")
                         .attr("text-anchor", "end");
@@ -374,7 +374,7 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                         // transition animations
                         label.transition()
                             .text(function (d) {
-                                return d.value;
+                                return mstrmojo.string.decodeHtmlString(d.value);
                             })
                             .attr("text-anchor", function (d) {
                                 return (d.startAngle + d.endAngle) / 2 > Math.PI ? "end" : null;
