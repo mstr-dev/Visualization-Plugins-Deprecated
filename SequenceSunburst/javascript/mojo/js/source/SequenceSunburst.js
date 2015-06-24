@@ -169,7 +169,7 @@
                         .attr("d", arc)
                         .attr("fill-rule", "evenodd")
                         .style("fill", function(d) {
-                                if (d.depth) { color_hash[colors(d.name)] = d.name;
+                                if (d.depth) { color_hash[colors(d.name)] = mstrmojo.string.decodeHtmlString(d.name);
                                 return colors(d.name); }
                                 return null;
                             })
@@ -326,7 +326,7 @@
                         .attr("dy", "0.35em")
                         .attr("text-anchor", "middle")
                         .text(function(d) {
-                            return d.name; })
+                            return mstrmojo.string.decodeHtmlString(d.name); })
                         .style("fill", "#fff")
                         .style("font-family", "arial")
                         .style("font-weight", "600");
