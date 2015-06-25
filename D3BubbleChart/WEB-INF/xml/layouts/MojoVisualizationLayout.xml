@@ -1,0 +1,55 @@
+<!DOCTYPE mstrlayout:layout SYSTEM "mstrlayout.dtd">
+<mstrlayout:layout>
+	<![CDATA[
+    <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/Vis.css"/>
+	<div id="visContainer]]><mstrlayout:render name="UniqueId"/><![CDATA[">&nbsp;</div>
+	<script language="javascript">
+        
+        ]]><mstrlayout:render name="InsertDynamicScripts"/><![CDATA[
+        
+		var className]]><mstrlayout:render name="UniqueId"/><![CDATA[ = ']]><mstrlayout:render name="FormalParameterValue"><mstrlayout:argument value="mojoClassName"/></mstrlayout:render><![CDATA[';
+		window.renderVis]]><mstrlayout:render name="UniqueId"/><![CDATA[ = function() {
+            mstrmojo.requiresCls('mstrmojo.' + className]]><mstrlayout:render name="UniqueId"/><![CDATA[); 
+            var cls = mstrmojo.hash.walk('mstrmojo.' + className]]><mstrlayout:render name="UniqueId"/><![CDATA[, window);
+			var props = {
+				placeholder: 'visContainer]]><mstrlayout:render name="UniqueId"/><![CDATA[',
+				model: ]]><mstrlayout:render name="GridData"/><![CDATA[,
+	   			containerid: "]]><mstrlayout:render name="UniqueId"/><![CDATA[",
+	   			width:parseInt(']]><mstrlayout:render name="containerWidth"/><![CDATA['),
+	   			height:parseInt(']]><mstrlayout:render name="containerHeight"/><![CDATA['),
+                zoomFactor:]]><mstrlayout:render name="zoomFactor"/><![CDATA[
+	   		};
+            var extProps = ]]><mstrlayout:render name="ExtraProps"/><![CDATA[;
+            props = mstrmojo.hash.copy(props, extProps);
+            
+            var w = null;
+            for (var i in mstrmojo.all) { 
+                var cm = mstrmojo.all[i].model,
+                    pm = props.model;
+                if (cm && cm.k === pm.k && 
+                    parseInt(cm.sid) === parseInt(pm.sid) &&
+                    cm.scriptClass === pm.scriptClass) {
+                    w = mstrmojo.all[i];
+                    break;
+                }
+            }
+            if (!w) {
+              w = new cls(props);
+              w.render();
+            } else {
+              w.placeholder = document.getElementById(props.placeholder);
+              w.model = props.model;
+              w.zoomFactor = props.zoomFactor;
+              w.unrender();
+              w.render();
+            }
+   		};
+   		
+		if (className]]><mstrlayout:render name="UniqueId"/><![CDATA[) {
+            loadInit(loadConditions, 'renderVis]]><mstrlayout:render name="UniqueId"/><![CDATA[()');
+   		} else {
+   			alert("no mojo class specified");
+   		}
+	</script>
+	]]>
+</mstrlayout:layout>
