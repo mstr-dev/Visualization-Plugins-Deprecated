@@ -20,5 +20,6 @@
 **Screenshot:**
 
 ![Alt text][screenshot]
-[screenshot]: ./screenshot.png?raw=true
-[screenshot]: ./Widget Property.png?raw=true
+[screenshot]: ./screenshot.PNG?raw=true
+
+![Alt text](./Widget Property.PNG?raw=true)
