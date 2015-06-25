@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE StyleCatalog SYSTEM "styleCatalog.dtd">
+<StyleCatalog version="2.0">
+  <TransformDefns>
+    <TransformDefn class="com.microstrategy.sdk.transform.D3BubbleChartWidgetDataTransform" name="D3BubbleChartWidgetDataTransform"/>
+  </TransformDefns>
+  <Styles>
+    <Style description="Style for rendering json data for D3 Bubble Chart View widgets" name="D3BubbleChartMojoDataStyle" transform="D3BubbleChartWidgetDataTransform"/>
+
+    <Style description="Style to render D3 Bubble Chart Widget" name="D3BubbleChartMojoVisualizationStyle" transform="ReportAjaxMojoVisualizationTransform">
+      <ActualParameters>
+        <ActualParameter name="containerHeight" value="350"/>
+        <ActualParameter name="containerWidth" value="800"/>
+        <ActualParameter name="mojoClassName" value="plugins.D3BubbleChart.D3BubbleChartVis"/>
+        <ActualParameter name="reportXMLStyle" value="D3BubbleChartMojoDataStyle"/>
+      </ActualParameters>
+      <Layouts>
+        <Layout layout_source="AppLayoutSourceFile"><![CDATA[/plugins/D3BubbleChart/WEB-INF/xml/layouts/MojoVisualizationLayout.xml]]></Layout>
+      </Layouts>
+    </Style>
+    <Style description="Displays Visualization Properties Editor for D3 Bubble Chart widget" name="visPropsD3BubbleMojoVisualizationStyle" transform="VisualizationPropertiesTransform">
+      <Layouts>
+        <Layout layout_source="AppLayoutSourceFile" order="1"><![CDATA[/plugins/D3BubbleChart/WEB-INF/xml/layouts/visPropsBubbleCharts.xml]]></Layout>
+      </Layouts>
+    </Style>
+  </Styles>
+</StyleCatalog>

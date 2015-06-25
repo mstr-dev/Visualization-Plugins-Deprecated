@@ -1,0 +1,5 @@
+<visualizations>
+  <visualization-list name="ajax">
+    <visualization desc="D3 BubbleChart Visualization" is-mojo="true" scope="3" style-name="D3BubbleChartMojoVisualizationStyle" includeMDProperties="1" propsEditor="visPropsD3BubbleMojoVisualizationStyle"/>
+  </visualization-list>
+</visualizations>

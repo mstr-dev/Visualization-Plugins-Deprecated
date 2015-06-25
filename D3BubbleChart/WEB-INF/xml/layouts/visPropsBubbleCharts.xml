@@ -1,0 +1,34 @@
+<!DOCTYPE mstrlayout:layout SYSTEM "mstrlayout.dtd">
+<mstrlayout:layout>
+ <table>
+	 <tr>
+		<td>
+			<mstrlayout:render name="descriptor">
+				<mstrlayout:argument type="string" value="mstrWeb.4880"/><!-- "Update Button" -->
+			</mstrlayout:render>
+		</td>
+		<td>
+			<mstrlayout:render name="SelectBox">
+				<mstrlayout:argument type="String" value="colorby" /> <!-- prop name -->
+				<mstrlayout:argument type="String" value="0^Color By Parent|1^Color By Children" /> <!-- selectBox elements -->
+				<mstrlayout:argument type="String" value="" /> <!-- extra att -->
+				<mstrlayout:argument type="String" value="0" /> <!-- default val -->
+			</mstrlayout:render>
+		</td>		
+	</tr>
+	<tr>
+		<td>
+			<mstrlayout:render name="descriptor">
+				<mstrlayout:argument type="string" value="mstrWeb.2403"/>
+			</mstrlayout:render>
+		</td>
+		<td>
+			<mstrlayout:render name="checkbox">
+				<mstrlayout:argument type="String" value="legend" /> <!-- prop name -->
+				<mstrlayout:argument type="String" value="" /> <!-- extra att -->
+				<mstrlayout:argument type="String" value="1" /> <!-- default val -->
+			</mstrlayout:render>
+		</td>		
+	</tr>
+ </table>
+</mstrlayout:layout>
