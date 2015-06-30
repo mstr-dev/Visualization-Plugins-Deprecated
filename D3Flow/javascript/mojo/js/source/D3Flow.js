@@ -44,6 +44,7 @@
                 // gridData.getRowTitles().size() // Nb Attributes
                 //var lAttributeName = gridData.getRowTitles().getTitle(i).getName(); // Attrbiute Name
                 var gridData = this.dataInterface;
+                if (gridData.getRowTitles().size() <= 1) return;
                 var mMyData = [];
 
                 window.gridData = gridData;
