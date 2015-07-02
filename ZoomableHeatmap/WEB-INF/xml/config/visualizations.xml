@@ -1,0 +1,13 @@
+<visualizations>
+   <visualization-list name="ajax">
+      <!--Define a new visualization, with the style name defined in stylecatalog.xml and with is-mojo="true"-->
+      <!--id is a unique identifier for the visualization, such as the name of the plugin-->
+      <!--desc is the name that is displayed in the list of visualizations for use in a document or dashboard. Replace "name to be displayed for visualization" with the name to appear in the gallery or list.-->
+      <!--is-mojo specifies whether this is a mojo visualization-->
+      <!--scope is a bit-wise value that specifies which MicroStrategy objects the visualization can be applied to: -->
+      <!--     2  Report grids in documents --> 
+      <!--    16  VI dashboards -->
+      <!--style-name is the name of the style used to render the visualization. Replace "visualization rendering style" with the name of the style in styleCatalog.xml that renders the visualization-->
+      <visualization id="ZoomableHeatmap" desc="Zoomable Heatmap" is-mojo="true" scope="18" style-name="ZoomableHeatmapStyle" attribute-minimum="1" metric-minimum="1"/>
+   </visualization-list>
+</visualizations>
