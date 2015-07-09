@@ -159,7 +159,9 @@
                     format = function(d) { return formatNumber(d) + " " + units; },
                     color = d3.scale.category20();
 // append the svg canvas to the page
-                var svg = d3.selectAll($('#' + lD3ID).toArray()).append("svg")
+                //var svg = d3.selectAll($('#' + lD3ID).toArray()).append("svg")
+				//for some reason, upper selectAll does not work, replace it with select domNode
+				var svg = d3.select(this.domNode).append("svg")
                     .attr("width", width + margin.left + margin.right)
                     .attr("height", height + margin.top + margin.bottom)
                     .append("g")

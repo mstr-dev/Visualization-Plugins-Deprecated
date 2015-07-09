@@ -380,13 +380,19 @@
                 }
 
                 //this._super(props);
-                this.styleName = getStyleCatalogName(props, this.scriptClass);
-                currentGalleryNode = getVisGalleryNode(this.styleName);
-                getMinimalValues.call(this, currentGalleryNode.mr);
-                this.description = currentGalleryNode.n;
-                this.pluginFolder = this.scriptClass.split(".")[2];
-                this.stylePrefix = '.custom-vis-layout.' + this.pluginFolder.toLowerCase() + ' ';
-                this.scope = mstrConfig.pluginsVisList[currentGalleryNode.id].scp;
+                if (mstrApp.isVI) {
+                    this.styleName = getStyleCatalogName(props, this.scriptClass);
+                    currentGalleryNode = getVisGalleryNode(this.styleName);
+                    if(currentGalleryNode === undefined || currentGalleryNode === null){
+                        currentGalleryNode = getSelectNode( this.styleName);
+                    }
+                    getMinimalValues.call(this, currentGalleryNode.mr);
+                    this.description = currentGalleryNode.n;
+                    this.pluginFolder = this.scriptClass.split(".")[2];
+                    this.stylePrefix = '.custom-vis-layout.' + this.pluginFolder.toLowerCase() + ' ';
+                    this.scope = mstrConfig.pluginsVisList[currentGalleryNode.id].scp;
+                }
+                
             },
             postBuildRendering:function () {
                 applyVisName.call(this, this.description);
