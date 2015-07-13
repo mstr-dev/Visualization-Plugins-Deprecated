@@ -93,7 +93,14 @@
 					}
 
 				*/
-
+				/**
+					 * Utility function that unescapes HTML entities <,>,& and '.  D3 will re-escape them when creating it's DOM elements.
+					 * @param {String} st
+					 * @returns {String}
+					 */
+				var unescapeString = function(st) {
+						return st.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&").replace(/&#039;/g, "\'");
+					};
                 /**
                  * Recursive function used to flatten raw data tree into an array. The output is appended to the 'data' array declared above.
                  *
@@ -167,14 +174,7 @@
         }
     );
 
-    /**
-     * Utility function that unescapes HTML entities <,>,& and '.  D3 will re-escape them when creating it's DOM elements.
-     * @param {String} st
-     * @returns {String}
-     */
-    function unescapeString(st) {
-        return st.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&apos;/g, "'").replace(/&amp;/g, "&").replace(/&#039;/g, "\'");
-    }
+    
 
 
 }());
