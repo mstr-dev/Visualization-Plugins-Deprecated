@@ -15,7 +15,7 @@
             // Source Code: http://bl.ocks.org/d3noob/5028304 
             scriptClass: "mstrmojo.plugins.D3Flow.D3Flow",
 
-            cssClass: "D3Flow",
+            cssClass: "d3flow",
 
             errorDetails: "This visualization requires one or more attributes and one metric.",
 

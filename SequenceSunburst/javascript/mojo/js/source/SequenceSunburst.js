@@ -16,7 +16,7 @@
         {
             scriptClass: "mstrmojo.plugins.SequenceSunburst.SequenceSunburst",
 
-            cssClass: "SequenceSunburst",
+            cssClass: "sequencesunburst",
 
             errorDetails: "This visualization requires one or more attributes and one metric.",
 
