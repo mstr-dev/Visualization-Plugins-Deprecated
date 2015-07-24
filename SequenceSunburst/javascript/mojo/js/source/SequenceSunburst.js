@@ -4,14 +4,14 @@
     }
 
     mstrmojo.requiresCls(
-        "mstrmojo.CustomVisBase",
+        "mstrmojo.plugins.SequenceSunburst.CustomVisBase",
         "mstrmojo.models.template.DataInterface",
         "mstrmojo.hash"
 
     );
 
     mstrmojo.plugins.SequenceSunburst.SequenceSunburst = mstrmojo.declare(
-        mstrmojo.CustomVisBase,
+        mstrmojo.plugins.SequenceSunburst.CustomVisBase,
         null,
         {
             scriptClass: "mstrmojo.plugins.SequenceSunburst.SequenceSunburst",
@@ -91,7 +91,7 @@
 
 
                 initHTMLNodes();
-                var svg = d3.select("#basesvg");
+                var svg = d3.select(this.domNode).select("#basesvg");
                 if (svg.empty()) {
                     svg = d3.select(this.domNode).append("svg:svg")
                         .attr("id", "basesvg")
@@ -221,7 +221,7 @@
                     var nodes = partition.nodes(root)
                         .filter(function(d) {
                             return (d.dx > 0.005) ;
-                        })
+                        });
 
                     d3.select(that.domNode).select("#container")/*.select("g")*/.selectAll("path").remove();
                     var p = d3.select(that.domNode).select("#container")/*.select("g")*/.selectAll("path")
@@ -267,12 +267,12 @@
                         percentageString = "< 0.1%";
                     }
 
-                    d3.select("#percentage")
+                    d3.select(that.domNode).select("#percentage")
                         .text(percentageString);
 
-                    d3.select("#percentage")
+                    d3.select(that.domNode).select("#percentage")
                         .style("visibility", "");
-                    d3.select("#explanation")
+                    d3.select(that.domNode).select("#explanation")
                         .style("visibility", "");
 
                     var sequenceArray = getAncestors(d);
@@ -296,7 +296,7 @@
                 function mouseleave(d) {
                  //   console.log("enter mouseleave", me.colors.domain(), me.color_hash_ntoc);
                     // Hide the breadcrumb trail
-                    d3.select("#trail")
+                    d3.select(that.domNode).select("#trail")
                         .style("visibility", "hidden");
 
 
@@ -312,9 +312,9 @@
                             d3.select(this).on("mouseover", mouseover);
                         });
 
-                    d3.select("#percentage")
+                    d3.select(that.domNode).select("#percentage")
                         .style("visibility", "hidden");
-                    d3.select("#explanation")
+                    d3.select(that.domNode).select("#explanation")
                         .style("visibility", "hidden");
 
                 }
@@ -333,9 +333,9 @@
 
                 function initializeBreadcrumbTrail() {
                     // Add the svg area.
-                    var trail = d3.select("div.sequence").select("svg");
+                    var trail = d3.select(that.domNode).select("div.sequence").select("svg");
                     if (trail.empty()) {
-                        trail = d3.select("div.sequence").append("svg")
+                        trail = d3.select(that.domNode).select("div.sequence").append("svg")
                             .attr("width", width)
                             .attr("height", 50)
                             .attr("id", "trail");
@@ -369,8 +369,8 @@
                 function updateBreadcrumbs(nodeArray, percentageString) {
 
                     // Data join; key function combines name and depth (= position in sequence).
-                    d3.select("#trail").selectAll("g").remove();
-                    var g = d3.select("#trail")
+                    d3.select(that.domNode).select("#trail").selectAll("g").remove();
+                    var g = d3.select(that.domNode).select("#trail")
                         .selectAll("g")
                         .data(nodeArray, function(d) {
                             return d.name + d.depth; });
@@ -402,7 +402,7 @@
                     g.exit().remove();
 
                     // Now move and update the percentage at the end.
-                    d3.select("#trail").select("#endlabel")
+                    d3.select(that.domNode).select("#trail").select("#endlabel")
                         .attr("x", (nodeArray.length + 0.5) * (b.w + b.s))
                         .attr("y", b.h / 2)
                         .attr("dy", "0.35em")
@@ -411,7 +411,7 @@
                         .text(percentageString);
 
                     // Make the breadcrumb trail visible, if it's hidden.
-                    d3.select("#trail")
+                    d3.select(that.domNode).select("#trail")
                         .style("visibility", "");
 
                 }
@@ -423,9 +423,9 @@
                         w: 75, h: 30, s: 3, r: 3
                     };
 
-                    var legend = d3.select("div.legend").selectAll("svg");
+                    var legend = d3.select(that.domNode).select("div.legend").selectAll("svg");
                     if (legend.empty()) {
-                        legend = d3.select("div.legend").append("svg");
+                        legend = d3.select(that.domNode).select("div.legend").append("svg");
                         var g = legend.selectAll("g")
 
                             .data(me.colors.range())
@@ -476,7 +476,7 @@
                 }
 
                 function toggleLegend() {
-                    var legend = d3.selectAll("div.legend");
+                    var legend = d3.select(that.domNode).selectAll("div.legend");
                     if (legend.style("visibility") == "hidden") {
                         legend.style("visibility", "");
                     } else {
