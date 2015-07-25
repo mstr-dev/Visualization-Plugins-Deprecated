@@ -1,7 +1,3 @@
 .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-MstrVisD3ZoomableCirclePacking > div > div {
-    background-image: url(http://ntnycv274/MicroStrategy/plugins/MstrVisD3ZoomableCirclePacking/style/images/ZoomableCirclePacking.png);
-background-position: 0 0;
-}.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-MstrVisD3ZoomableCirclePacking > div > div {
-    background-image: url(http://ntnycv274/MicroStrategy/plugins/MstrVisD3ZoomableCirclePacking/style/images/ZoomableCirclePacking.png);
-background-position: 0 0;
+    background-image: url(images/ZoomableCirclePacking.png);
 }
