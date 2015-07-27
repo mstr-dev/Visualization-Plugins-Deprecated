@@ -9,7 +9,7 @@ Steps to use visualization plugins in this repo:
 
 Note: The visualizations in this branch are designed for MicroStrategy 10. They should work in Document Express/Interactive Mode(Web) and Visual Insight Dashboard(Web/Desktop). If you are looking for visualizations customized for MicroStrategy 9.4.1, please check the [9.4.1 branch](https://github.com/mstr-dev/Visualization-Plugins/tree/9.4.1).
 
-###Create Customized Visualiztions 
+###Create Customized Visualizations 
 You can follow the [introduction](https://lw.microstrategy.com/msdz/MSDL/10/docs/projects/VisSDK_All/default.htm#topics/HTML5/Creating_an_HTML5_visualization.htm) to create a new customized visualization.
 
 ###Sharing Your Visualizations
@@ -22,6 +22,6 @@ Steps to share:
 3. Send a pull request.
 
 ###License of Visualizations
-For all the Custom Visualizations submitted to this GitHub Repository, we assume that they are aligned to the open source principle and allowed to share to the MSTR community. If you have a specific license statement, please put it at the begining of your Visualization JavaScript code. 
+For all the Custom Visualizations submitted to this GitHub Repository, we assume that they are aligned to the open source principle and allowed to share to the MSTR community. If you have a specific license statement, please put it at the beginning of your Visualization JavaScript code. 
 
 For more info, please refer to the [Wiki Site](https://github.com/mstr-dev/Visualization-Plugins/wiki).
