@@ -1,18 +1,18 @@
 (function () {
     // We need to define this code as plugin in mstrmojo object
-    if (!mstrmojo.plugins.MstrVisD3ZoomableCirclePacking) {
-        mstrmojo.plugins.MstrVisD3ZoomableCirclePacking = {};
+    if (!mstrmojo.plugins.D3ZoomableCirclePacking) {
+        mstrmojo.plugins.D3ZoomableCirclePacking = {};
     }
     // Visualization requires library to render, and in this
     mstrmojo.requiresCls('mstrmojo.CustomVisBase');
     // Declaration of the visualization object
-    mstrmojo.plugins.MstrVisD3ZoomableCirclePacking.MstrVisD3ZoomableCirclePacking = mstrmojo.declare(
+    mstrmojo.plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking = mstrmojo.declare(
         //We need to declare that our code extends CustomVisBase
         mstrmojo.CustomVisBase,
         null,
         {
             //here scriptClass is defined as mstrmojo.plugins.{plugin name}.{js file name}
-            scriptClass: 'mstrmojo.plugins.MstrVisD3ZoomableCirclePacking.MstrVisD3ZoomableCirclePacking',
+            scriptClass: 'mstrmojo.plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking',
             cssClass: 'zoomable-circle-packing',
             errorDetails: 'This visualization requires one or more attributes and one metric',
             useRichTooltip: true,
@@ -63,7 +63,7 @@
                     .style('fill', function (d) { return d.children ? color(d.depth) : null; })
                     .on('click', function (d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
 
-                var text = svg.selectAll('text')
+                svg.selectAll('text')
                     .data(nodes)
                     .enter()
                     .append('text')
@@ -74,13 +74,13 @@
 
                 var node = svg.selectAll('circle, text');
 
-                d3.select(this.domNode)                    
+                d3.select(this.domNode)
                     .on('click', function () { zoom(root); });
 
                 zoomTo([root.x, root.y, root.r * 2 + margin]);
 
                 function zoom(d) {
-                    var focus0 = focus; focus = d;
+                    focus = d;
 
                     var transition = d3.transition()
                         .duration(d3.event.altKey ? 7500 : 750)
