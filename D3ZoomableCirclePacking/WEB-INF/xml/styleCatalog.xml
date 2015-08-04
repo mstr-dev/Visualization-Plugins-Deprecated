@@ -1,16 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE StyleCatalog SYSTEM "styleCatalog.dtd">
 <StyleCatalog name="Empty style catalog">
-  <BeanDefns/>
-  <LayoutParserDefns/>
-  <TransformDefns/>
-  <LayoutSourceDefns/>
-  <MapperDefns/>
-  <StyleMaps/>
   <Styles>
-    <Style name="MstrVisD3ZoomableCirclePacking" transform="ReportAjaxMojoVisualizationTransform">
+    <Style name="D3ZoomableCirclePacking" transform="ReportAjaxMojoVisualizationTransform">
       <ActualParameters>
-        <ActualParameter name="mojoClassName" value="plugins.MstrVisD3ZoomableCirclePacking.MstrVisD3ZoomableCirclePacking"/>
+        <ActualParameter name="mojoClassName" value="plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking"/>
       </ActualParameters>
       <Layouts>
         <Layout layout_source="AppLayoutSourceFile"><![CDATA[/WEB-INF/xml/layouts/MojoVisualizationLayout.xml]]></Layout>
