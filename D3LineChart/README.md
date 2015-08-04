@@ -1,16 +1,16 @@
 **Contributor:** Vasu Thadaka, Shiva Balena & Trianz.
 
-**Contributor's Contact Info.:** <vasu.thadhaka@trianz.com>
+**Contributor's Contact Info.:** <vasu.thadhaka@trianz.com> , <shivaprasad.balena@trianz.com>
 
 **Contributor's Organization:** Trianz.
 
-**Original Author:** Shiva Balena
+**Original Author:** Mike Bostock
 
-**Original Author's Organization:** Trainz
+**Original Author's Orgnization:** The New York Times
 
 **Original Author's Contact Info.:** <mike@ocks.org>
 
-**Original Visualization Source Link:** <a href = "http://bost.ocks.org/mike/sankey/" target = "_blank">Link</a>
+**Original Visualization Source Link:** <a href = "http://bl.ocks.org/mbostock/4063269" target = "_blank">Link</a>
 
 **Usage:** This visualization needs 2 or more attributes and 1 or more metrics.
 
