@@ -1,6 +1,6 @@
-**Contributor:** Vasu Thadaka, Shiva Balena & Trianz.
+**Contributor:** Vasu Thadaka, Shiva Balena, Ankan Mukhopadhyay & Trianz.
 
-**Contributor's Contact Info.:** <vasu.thadhaka@trianz.com> , <shivaprasad.balena@trianz.com>
+**Contributor's Contact Info.:** <vasu.thadhaka@trianz.com> , <shivaprasad.balena@trianz.com>, Ankan.Mukhopadhyay@trianz.com
 
 **Contributor's Organization:** Trianz.
 
