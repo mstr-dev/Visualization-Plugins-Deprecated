@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE StyleCatalog SYSTEM "styleCatalog.dtd">
+<StyleCatalog name="Empty style catalog">
+  <Styles>
+    <Style name="D3ZoomableCirclePacking" transform="ReportAjaxMojoVisualizationTransform">
+      <ActualParameters>
+        <ActualParameter name="mojoClassName" value="plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking"/>
+      </ActualParameters>
+      <Layouts>
+        <Layout layout_source="AppLayoutSourceFile"><![CDATA[/WEB-INF/xml/layouts/MojoVisualizationLayout.xml]]></Layout>
+      </Layouts>
+    </Style>
+  </Styles>
+</StyleCatalog>

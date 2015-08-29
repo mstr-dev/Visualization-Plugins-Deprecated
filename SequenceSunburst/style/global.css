@@ -1,24 +1,24 @@
 
-.custom-vis-layout.SequenceSunburst .sidebar {
+.custom-vis-layout.sequencesunburst .sidebar {
     float: right;
     width: 100px;
 }
 
 
-.custom-vis-layout.SequenceSunburst .sequence {
+.custom-vis-layout.sequencesunburst .sequence {
     float: inherit;
     width: 100px;
 }
 
-.custom-vis-layout.SequenceSunburst .div.legend {
+.custom-vis-layout.sequencesunburst .div.legend {
     padding: 10px 0 0 3px;
 }
 
-.custom-vis-layout.SequenceSunburst path {
+.custom-vis-layout.sequencesunburst path {
     stroke: #fff;
 }
 
-.custom-vis-layout.SequenceSunburst .div.sequence text, .div.legend text {
+.custom-vis-layout.sequencesunburst .div.sequence text, .div.legend text {
     font-weight: 600;
     fill: #fff;
 }

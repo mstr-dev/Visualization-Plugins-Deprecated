@@ -13,20 +13,13 @@
     var FILTER_TYPE = {
         SHARED: 0
     };
+    /*var $ENUM_REQUIREMENT_TYPE = mstrmojo.vi.models.DropZonesModel.ENUM_REQUIREMENT_TYPE,
+        REQ_ATTRIBUTE = $ENUM_REQUIREMENT_TYPE.ATTRIBUTE,
+        REQ_METRIC = $ENUM_REQUIREMENT_TYPE.METRIC;*/
+    var REQ_ATTRIBUTE = 12,
+        REQ_METRIC = 4;
 
-    function toggleError(show) {
-        this.raiseEvent({
-            name: 'toggleCtrlOverlay',
-            visible: show,
-            controls: [
-                {
-                    scriptClass: 'mstrmojo.Label',
-                    cssClass: 'dropMsg',
-                    text: this.errorMessage + " " + this.errorDetails
-                }
-            ]
-        });
-    }
+
 
 
     var currentGalleryNode, styleNode;
@@ -52,13 +45,22 @@
         } else {
             toAppend = tempGalleryNode;
         }
-        //adding created node so styles are applied
+
+
+        //var html5vicss = "../plugins/stylename/style/Html5ViPage.css".replace("stylename", visStyleName.substring(3,visStyleName.length));
+        //tempGalleryNode.href = html5vicss;
+        //tempGalleryNode.onload = function(){
+        //    alert('Success！');
+
+            //adding created node so styles are applied
         document.body.appendChild(toAppend);
 
+
         var img = el1.children[0].children[0], style = img.currentStyle || window.getComputedStyle(img, false);
-        imageLink = style.backgroundImage.slice(4, -1);
+            imageLink = style.backgroundImage.slice(4, -1);
         //removing node from document since we do not need it any more
         document.body.removeChild(toAppend);
+
         return imageLink;
     }
 
@@ -178,6 +180,79 @@
         }
     }
 
+    // from mstrConfig.plu to get styleName item
+    function getSelectNode(st){
+        var vizItems = [],
+            visList = mstrConfig.pluginsVisList || {},
+            fnAddRequirement = function (type, value, requirements) {
+                // Initialize collection if undefined.
+                requirements = requirements || [];
+
+                // Convert to number (default to zero).
+                value = isNaN(value) ? 0 : parseInt(value, 10);
+
+                // Do we have a required value?
+                if (value > 0) {
+                    // Add requirement to passed collection.
+                    requirements.push({
+                        t: type,
+                        r: value
+                    });
+                }
+
+                // Returns requirements.
+                return requirements;
+            };
+
+
+
+        // Iterate visualizations.
+        Object.keys(visList).forEach(function (vizType) {
+            var viz = visList[vizType],
+                vizStyle = viz.s,
+                vizName = viz.d,
+                introduction = viz.i; // Add this line on 13th July 2015
+
+
+            // Do we have a descriptor ID?
+            var descriptorID = viz.desc;
+            if (descriptorID) {
+                // DE7017: Use descriptor ID instead of description.
+                vizName = mstrmojo.desc(descriptorID, "");
+            }
+
+            var arrresult = ["GraphMatrixVisualizationStyle", "GoogleMapVisualizationStyle", "ESRIMapVisualizationStyle",
+                "ImageLayoutVisualizationStyle", "VIHeatMapVisualizationStyle", "NetworkVisualizationStyle"] ;
+
+
+            //Add judge to add 3rd party vis
+            if(vizStyle &&  arrresult.indexOf(vizStyle) < 0){
+                // Calculate attribute and metric requirements and add button.
+                vizItems.push({
+                    n: vizName,
+                    s: vizStyle,
+                    mr: fnAddRequirement(REQ_ATTRIBUTE, viz.ma, fnAddRequirement(REQ_METRIC, viz.mm)),
+                    id: vizStyle,
+                    vt: -1, //unknown graph type
+                    wtp: viz.wtp,
+                    i: introduction // Add this line on 13th July 2015
+                });
+            }
+            /****************/
+        });
+
+
+        var i = vizItems.length;
+        while (i) {
+            i--;
+            if (vizItems[i].s === st) {
+                return vizItems[i];
+            }
+        }
+    }
+
+
+
     function getCurrentNode() {
         if (currentGalleryNode) {
             return currentGalleryNode;
@@ -254,6 +329,11 @@
         return p;
     }
 
+   /* function pause(milliseconds) {
+        var dt = new Date();
+        while ((new Date()) - dt <= milliseconds) { *//* Do nothing *//* }
+    }*/
+
     var defaultImage = 1, uploadedImage = 2, hrefImage = 3;
 
     function getStyleCatalogName(props, scriptClass) {
@@ -297,7 +377,7 @@
             lightIconValue: '',
             darkIconType: 1,
             darkIconValue: '',
-            scope: 0,
+            scope: 16,
             styleName: '',
             stylePrefix: '.custom-vis-layout.',
 
@@ -379,19 +459,42 @@
                     mstrmojo.insertCSSLinks(cssFiles);
                 }
 
+
+
                 //this._super(props);
-                this.styleName = getStyleCatalogName(props, this.scriptClass);
-                currentGalleryNode = getVisGalleryNode(this.styleName);
-                getMinimalValues.call(this, currentGalleryNode.mr);
-                this.description = currentGalleryNode.n;
-                this.pluginFolder = this.scriptClass.split(".")[2];
-                this.stylePrefix = '.custom-vis-layout.' + this.pluginFolder.toLowerCase() + ' ';
-                this.scope = mstrConfig.pluginsVisList[currentGalleryNode.id].scp;
+                if (mstrApp.isVI) {
+                    this.styleName = getStyleCatalogName(props, this.scriptClass);
+                    currentGalleryNode = getVisGalleryNode(this.styleName);
+                    if(currentGalleryNode === undefined || currentGalleryNode === null){
+                        currentGalleryNode = getSelectNode( this.styleName);
+                    }
+
+                    getMinimalValues.call(this, currentGalleryNode.mr);
+                    this.description = currentGalleryNode.n;
+                    this.pluginFolder = this.scriptClass.split(".")[2];
+                    this.stylePrefix = '.custom-vis-layout.' + this.pluginFolder.toLowerCase() + ' ';
+                    this.scope = mstrConfig.pluginsVisList[currentGalleryNode.id].scp;
+                }
             },
-            postBuildRendering:function () {
+           /* postBuildRendering:function () {
                 applyVisName.call(this, this.description);
                 return this._super();
+            },*/
+
+            toggleError: function toggleError(show) {
+                this.raiseEvent({
+                    name: 'toggleCtrlOverlay',
+                    visible: show,
+                    controls: [
+                        {
+                            scriptClass: 'mstrmojo.Label',
+                            cssClass: 'dropMsg',
+                            text: this.errorMessage + " " + this.errorDetails
+                        }
+                    ]
+                });
             },
+
             vbIsSupported: function () {
                 return true;
             },
@@ -511,7 +614,7 @@
 
                 //Modify for save.....
                 if(p.scp === undefined) {
-                    p.scp = 0;
+                    p.scp = 16;
                 }
                 if(p.licntp === ""){
                     p.licntp = 2;
@@ -525,12 +628,33 @@
                 p = constructTaskParameters.call(this, p);
 
                 //Modify for save as.....
-                if(p.scp === undefined) {
-                    p.scp = 0;
+                if(p.scp === undefined || p.scp === 0) {
+                    p.scp = 16;
                 }
                 if(p.licntp === ""){
                     p.licntp = 2;
                 }
+
+                //
+               /* p.licntp = this.lightIconType;
+                p.licnvl = this.lightIconValue;
+                p.dicntp = this.lightIconType;
+                p.dicnvl = this.lightIconValue;*/
+                //"http://localhost:8080/MSTRWeb/plugins/MstrVisCircularHeatChart/style/images/gallery.png"
+
+                var re = /http:\/\/localhost:8080\/(\w+)\/plugins\/(\w+)\/style/;
+
+                function replacer(match, p1, p2, offset, string) {
+                    // p1 is mstrweb, p2 MstrVisCircularHeatChart
+                    return ["http://localhost:8080", p1, "plugins", name, "style"].join('/');
+                }
+                if(p.licntp === 3 && p.licnvl.search(re) === 0){
+                    p.licnvl = p.licnvl.replace( re,  replacer );
+                }
+                if(p.dicntp === 3 && p.dicnvl.search(re) === 0){
+                    p.licnvl = p.licnvl.replace( re,  replacer );
+                }
+
                 p.nm = name;
                 p.ustl = name;
                 return p;
@@ -579,16 +703,18 @@
             },
 
             displayError: function displayError() {
-                toggleError.call(this, true);
+                this.toggleError(true);
             },
 
             renderVisualization: function renderVisualization() {
                 try {
-                    toggleError.call(this, false);
+                    this.toggleError(false);
 
                     this.dataInterface = new mstrmojo.models.template.DataInterface(this.getData());
+
                     this.plot();
                     this.plotted = true;
+
 
                 } catch (e) {
                     this.displayError();
@@ -596,9 +722,25 @@
                 }
             },
 
+            getExternalLibraries: function getExternalLibraries() {
+                var result = [];
+                if (this.externalLibraries && this.externalLibraries.length > 0) {
+                    for (var i = 0; i < this.externalLibraries.length; i++) {
+                        result.push(this.externalLibraries[i]);
+                    }
+                }
+                return result;
+            },
+
             postBuildRendering: function postBuildRendering() {
+
+                if (mstrApp.isVI) {
+                    applyVisName.call(this, this.description);
+                }
+
                 var me = this,
-                    libraries = this.externalLibraries;
+
+                libraries = this.getExternalLibraries();//this.vbGetJSLibs();//this.externalLibraries;
 
                 // Are there libraries to load?
                 if (libraries) {
@@ -654,7 +796,7 @@
                 if (title) {
                     var tooltip = title.innerHTML;
 
-                    if (tooltip.length) {
+                    if (tooltip && tooltip.length) { //DE14469 : if(tooltip.length)
                         content = tooltip;
                         title.tt = tooltip;
                         title.innerHTML = "";
@@ -663,13 +805,16 @@
                     }
                 }
 
-                this.richTooltip = {
-                    posType: mstrmojo.tooltip.POS_TOPLEFT,
-                    content: content,
-                    top: evt.clientY + 12,
-                    left: evt.clientX - 12,
-                    cssClass: 'vi-regular vi-tooltip-A'
-                };
+
+                    this.richTooltip = {
+                        posType: mstrmojo.tooltip.POS_TOPLEFT,
+                        content: content,
+                        top: evt.clientY + 12,
+                        left: evt.clientX - 12,
+                        cssClass: 'vi-regular vi-tooltip-A'
+                    };
+
+
 
                 this._super(evt, win);
             },
@@ -684,10 +829,13 @@
                 if (consumer instanceof Function) {
                     consumer(tree);
                 }
-            }
 
+            }
 
         }
     );
+
+   // mstrmojo.getIconTypeParser = getIconTypeParser;
 }());
+
 //@ sourceURL=CustomVisBase.js

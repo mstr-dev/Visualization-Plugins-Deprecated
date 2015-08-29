@@ -1,0 +1,5 @@
+<visualizations>
+  <visualization-list name="ajax" show-in-web="true" view-mode="51">
+    <visualization attribute-minimum="0" desc="DifferenceChart" is-mojo="true" metric-minimum="0" scope="19" style-name="DifferenceChart"/>
+  </visualization-list>
+</visualizations>

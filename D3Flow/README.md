@@ -1,6 +1,6 @@
-**Contributor:** MicroStrategy, Inc.
+**Contributor:** David Ureña & MicroStrategy, Inc.
 
-**Contributor's Contact Info.:** <ypchen@microstrategy.com>
+**Contributor's Contact Info.:** <David@UrenaConsulting.com> & <ypchen@microstrategy.com>
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 

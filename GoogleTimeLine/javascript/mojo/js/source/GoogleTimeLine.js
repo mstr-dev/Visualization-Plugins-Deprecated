@@ -25,6 +25,18 @@
             ],
 
             reuseDOMNode: true,
+            
+            draggable: true,
+	    
+            isDragValid: function isDragValid() {
+                // US17907: Don't do anything for DnD here.
+                return false;
+            },
+    
+            shouldDragBubble: function shouldDragBubble() {
+                // US17907: Don't propagate DnD event to parent to prevent triggering DnD on UnitContainer.
+                return true;
+            },
 
             plot: function () {
 

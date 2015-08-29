@@ -1,6 +1,6 @@
 (function () {
-    if (!mstrmojo.plugins.D3Flow) {
-        mstrmojo.plugins.D3Flow = {};
+    if (!mstrmojo.plugins.D3FlowV) {
+        mstrmojo.plugins.D3FlowV = {};
     }
 
     mstrmojo.requiresCls(
@@ -8,19 +8,20 @@
         "mstrmojo.models.template.DataInterface"
     );
 
-    mstrmojo.plugins.D3Flow.D3Flow = mstrmojo.declare(
+    mstrmojo.plugins.D3FlowV.D3FlowV = mstrmojo.declare(
         mstrmojo.CustomVisBase,
         null,
         {
             // Source Code: http://bl.ocks.org/d3noob/5028304 
-            scriptClass: "mstrmojo.plugins.D3Flow.D3Flow",
+            scriptClass: "mstrmojo.plugins.D3FlowV.D3FlowV",
 
-            cssClass: "d3flow",
+            cssClass: "d3flowV",
 
             errorDetails: "This visualization requires one or more attributes and one metric.",
 
-           // externalLibraries: [{url: "http://d3js.org/d3.v3.min.js"}, {url: "../plugins/D3Flow/javascript/mojo/js/source/sankey.js"}, {url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"}],
-            externalLibraries: [{url: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "https://rawgit.com/mstr-dev/Visualization-Plugins/master/D3Flow/javascript/mojo/js/source/sankey.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
+// Use a sankey library that generates vertical links
+			//externalLibraries: [{url: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "../plugins/D3FlowV/javascript/mojo/js/source/sankeyV.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
+            externalLibraries: [{url: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "https://rawgit.com/mstr-dev/Visualization-Plugins/master/D3FlowV/javascript/mojo/js/source/sankeyV.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
 
             useRichTooltip: true,
 
@@ -28,7 +29,7 @@
 
             plot: function () {
 		var lMstrID = this.domNode.parentNode.parentNode.id;
-		var lD3ID = "D3Flow-" + lMstrID;
+		var lD3ID = "D3FlowV-" + lMstrID;
 		if( $('#' + lD3ID).length ) {
 			$('#' + lD3ID).empty();
 		}
@@ -42,7 +43,7 @@
                 // nodes items: {name: XXX}
 
                 // gridData.getRowTitles().size() // Nb Attributes
-                //var lAttributeName = gridData.getRowTitles().getTitle(i).getName(); // Attrbiute Name
+                //var lAttributeName = gridData.getRowTitles().getTitle(i).getName(); // Attribute Name
                 var gridData = this.dataInterface;
                 if (gridData.getRowTitles().size() <= 1) return;
                 var mMyData = [];
@@ -157,8 +158,9 @@
 
                 var formatNumber = d3.format(",.0f"),    // zero decimal places
                     format = function(d) { return formatNumber(d) + " " + units; },
-                    color = d3.scale.category20();
-// append the svg canvas to the page
+                    //color = d3.scale.category20();
+					color = d3.scale.category10(); // Simplified color palette
+				// append the svg canvas to the page
                 //var svg = d3.selectAll($('#' + lD3ID).toArray()).append("svg")
 				//for some reason, upper selectAll does not work, replace it with select domNode
 				var svg = d3.select(this.domNode).append("svg")
@@ -193,16 +195,19 @@
                     .nodes(graph.nodes)
                     .links(graph.links)
                     .layout(32);
+
+				
 // add in the links
                 var link = svg.append("g").selectAll(".link")
                     .data(graph.links)
                     .enter().append("path")
                     .attr("class", "link")
                     .attr("d", path)
-                    .style("stroke-linecap", "butt")
-                    .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+					.style("stroke-linecap", "butt")
+					.style("stroke-width", function(d) { return Math.max(1, d.dy); })
+					.style("stroke", function(d) { return d.source.color = color(d.source.name.replace(/ .*/, "")); }) // Match the link color to the source rectangle
                     .sort(function(a, b) { return b.dy - a.dy; });
-
+					
 // add the link titles
                 link.append("title")
                     .text(function(d) {
@@ -219,15 +224,17 @@
                     .call(d3.behavior.drag()
                         .origin(function(d) { return d; })
                         .on("dragstart", function(e) {
-console.log(this);
+							console.log(this);
                             d3.event.sourceEvent.stopPropagation();
                             this.parentNode.appendChild(this); })
                         .on("drag", dragmove));
 
 // add the rectangles for the nodes
                 node.append("rect")
-                    .attr("height", function(d) { return d.dy; })
-                    .attr("width", sankey.nodeWidth())
+                    //.attr("height", function(d) { return d.dy; }) //These vertical box values are appropriate for Horizontal links. The vertical sankey library referenced makes the links 
+                    //.attr("width", sankey.nodeWidth())			//vertical, the boxes are manually built horizontal in the next 2 lines
+                    .attr("height", sankey.nodeWidth())	
+					.attr("width", function(d) { return d.dy; })
                     .style("fill", function(d) {
                         return d.color = color(d.name.replace(/ .*/, "")); })
                     .style("stroke", function(d) {
@@ -236,8 +243,8 @@ console.log(this);
                     .text(function(d) {
                         return mstrmojo.string.decodeHtmlString(d.name) + "\n" + format(d.value); });
 
-// add in the title for the nodes
-                node.append("text")
+// add in the title for the nodes // The titles built here are appropriate for horizontal links. The titles are built to the vertical rectangle's side. 
+/*                node.append("text")
                     .attr("x", -6)
                     .attr("y", function(d) { return d.dy / 2; })
                     .attr("dy", ".35em")
@@ -248,16 +255,35 @@ console.log(this);
                     .filter(function(d) { return d.x < width / 2; })
                     .attr("x", 6 + sankey.nodeWidth())
                     .attr("text-anchor", "start");
-
+*/
+          node.append("text") // The titles built here are appropriate for vertical links. The titles are built inside the horizontal rectangle's side. 
+              .attr("text-anchor", "middle")
+              .attr("x", function (d) { return d.dy / 2 })
+              .attr("y", sankey.nodeWidth() / 2)
+              .attr("dy", ".35em")
+              .text(function(d) { return mstrmojo.string.decodeHtmlString(d.name); })
+              .filter(function(d) { return d.x < width / 2; });
+					
 // the function for moving the nodes
                 function dragmove(d) {
-		console.log(d);
+					console.log(d);
+/*					// Moving around works well for horizontal sankey. This is the code for it. 
                     d3.select(this).attr("transform",
                         "translate(" + (
                             d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
                         ) + "," + (
                             d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
                         ) + ")");
+					// Attempt to reflect for vertical sankey, not working well (moves rectangle to top left always)
+                    d3.select(this).attr("transform",
+                        "translate(" + (
+                            d.x = Math.max(0, Math.min(width - d.dy, d3.event.x))
+                        ) + "," + (
+                            d.y = Math.max(0, Math.min(height - d.dx, d3.event.y))
+                        ) + ")");
+*/						
+					//However, only allowing horizontal movement works well
+					d3.select(this).attr("transform", "translate(" + (d.x = Math.max(0, Math.min(width - d.dy, d3.event.x))) + "," + d.y + ")");
                     sankey.relayout();
                     link.attr("d", path);
                 }
@@ -269,4 +295,4 @@ console.log(this);
         }
     );
 }());
-//@ sourceURL=D3Flow.js
+//@ sourceURL=D3FlowV.js
