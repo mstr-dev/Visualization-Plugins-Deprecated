@@ -12,13 +12,15 @@
 
 **Original Visualization Source Link:** http://bl.ocks.org/mbostock/4063570
 
-**Name:** Cluster Dendrogram - Cartesian Layout
+**Name:** Cluster Dendrogram - Radial Layout
 
 **Usage:** This visualization needs 1 or more attributes.
 
-**Description:** Cluster dendrogram in cartesian layout. A dendrogram is a node-link diagram that places leaf nodes of the tree at the same depth. In this example, the classes (leaf nodes) are aligned on the right edge, with the packages (internal nodes) to the left. 
+**Description:** Cluster dendrogram in radial layout. 
 
-**Example scenario:** Representation of organizational chart.
+A dendrogram is a node-link diagram that places leaf nodes of the tree at the same depth. In this example, the classes (leaf nodes) are aligned on the right edge, with the packages (internal nodes) to the left.
+
+**Example scenario:** Radial representation of hiearchy.
 
 **Screenshot:**
 
