@@ -10,7 +10,7 @@
 
 **Original Author's Contact Info.:** mike@ocks.org
 
-**Original Visualization Source Link:** http://bl.ocks.org/mbostock/4339607
+**Original Visualization Source Link:** http://bl.ocks.org/mbostock/4063570
 
 **Usage:** This visualization needs 1 or more attributes.
 
