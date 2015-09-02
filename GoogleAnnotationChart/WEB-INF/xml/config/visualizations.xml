@@ -1,5 +1,5 @@
 <visualizations>
   <visualization-list name="ajax" show-in-web="true" view-mode="51">
-    <visualization attribute-minimum="0" desc="GoogleAnnotationChart" introduction="The Visualization is :" is-mojo="true" metric-minimum="0" scope="19" style-name="MstrVisGoogleAnnotationChart"/>
+    <visualization attribute-minimum="0" desc="GoogleAnnotationChart" introduction="The Visualization is :" is-mojo="true" metric-minimum="0" scope="19" style-name="GoogleAnnotationChart"/>
   </visualization-list>
 </visualizations>
