@@ -4,11 +4,11 @@
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 
-**Original Author:** 
+**Original Author:** Mike Bostock
 
-**Original Author's Orgnization:**
+**Original Author's Orgnization:** 
 
-**Original Author's Contact Info.:** 
+**Original Author's Contact Info.:** mike@ocks.org
 
 **Original Visualization Source Link:** http://bl.ocks.org/mbostock/4339607
 
