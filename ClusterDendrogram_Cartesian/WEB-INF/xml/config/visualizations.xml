@@ -1,0 +1,5 @@
+<visualizations>
+  <visualization-list name="ajax" show-in-web="true" view-mode="51">
+    <visualization attribute-minimum="1" desc="Cluster Dendrogram - Cartesian Layout" is-mojo="true" metric-minimum="0" scope="19" style-name="ClusterDendrogram_Cartesian"/>
+  </visualization-list>
+</visualizations>
