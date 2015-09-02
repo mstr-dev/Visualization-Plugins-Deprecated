@@ -1,6 +1,6 @@
 (function () {
-    if (!mstrmojo.plugins.MstrVisGoogleAnnotationChart) {
-        mstrmojo.plugins.MstrVisGoogleAnnotationChart = {};
+    if (!mstrmojo.plugins.GoogleAnnotationChart) {
+        mstrmojo.plugins.GoogleAnnotationChart = {};
     }
 
     mstrmojo.requiresCls(
@@ -8,12 +8,12 @@
         "mstrmojo.models.template.DataInterface"
     );
 
-    mstrmojo.plugins.MstrVisGoogleAnnotationChart.MstrVisGoogleAnnotationChart = mstrmojo.declare(
+    mstrmojo.plugins.GoogleAnnotationChart.GoogleAnnotationChart = mstrmojo.declare(
         mstrmojo.CustomVisBase,
         null,
         {
-            scriptClass: "mstrmojo.plugins.MstrVisGoogleAnnotationChart.MstrVisGoogleAnnotationChart",
-            cssClass: "MstrVisGoogleAnnotationChart",
+            scriptClass: "mstrmojo.plugins.GoogleAnnotationChart.GoogleAnnotationChart",
+            cssClass: "GoogleAnnotationChart",
             externalLibraries: [{url: "//www.google.com/jsapi"}],
             useRichTooltip: false,
             reuseDOMNode: true,
