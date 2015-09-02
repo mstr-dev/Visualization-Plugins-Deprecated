@@ -1,4 +1,4 @@
-**Contributor:** MicroStrategy, Inc.
+**Contributor:** Tiago Siebler
 
 **Contributor's Contact Info.:** <tsiebler@microstrategy.com>
 
