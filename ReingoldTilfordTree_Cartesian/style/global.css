@@ -1,0 +1,12 @@
+.custom-vis-layout.reingoldtilfordtree_cartesian .custom-vis-layout.reingoldtilfordtree_cartesian .node circle {
+  fill: #fff;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}.node {
+  font: 10px sans-serif;
+}
+.custom-vis-layout.reingoldtilfordtree_cartesian .link {
+  fill: none;
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
