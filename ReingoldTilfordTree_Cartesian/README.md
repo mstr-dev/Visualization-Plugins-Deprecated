@@ -1,6 +1,6 @@
 **Contributor:** Tiago Siebler
 
-**Contributor's Contact Info.:** <tsiebler@microstrategy.com>
+**Contributor's Contact Info.:** tsiebler at microstrategy dot com
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 
