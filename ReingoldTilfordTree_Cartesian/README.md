@@ -1,6 +1,6 @@
 **Contributor:** Tiago Siebler
 
-**Contributor's Contact Info.:** <tsiebler@microstrategy.com>
+**Contributor's Contact Info.:** tsiebler at microstrategy dot com
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 
@@ -10,7 +10,7 @@
 
 **Original Author's Contact Info.:** mike@ocks.org
 
-**Original Visualization Source Link:** http://bl.ocks.org/mbostock/4063570
+**Original Visualization Source Link:** http://bl.ocks.org/mbostock/4339184
 
 **Name:** Reingold–Tilford Tree - Cartesian Layout
 
