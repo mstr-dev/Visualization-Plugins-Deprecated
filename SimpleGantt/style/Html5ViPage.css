@@ -1,7 +1,7 @@
 .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-SimpleGantt > div > div {
-    background-image: url(http://localhost:8080/MSTR10HF1/plugins/SimpleGantt/style/images/icon.png);
+    background-image: url(images/icon.png);
 background-position: 0 0;
 }.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-SimpleGantt > div > div {
-    background-image: url(http://localhost:8080/MSTR10HF1/plugins/SimpleGantt/style/images/darkIcon.png);
+    background-image: url(image/darkIcon.png);
 background-position: 0 0;
 }
