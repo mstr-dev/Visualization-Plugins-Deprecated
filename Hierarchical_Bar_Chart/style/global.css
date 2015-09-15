@@ -1,0 +1,26 @@
+.custom-vis-layout.hierarchical_bar_chart .custom-vis-layout._visbuilder text {
+  font: 10px sans-serif;
+}
+
+rect.background {
+  fill: white;
+}
+
+.custom-vis-layout.hierarchical_bar_chart .custom-vis-layout._visbuilder .axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+}
+
+
+
+
+
+
+
+
+
