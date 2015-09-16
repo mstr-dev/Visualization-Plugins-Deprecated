@@ -22,19 +22,19 @@
 
 **Screenshots:**
 
-![Alt text][screenshot]
-[screenshot]: ./style/images/screenshot1.png?raw=true
+![Alt text][screenshot1]
+[screenshot1]: ./style/images/screenshot1.png?raw=true
 
 Click on "Movies" bar to drill to the next level.
 
-![Alt text][screenshot]
-[screenshot]: ./style/images/screenshot2.png?raw=true
+![Alt text][screenshot2]
+[screenshot2]: ./style/images/screenshot2.png?raw=true
 
 Click on "Drama" to drill another level down.
 
-![Alt text][screenshot]
-[screenshot]: ./style/images/screenshot3.png?raw=true
+![Alt text][screenshot3]
+[screenshot3]: ./style/images/screenshot3.png?raw=true
 
 Click anywhere to drill out again:
-![Alt text][screenshot]
-[screenshot]: ./style/images/screenshot2.png?raw=true
+![Alt text][screenshot2]
+[screenshot2]: ./style/images/screenshot2.png?raw=true
