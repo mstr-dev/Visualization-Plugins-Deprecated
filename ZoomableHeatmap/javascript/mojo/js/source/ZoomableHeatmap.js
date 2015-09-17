@@ -31,7 +31,7 @@
                     color = d3.scale.category10(),
                     transitionDuration = 750;
                 
-                var element;
+                var elements;
                 
                 var svg = d3.select(this.domNode).select("svg");
 
@@ -50,55 +50,67 @@
                 
                 
                 var nodes = treemap.nodes(normalizedModel);
-	            console.log(nodes);
+	            //console.log(nodes);
                 
                 display();
 
                 function display(){
     
-	               element = svg.selectAll("g")
+	               elements = svg.selectAll("g")
                                 .data(nodes)
 	                            .enter().append("g") 
 	                            .attr("class","treemap")
                                 .on("click", function(d ,i) {zoom(d);});   
 
                     // draw the rectangles
-                    element.append("rect")
+                    elements.append("rect")
                     .call(rect);
                     // append the text
-                    element.append("text")
+                    elements.append("text")
                     .call(text);
                     
                     // draw a grouping text
                     var array1 = [];
+                    var array2 = [];
                     var grouparea;
                     var lastElement; 
-                    element.each(function(d){ lastElement = d; });
-                    element.each(function(d){
+                    elements.each(function(d){ lastElement = d; });
+                    elements.each(function(d, i){
                         var org;
                         if(!d.children && org === d.parenrt && d !== lastElement){
                             array1.push(d);
-                            console.log(d);
                         }else if (array1.length != 0){
                             org = d.parenrt;
-                            if(d === lastElement) {array1.push(d);};
+                            var j = 1;  // for the last element.
+                            if(d === lastElement) {array1.push(d); j=0; };
                             grouparea = calarea(array1);
-                            d3.select(this).append("text")
-                            .attr("x",grouparea.minX + ((grouparea.maxX+grouparea.maxXWidth)-grouparea.minX)/2)
-                            .attr("y",grouparea.minY + ((grouparea.maxY+grouparea.maxYHeight)-grouparea.minY)/2)
-                            .text(array1[0].parent.name)
-                            .attr("stroke","white")
-                            .attr("stroke-width",2)
-                            .attr("fill","red")
-                            .attr("text-anchor","middle")
-                            .attr("font-size", grouparea.maxXWidth/4)
-                            .attr("opacity", 0.7)
-                            .attr("class", "gText");
+                            
+                            var obj = { "node": nodes[i - array1.length - j], "area": grouparea};  // parent node - # of child node of the previous parent node. 
+                            array2.push(obj);
+                            
                             array1 = [];
                         }else{
                             array1 = [];
                         }
-                    });                    
+                    });
+                    
+                    array2.forEach(function(d, i){
+                        svg.append("text").datum(array2[i].node)
+                            .attr("x", array2[i].area.minX + ((array2[i].area.maxX+array2[i].area.maxXWidth)-array2[i].area.minX)/2)
+                            .attr("y", array2[i].area.minY + ((array2[i].area.maxY+grouparea.maxYHeight)-array2[i].area.minY)/2)
+                            .text(array2[i].node.name)
+                            .attr("stroke","white")
+                            .attr("stroke-width",2)
+                            .attr("fill","red")
+                            .attr("text-anchor","middle")
+                            .attr("font-size", array2[i].area.maxXWidth/4)
+                            .attr("opacity", 0.7)
+                            .attr("class", "gText")
+                            .on("click", function(d) {zoom(d.children[0]);});
+                    });
+
+                    
+                    arry2 = [];
                     
                 }
                 
@@ -151,15 +163,15 @@
     
                     if(svg.select("g").attr("class") == "ext"){
                         // reset the screen;
-                        element.remove();
+                        elements.remove();
                         display();
                         return;
                     };
     
                     // filter with the children which has the same parent
-                    var area = element.filter(function(x) {return d.parent === x.parent;});
+                    var area = elements.filter(function(x) {return d.parent === x.parent;});
                     // The other area
-                    var areaOther = element.filter(function(x) {return d.parent !== x.parent;});
+                    var areaOther = elements.filter(function(x) {return d.parent !== x.parent;});
     
                     area.attr("class", "ext");  // update the class name for the zoomed area
                     area.attr("opacity", 0.4); 
@@ -193,8 +205,8 @@
                                         .attr("font-size", function(d){return d.dx*(width/((maxX+maxXWidth)-minX))/18;});
                     });
                     
-                    // remove the last added g elment.
-                    var gText = area.selectAll(".gText");
+                    // remove the grouping text.
+                    var gText = svg.selectAll(".gText"); 
                     gText.remove();
                     
                     area.transition().duration(transitionDuration).attr("opacity", 1.0);
