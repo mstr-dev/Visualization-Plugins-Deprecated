@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">        
+        <visualization id="Microcharts" desc="Microcharts" desc-id="mstrWeb.5630" scope="19" projects="" style-name="MicroChartsVisualizationStyle" propsEditor="" titleDESCId="19469" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
+</visualizations>
