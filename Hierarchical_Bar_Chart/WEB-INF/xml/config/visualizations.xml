@@ -1,0 +1,5 @@
+<visualizations>
+  <visualization-list name="ajax" show-in-web="true" view-mode="51">
+    <visualization attribute-minimum="2" desc="Hierarchical Bar Chart" is-mojo="true" metric-minimum="1" scope="19" style-name="Hierarchical_Bar_Chart"/>
+  </visualization-list>
+</visualizations>
