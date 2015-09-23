@@ -822,6 +822,9 @@
             },
 
             postBuildRendering: function postBR() {
+                if(this.widget && this.widget.model){
+                    this.model = this.widget.model;
+                }
 
                 //-1 for the height of the dividing line
                 ROW_HEIGHT = (this.widget.otherProps.mRowHeight - 1) + 'px';
@@ -1206,7 +1209,10 @@
                 var icn = this.chartTable;
                 this.utils.translateCSS(-origin.x, -origin.y, false, icn);
             },
-
+/*
+            getData: function getData() {
+                return this.widget && this.widget.model && this.widget.model.data;
+            },*/
 
            /* shouldTouchBubble: function shouldTouchBubble(touch) {
                 var scroller = this._scroller,
