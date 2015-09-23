@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">
+        <visualization id="VisBuilderNew" desc="New Visualization" scope="0" projects="" style-name="VisBuilderNew" is-mojo="true"/>
+    </visualization-list>
+</visualizations>
