@@ -4,6 +4,8 @@
   <Styles>
     <Style name="D3ZoomableCirclePacking" transform="ReportAjaxMojoVisualizationTransform">
       <ActualParameters>
+        <ActualParameter name="documentStyle" type="1" value="RWGridJsonStyle" />
+        <ActualParameter name="reportXMLStyle" type="1" value="VisualizationDataStyle" />
         <ActualParameter name="mojoClassName" value="plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking"/>
       </ActualParameters>
       <Layouts>

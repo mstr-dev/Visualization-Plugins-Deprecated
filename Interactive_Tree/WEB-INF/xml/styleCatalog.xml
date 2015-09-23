@@ -10,6 +10,8 @@
   <Styles>
     <Style name="Interactive_Tree" transform="ReportAjaxMojoVisualizationTransform">
       <ActualParameters>
+        <ActualParameter name="documentStyle" type="1" value="RWGridJsonStyle" />
+        <ActualParameter name="reportXMLStyle" type="1" value="VisualizationDataStyle" />
         <ActualParameter name="mojoClassName" value="plugins.Interactive_Tree.Interactive_Tree"/>
       </ActualParameters>
       <Layouts>
