@@ -15,8 +15,8 @@ Once the Visualization Builder is installed, you can create custom visualization
 ###Difference Between JSP & ASP Version
 This folder contains all files for both JSP and ASP server. The default setting is for JSP server. If you are using JSP, following steps above and no file needs to be changed. If you are using ASP, please remove WEB-INF\xml\pageConfig.xml and and rename pageConfig_ASP.xml to pageConfig.xml. The alternative way is to manually change the following line in WEB-INF\xml\pageConfig.xml
 
-<page-section name="content_core" file-name="/plugins/_VisBuilder/jsp/VisBuilder_Content_Core.jsp"/>
+file-name="/plugins/_VisBuilder/jsp/VisBuilder_Content_Core.jsp"
 
 to
 
-<page-section name="content_core" file-name="/plugins/_VisBuilder/asp/VisBuilder_Content_Core.ascx"/>
+file-name="/plugins/_VisBuilder/asp/VisBuilder_Content_Core.ascx"
