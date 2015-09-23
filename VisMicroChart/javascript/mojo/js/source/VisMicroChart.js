@@ -8,9 +8,6 @@
         "mstrmojo.plugins.VisMicroChart.VisChartUtils",
         "mstrmojo.plugins.VisMicroChart.VisMicroChartTable",
         "mstrmojo.dom",
-        //"mstrmojo._TouchGestures",
-        //"mstrmojo._HasTouchScroller",
-        "mstrmojo.VisTextTooltip",
         "mstrmojo.plugins.VisMicroChart.VisMicroChartTooltip",
         "mstrmojo.hash",
         "mstrmojo.color",
@@ -524,15 +521,7 @@
         this.initDockedHeadersDone = false;
     }
 
-    // function printArray(array, arrayname){
-    // var result = arrayname+": ";
-    // for(var i = 0; i < array.length; i++){
-    // result += array[i] + " ";
-    // }
-    // console.log(result+";");
-    // }
 
-    //lastTreePath[attrIdx] != currRow[attrIdx].idx
     function compareTreePath(src, des) {
         var count = src.length;
         if (des.length != count) {
@@ -3556,10 +3545,6 @@
                     delete this._rightChart;
                 }
 
-                if (this._textTooltip) {
-                    this._textTooltip.destroy();
-                    delete this._textTooltip;
-                }
 
                 if (this._tooltip) {
                     this._tooltip.destroy();
@@ -3591,28 +3576,6 @@
                     this._super(scroller);
                 }
 
-/*
-                if (this.enableSmoothScroll) {
-                    // Attach event listeners.  Call back to listen when scroll is done
-                    // update the vertical scrollbar position
-                    this._scrollDoneListener = this._scroller.attachEventListener('scrollDone', this.id, function () {
-                        this.updateScrollBarPosition();
-                        var scrl = this._scroller;
-                        if (scrl) {
-                            scrl.toggleScrollBars(false);
-                        }
-
-                    });
-
-                    this._scrollMovedListener = this._scroller.attachEventListener('scrollMoved', this.id, function (evt) {
-                        if (this.sortKeyIdx >= this.attrColumnCount) {
-                            //sort key on the right chart
-                            this.utils.translateCSS(-evt.x, -evt.y, false, this.sortArrowCanvas);
-                        }
-
-                    });
-
-                }*/
 
             },
 
@@ -3682,42 +3645,6 @@
                         }
                         this.updateDockedHeadersByOneRow(currPos);
                     }
-
-                    /*
-                     var scrollPastRowCount = this.firstRowIdxOnScrn - this.lastFirstRowIdxOnScrn;
-
-                     console.log("scrollPastRowCount:"+scrollPastRowCount);
-                     if(scrollPastRowCount > 1){
-
-                     for(var i = 1; i < scrollPastRowCount; i++){
-                     this.updateDockedHeadersByOneRow(this.lastScrollPosition.y + rowOffsetHeight, true);
-                     }
-                     //                                    while(scrollPastRowCount > 1){
-                     //                                        if(this.dockedHeaderStatus == NO_REPLACE && !this.lastFirstRow.treeNode.needExpand){
-                     //
-                     //                                            var remainRowCount = this.lastFirstRow.treeNode.postSiblingCount;
-                     //                                            if(scrollPastRowCount > remainRowCount){
-                     //                                                this.updateDockedHeadersByOneRow(this.lastScrollPosition.y + remainRowCount*this.rowOffsetHeight, true);
-                     //                                                scrollPastRowCount -= remainRowCount;
-                     //                                            }else{
-                     //                                                this.updateDockedHeadersByOneRow(this.lastScrollPosition.y + (scrollPastRowCount - 1)*this.rowOffsetHeight, true);
-                     //                                                scrollPastRowCount = 1;
-                     //                                            }
-                     //                                            console.log("update at row:"+ this.lastFirstRow.rowIdx);
-                     //
-                     //                                        }else{
-                     //                                            this.updateDockedHeadersByOneRow(this.lastScrollPosition.y + this.rowOffsetHeight, true);
-                     //                                            scrollPastRowCount--;
-                     //                                        }
-                     //                                    }
-
-                     }else if(scrollPastRowCount < -1){
-                     for(var i = -1; i > scrollPastRowCount; i--){
-                     this.updateDockedHeadersByOneRow(this.lastScrollPosition.y - rowOffsetHeight, true);
-                     }
-                     }
-                     this.updateDockedHeadersByOneRow(evt.y);
-                     */
                 }
             },
 
@@ -4904,20 +4831,8 @@
                     });
                 }
 
-                this.renderTextTooltip();
+                //this.renderTextTooltip();
                 this.renderVisTooltip();
-            },
-
-            renderTextTooltip: function renderTextTooltip() {
-                //renderToolip
-                var props = {
-                    placeholder: this.textTooltip,
-                    boundary: this.domNode
-                };
-                this._textTooltip = new mstrmojo.VisTextTooltip(props);
-                this._textTooltip.render();
-
-                this._textTooltip.toggle(false);
             },
 
             renderVisTooltip: function renderVisTooltip() {
@@ -5210,89 +5125,6 @@
                     });
                 }
 
-            },
-
-            touchSelectBegin: function touchSelectBegin(touch) {
-                if (touch.evt.ctrlKey) { // if ctrl Key is pressed
-                    this.touchMultiBegin(touch);
-                    return;
-                }
-
-                var me = this;
-
-                hideTooltipGlobal.call(me);
-
-                var td = mstrmojo.dom.findAncestorByAttr(touch.target, "mcol", true, this.domNode);
-                if (td && td.node) {
-                    var mrow = td.node.getAttribute("mrow");
-                    var mcol = td.node.getAttribute("mcol");
-
-                    if (mrow == -1) {
-                        //on table header
-                        this.showTextTooltip(td.node, mcol, true);
-
-                    } else {
-                        var tr = td.node.parentNode;
-                        var rowInfo = null;
-                        if (tr.getAttribute("rowType") == DOCKED_HEADER) {
-                            var dockedHeaderIdx = getIdxByRowIdx(this.dockedHeaderRows, mrow);
-                            if (dockedHeaderIdx >= 0) {
-                                rowInfo = this.dockedHeaderRows[dockedHeaderIdx];
-                            } else {
-                                dockedHeaderIdx = getIdxByRowIdx(this.dockedHeaderReplaceRows, mrow);
-                                rowInfo = this.dockedHeaderReplaceRows[dockedHeaderIdx];
-                            }
-                        } else {
-                            rowInfo = this.rows[mrow];
-                        }
-
-                        var colInfo = this.colInfos[mcol];
-                        if (colInfo.type == CHART) {
-                            var touchedChart = rowInfo && rowInfo.rowRef && rowInfo.rowRef[mcol];
-                            if (touchedChart) {
-                                this.showChartTooltip(touchedChart, touch);
-                                this.currSelectedWidget = {mrow: mrow, mcol: mcol};
-                            }
-                        } else if (colInfo.type == ATTR_NAME || colInfo.type == METRIC_VALUE || colInfo.type == METRIC_NAME) {
-                            this.showTextTooltip(td.node, mcol);
-                        }
-                    }
-
-                }
-            },
-
-            showTextTooltip: function showTextTooltip(e, mcol, onHeader) {
-                if (onHeader) {
-                    var colInfo = this.colInfos[mcol],
-                        text = colInfo.title;
-                    if (colInfo.titleOverflow && this._textTooltip) {
-                        this._textTooltip.updateContent(e, onHeader ? 'title' : 'content', text);
-
-                    }
-                } else {
-                    var text = e.innerText;
-                    var tmpLength = this.getTextWidthByCanvas(text, e, true);
-                    if (tmpLength > e.offsetWidth && this._textTooltip) {
-                        this._textTooltip.updateContent(e, onHeader ? 'title' : 'content', text);
-
-                    }
-                }
-
-            },
-
-            hideTextTooltip: function hideTextTooltip() {
-                if (this._textTooltip) {
-                    this._textTooltip.toggle(false);
-                }
-            },
-
-            touchSelectEnd: function touchSelectEnd(touch) {
-                if (touch.evt.ctrlKey) {
-                    this.touchMultiEnd(touch);
-                    return;
-                }
-                this.currSelectedWidget = null;
-                this.hideTextTooltip();
             },
 
             touchSelectMove: function touchSelectMove(touch) {
@@ -6932,98 +6764,7 @@
                 return treeNodeList;
             },
 
-            /*sortOnTap: function sortOnTap(sortKeyIdx) {
 
-                if (this.isKPI) {
-                    //we don't support sort in KPI mode
-                    return;
-                }
-
-                var colInfo = this.colInfos[sortKeyIdx];
-
-                if (colInfo.type == CHART || colInfo.type == TREE_TRIANGLE || colInfo.type == DROP_SHADOW) {
-                    //don't support sort on chart
-                    return;
-                }
-
-                //begin sorting
-
-                if (sortKeyIdx != this.sortKeyIdx && this.sortKeyIdx != undefined) {
-                    //restore previous sort status
-                    this.toggleSortOrderAndArrow(this.sortKeyIdx, SORT_ORDER.NORMAL);
-                }
-
-                //change sort status
-                var currSortOrder = (colInfo.sortOrder + 1) % 3;
-                //draw arrow on header
-                this.toggleSortOrderAndArrow(sortKeyIdx, currSortOrder);
-
-                //update the current sort key
-                this.sortKeyIdx = sortKeyIdx;
-
-                var me = this,
-                    sortID = ++this.sortID;
-
-                var callback = {
-                    success: function (res) {
-
-                        if (sortID != me.sortID) {
-                            console.log("current sortID:" + me.sortID + ", this sortID:" + sortID + ", obsolete data, ignore");
-                            return;
-
-                        }
-
-                        var nodeKey = me.getModelK();
-
-                        if (res.eg) {
-                            //has error
-                            return;
-                        }
-
-                        me.model = res;//mstrmojo.Vis.getVisGrid(docModel, res, nodeKey);
-
-                        //add the node key as backend won't send it when apply sort.
-                        me.model.k = nodeKey;
-
-                        //reRender
-                        me.storeMCStatus(true);
-
-                        me.pushToReusePool();
-
-                        me.rowsNeedRebuild = true;
-                        convertDataToModels.call(me, true);
-
-                        me.restoreMCStatus();
-
-                        me.firstRowIdxOnScrn = 0;
-                        me.getCurrRenderRowCount();
-
-                        //assign rowRef to the row which will be rendered.
-                        var rows = me.rows;
-                        for (var i = me.startCnt; i < me.endCnt; i++) {
-                            rows[i].rowRef = me.popFromReusePool();
-                        }
-
-                        var scrollTo = {x: 0, y: 0};
-
-                        if (!me.enableSmoothScroll) {
-                            me._leftChart.reRenderRows(scrollTo);
-                        } else {
-                            me._leftChart.reRenderRows(scrollTo);
-                            me._rightChart.reRenderRows(scrollTo);
-                        }
-
-                        me.getDefaultHighlightRow();
-                        me.updateSelectedStatus(me.tree);
-                        me.updateHighlightForCurrRenderRows();
-
-                        if (me.isTreeMode) {
-                            me.initDockedHeaders();
-                        }
-                    }
-                };
-                this.doSort(currSortOrder, callback);
-            },*/
 
             toggleSortOrderAndArrow: function togglesoaa(sortKeyIdx, currSortOrder) {
                 var colInfo = this.colInfos[sortKeyIdx],
@@ -7227,210 +6968,7 @@
 
             multiTap: true,
 
-            /*touchTap: function (touch) {
-                var widget = this;
 
-                if (widget._tooltip.show) {
-                    hideTooltipGlobal.call(this);
-                    return;
-                }
-
-                var td = mstrmojo.dom.findAncestorByAttr(touch.target, "mcol", true, this.domNode);
-                if (!td) {
-                    this._leftChart.dockedHeaderReplaceDiv.style.display = 'none';
-                    touch.target = document.elementFromPoint(touch.pageX, touch.pageY);
-                    td = mstrmojo.dom.findAncestorByAttr(touch.target, "mcol", true, this.domNode);
-                    this._leftChart.dockedHeaderReplaceDiv.style.display = '';
-                }
-                if (td && td.node) {
-                    //find the node
-                    var mrow = parseInt(td.node.getAttribute("mrow"));
-                    var mcol = parseInt(td.node.getAttribute("mcol"));
-
-                    if (mrow == -1) {
-                        //PM required:Starting with 9.3.1, we decided to disable selections by tapping on the header
-                        //they seem to be counter-intuitive.  As such, we could disable selection at the top for link-drill as well.
-
-                        //do sorting
-                        //                        this.sortOnTap(mcol);
-                        return;
-                    }
-
-                    if (this.isTreeMode) {
-
-                        if (mrow >= 0) {
-                            //tap on body
-                            var rowInfo = this.rows[mrow];
-                            var treeNode = rowInfo && rowInfo.treeNode;
-                            if (touch.count == 2 || ( touch.count == 1 && mcol == this.treeColumnIdx)) {
-                                // double tap on any node || single tap on triangle
-
-                                // do collapse and expand one row
-
-                                if (!treeNode.isLeaf) {
-
-                                    this.rowsNeedRebuild = true;
-
-                                    var rowType = td.node.parentNode.getAttribute("rowType");
-
-                                    if (treeNode.needExpand) {
-                                        // do collapse
-                                        collapseTreeNodeAndSetScrlPos.call(this, rowInfo, rowType);
-                                    } else {
-                                        // do expand
-                                        expandTreeNodeAndSetScrlPos.call(this, rowInfo, rowType);
-                                    }
-                                }
-                                return;
-                            }
-                        }
-
-                        // do selection and link drilling for treemode
-                        var touchedObj = {node: td.node, treeNode: treeNode, mcol: mcol, mrow: mrow};
-                        var actionObjList = this.getActionObj(touchedObj);
-                        var actionObj = actionObjList && actionObjList[0];
-                        if (actionObj) {
-                            this.performActionAndDoHighlight(actionObjList, touchedObj);
-                            //TODO: clear link drill highlight
-                            return;
-                        }
-
-                    } else {
-                        // none tree mode
-                        var touchedObj = {node: td.node, mcol: mcol, mrow: mrow};
-                        var actionObjList = this.getActionObj(touchedObj);
-                        var actionObj = actionObjList && actionObjList[0];
-                        if (actionObj) {
-                            this.performActionAndDoHighlight(actionObjList, touchedObj);
-                            return;
-                        }
-
-                    }
-
-                    /*
-                     * PM required:
-                     * TQMS 720655:
-                     * If the Visualization is "not" configured as a selector,
-                     * then tapping on the sparkline or the bullet graph should also trigger the tooltip.
-                     */
-                  /*  var me = this;
-                    var tr = td.node.parentNode;
-                    var rowInfo = null;
-                    if (tr.getAttribute("rowType") == DOCKED_HEADER) {
-                        var dockedHeaderIdx = getIdxByRowIdx(this.dockedHeaderRows, mrow);
-                        if (dockedHeaderIdx >= 0) {
-                            rowInfo = this.dockedHeaderRows[dockedHeaderIdx];
-                        } else {
-                            dockedHeaderIdx = getIdxByRowIdx(this.dockedHeaderReplaceRows, mrow);
-                            rowInfo = this.dockedHeaderReplaceRows[dockedHeaderIdx];
-                        }
-                    } else {
-                        rowInfo = this.rows[mrow];
-                    }
-
-                    var touchedChart = rowInfo && rowInfo.rowRef && rowInfo.rowRef[mcol];
-                    if (touchedChart) {
-                        this.showChartTooltip(touchedChart, touch);
-                    }
-
-                }
-
-            },*/
-
-            /**
-             * Returns true if the touch event should be bubbled
-             * When user scroll horizonally:
-             *    If enable smooth scroll, not bubble
-             *    else bubble
-             * @type Boolean
-             */
-            /*shouldTouchBubble: function shouldTouchBubble(touch) {
-                var isVertical = touch.isVertical;
-                return isVertical ? this._super(touch) : this.enableSmoothScroll && isScrollableElementTouched.call(this, touch) ? false : true;
-            },*/
-            //                        shouldTouchBubble: function shouldTouchBubble(touch) {
-            //
-            //                            // Default to horizontal.
-            //                            var scroller = this.enableSmoothScroll ? this._rightChart._scroller : this._leftChart._scroller,
-            //                                isVertical = touch.isVertical;
-            //
-            //                            return isVertical ? !scroller.vScroll : (this.enableSmoothScroll ? false : true);
-            //                        },
-
-            multiTouch: true,
-
-            /*touchMultiBegin: function (touch) {
-                // we have two mode. First is using single touch or
-                // mouse event for simpler debug. Second is really
-                // multi touch
-                // hide tooltip anyway
-                hideTooltipGlobal.call(this);
-                this.initTouchObj = touch;
-                var touch1;
-                var touch2;
-                if (touch.evt.touches
-                    && touch.evt.touches.length == 2) {
-                    touch1 = touch.evt.touches[0];
-                    touch2 = touch.evt.touches[1];
-                } else {
-                    touch1 = touch;
-                    touch2 = {
-                        pageX: 100,
-                        pageY: 100,
-                        target: touch.target
-                    };
-                }
-                var xDiff = touch1.pageX - touch2.pageX;
-                var yDiff = touch1.pageY - touch2.pageY;
-                this.initDiffDiff = xDiff * xDiff + yDiff * yDiff;
-
-                this.relScaleFactor = 1;
-
-                var td1 = mstrmojo.dom.findAncestorByAttr(touch1.target, "mrow", true, this.domNode);
-                var td2 = mstrmojo.dom.findAncestorByAttr(touch2.target, "mrow", true, this.domNode);
-                if (td1 && td1.value && td2 && td2.value) {
-                    this.centerRowIdx = Math.round(( parseInt(td1.value) + parseInt(td2.value) ) / 2);
-                } else {
-                    this.centerRowIdx = this.firstRowIdxOnScrn;//Math.round( this.firstRowIdxOnScrn + this.pageSize/2 );
-                }
-
-                // console.log("initDiffDiff:" + this.initDiffDiff +
-                // ", with init center:" + this.initCenterX + "," +
-                // this.initCenterY);
-            },
-
-            touchMultiMove: function (touch) {
-                // we have two mode. First is using single touch or
-                // mouse event for simpler debug. Second is really
-                // multi touch
-                var touch1;
-                var touch2;
-                if (touch.evt.touches
-                    && touch.evt.touches.length == 2) {
-                    touch1 = touch.evt.touches[0];
-                    touch2 = touch.evt.touches[1];
-                } else {
-                    touch1 = touch;
-                    touch2 = {
-                        pageX: 100,
-                        pageY: 100
-                    };
-                }
-                var xDiff = touch1.pageX - touch2.pageX;
-                var yDiff = touch1.pageY - touch2.pageY;
-                this.curDiffDiff = xDiff * xDiff + yDiff * yDiff;
-            },
-
-            touchMultiEnd: function (touch) {
-                if (this.isTreeMode) {
-                    if (this.curDiffDiff > this.initDiffDiff) {
-                        this.onPinchOpen();
-                    } else if (this.curDiffDiff < this.initDiffDiff) {
-                        this.onPinchClose();
-                    }
-                }
-
-            },*/
 
             onPinchOpen: function onPinchOpen() {
                 var currLowestLevel = getLowestLevelOnScreen.call(this);
