@@ -11,3 +11,12 @@ Once the Visualization Builder is installed, you can create custom visualization
 
 - [Using an existing D3 visualization](https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm#topics/HTML5/CreatingCustomD3Visualizations.htm)
 - [Using the sample visualizations](https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm#topics/HTML5/UsingVisBuilderSamples.htm)
+
+###Difference Between JSP & ASP Version
+This folder contains all files for both JSP and ASP server. The default setting is for JSP server. If you are using JSP, following steps above and no file needs to be changed. If you are using ASP, please remove WEB-INF\xml\pageConfig.xml and and rename pageConfig_ASP.xml to pageConfig.xml. The alternative way is to manually change the following line in WEB-INF\xml\pageConfig.xml
+
+<page-section name="content_core" file-name="/plugins/_VisBuilder/jsp/VisBuilder_Content_Core.jsp"/>
+
+to
+
+<page-section name="content_core" file-name="/plugins/_VisBuilder/asp/VisBuilder_Content_Core.ascx"/>
