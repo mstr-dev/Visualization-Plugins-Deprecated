@@ -1,5 +1,9 @@
-.custom-vis-layout.microchartsvisualizationstyle text {
-    font: 10px sans-serif;
+.MicroChart {
+    font-size: 10px ;
+}
+
+.MicroChartVisChart {
+    font-size: 10px ;
 }
 
 #RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgMicroChartsVisualizationStyle {
