@@ -42,6 +42,7 @@
          * @lends mstrmojo.VisChart.prototype
          */
         {
+            cssClass: 'MicroChartVisChart',
             /**
              * @ignore
              */
