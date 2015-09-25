@@ -1224,38 +1224,10 @@
             },*/
 
             multiTap: true,
-/*
-            touchTap: function (touch) {
-                this.widget.touchTap(touch);
-            },
 
-            touchSelectBegin: function touchSelectBegin(touch) {
-                this.bubbleTouchEvent(touch);
-            },
-
-            touchSelectEnd: function touchSelectEnd(touch) {
-                this.bubbleTouchEvent(touch);
-            },
-
-            touchSelectMove: function touchSelectMove(touch) {
-                this.bubbleTouchEvent(touch);
-            },
-*/
             multiTouch: true,
 
- /*           touchMultiBegin: function (touch) {
-                this.bubbleTouchEvent(touch);
-            },
-
-            touchMultiMove: function (touch) {
-                this.bubbleTouchEvent(touch);
-            },
-
-            touchMultiEnd: function (touch) {
-                this.bubbleTouchEvent(touch);
-            },
-
-   */         destroy: function destroy() {
+            destroy: function destroy() {
                 var colLen = this.colInfos.length;
                 for (var i = 0; i < colLen; i++) {
                     var colInfo = this.colInfos[i];

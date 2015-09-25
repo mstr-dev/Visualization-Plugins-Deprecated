@@ -35,6 +35,8 @@
         {
             scriptClass: 'mstrmojo.plugins.VisMicroChart.MicroChartVisBase',
 
+            cssClass : 'MicroChart',
+
             offsetTop: 0,
             offsetLeft: 0,
 
@@ -102,6 +104,10 @@
                 this._super();
             },
 
+            //override renderVisualization of super
+            renderVisualization: function renderVisualization() {
+
+            },
 
             postBuildRendering: function postBR() {
                 prevWidth = this.width;

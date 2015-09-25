@@ -3164,30 +3164,6 @@
                 }
             },
 
-            //                        showLoadingMsg: function shmsg(text) {
-            //                            var msg = this.loadingMsg,
-            //                                mns = msg.style;
-            //
-            //                            // Add message text.
-            //                            msg.innerHTML = text || mstrmojo.desc(5674, 'Loading...');
-            //                            mns.display = 'block';
-            //                            mns.opacity = 1;
-            //
-            //                            // Display message centered within the widget.
-            //                            var x = Math.round(this.getWidth() / 2 - msg.offsetWidth / 2);
-            //                            var y = Math.round(this.getHeight() / 2 - msg.offsetHeight / 2);
-            //
-            //                            this.utils.translateCSS(x, y, false, msg);
-            //                            console.log("show loading message");
-            //
-            //                        },
-            //
-            //                        hideLoadingMsg: function hmsg() {
-            //                            this.loadingMsg.style.display = 'none';
-            //                            this.loadingMsg.style.opacity = 0;
-            //                            console.log("hide loading message");
-            //                        },
-
             renderErrorMessage: function renderErrorMessage(msg) {
                 var contentDiv = this.errorMsg.firstChild;
                 contentDiv.innerHTML = msg; //"<div class=\"mstrmojo-message\">" + msg + "</div>";

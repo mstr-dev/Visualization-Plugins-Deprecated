@@ -2998,7 +2998,7 @@
             },
 
             visPrint: function () {
-                var enableInVis = mstrmojo.VisUtility.enableInVis;
+                var enableInVis = mstrmojo.plugins.VisMicroChart.VisUtility.enableInVis;
                 if (enableInVis && mstr_profile.enabled && console) {
                     Function.prototype.apply.call(console.log, console, arguments);
                 }
@@ -3013,6 +3013,6 @@
     );
 
     // to enable/disable debug log in vis, set mstrmojo.VisUtility.enableInVis to be true/false in console
-    mstrmojo.VisUtility.enableInVis = false;
-    var $UTIL = mstrmojo.VisUtility;
+    mstrmojo.plugins.VisMicroChart.VisUtility.enableInVis = false;
+    var $UTIL = mstrmojo.plugins.VisMicroChart.VisUtility;
 }());//@ sourceURL=VisUtility.js
