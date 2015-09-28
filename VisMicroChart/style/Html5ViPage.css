@@ -1,3 +1,8 @@
 .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-MicroChartsVisualizationStyle>div>div {
     background-image: url(images/gallery.png);
+       background-position: 0 0;
+}
+.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-MicroChartsVisualizationStyle > div > div {
+background-position: 0 0;
+}
 }
