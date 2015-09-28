@@ -22,3 +22,12 @@
   pointer-events: none;
 }
 
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgD3ZoomableCirclePacking {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3ZoomableCirclePacking{
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
