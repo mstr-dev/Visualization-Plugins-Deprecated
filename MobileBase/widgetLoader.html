@@ -45,44 +45,9 @@
 <div id="errorMessage"></div>
 
 <script>
-
-    /**
-     * the function is used to add a timer to all the function type property of an object
-     * it is useful for debugging some device / os specific issues, whose os version is lower than 4.4
-     */
-    var addTimer = function (widget) {
-//        var funcList = ["processLinearData",
-//            "process",
-//            "generateAxisLabels",
-//            "condenseLabels",
-//            "checkDuplicatedCondensed"];
-//        var prop;
-//        var getFuncWithTimer = function (prop) {
-//            var backupFunc = widget[prop];
-//            return function () {
-//                //console.time(prop);
-//                var startTime = new Date();
-//                var ret = backupFunc.apply(this, arguments);
-//                //console.timeEnd(prop);
-//                var endTime = new Date();
-//                console.log((endTime - startTime) + " ms of " + prop);
-//                return ret;
-//            };
-//        };
-//        for (prop in widget) {
-//            if (typeof widget[prop] === 'function' && funcList.indexOf(prop) > -1) {
-//                widget[prop] = getFuncWithTimer(prop);
-//            }
-//
-//        }
-    };
-
-
 var time0 = new Date();
-window.isUsingDebugBundle = false;
 window.isUsingMockupData = true;
-window.isUsingMinifiedBundle = true;
-window.isDebugging = window.isUsingMockupData || window.isUsingDebugBundle;
+window.isDebugging = window.isUsingMockupData;
 window.isPlugIn = true;
 
 window.mstrApp = {
@@ -116,120 +81,6 @@ mstrConfig = {
     }
 };
 
-var VIS_LIST = {
-    'MicroChartsVisualizationStyle': {
-        's': 'MicroChartVisualizationDataStyle',
-        'c': 'VisMicroChart',
-        'bn': 'microchart'
-    },
-    'TimeSeriesAjaxVisualizationStyle': {
-        'dc': 'DocVisTimeSeries',
-        's': 'TimeSeriesVisualizationDataStyle',
-        'c': 'AndroidVisTimeSeries',
-        'bn': 'timeseries'
-    },
-    'HeatMapVisualizationStyle': {
-        's': 'HeatMapVisualizationDataStyle',
-        'c': 'VisHeatMap',
-        'bn': 'heatmap'
-    },
-    'InteractiveGridAjaxVisualizationStyle': {
-        'dc': 'DocInteractiveGridXtab',
-        's': 'InteractiveGridDataStyle',
-        'c': 'AndroidInteractiveGridXtab',
-        'm': 'DocXtabModel',
-        'bn': 'interactivegrid'
-    },
-    'MstrVisCircularHeatChart':{
-        'bn' : 'CircularHeatChart',
-        'c' : 'CircularHeatChart'
-    },
-    'MstrClusterDendrogram_Cartesian':{
-        'bn' : 'ClusterDendrogram_Cartesian',
-        'c' : 'ClusterDendrogram_Cartesian'
-    },
-    'MstrClusterDendrogram_Radial':{
-        'bn' : 'ClusterDendrogram_Radial',
-        'c' : 'ClusterDendrogram_Radial'
-    },
-    'MstrCollapsibleIndentedTree':{
-        'bn' : 'CollapsibleIndentedTree',
-        'c' : 'CollapsibleIndentedTree'
-    },
-    'MstrD3BarChart':{
-        'bn' : 'D3BarChart',
-        'c' : 'D3BarChart'
-    },
-    'MstrD3BubbleChart':{
-        'bn' : 'D3BubbleChart',
-        'c' : 'D3BubbleChart'
-    },
-    'MstrD3Calendar':{
-        'bn' : 'D3Calendar',
-        'c' : 'D3Calendar'
-    },
-    'MstrD3Flow':{
-        'bn' : 'D3Flow',
-        'c' : 'D3Flow'
-    },
-    'MstrD3FlowV':{
-        'bn' : 'D3FlowV',
-        'c' : 'D3FlowV'
-    },
-    'MstrD3LineChart':{
-        'bn' : 'D3LineChart',
-        'c' : 'D3LineChart'
-    },
-    'MstrD3ZoomableCirclePacking':{
-        'bn' : 'D3ZoomableCirclePacking',
-        'c' : 'D3ZoomableCirclePacking'
-    },
-    'MstrDifferenceChart':{
-        'bn' : 'DifferenceChart',
-        'c' : 'DifferenceChart'
-    },
-    'MstrGoogleAnnotationChart':{
-        'bn' : 'GoogleAnnotationChart',
-        'c' : 'GoogleAnnotationChart'
-    },
-    'MstrGoogleTimeLine':{
-        'bn' : 'GoogleTimeLine',
-        'c' : 'GoogleTimeLine'
-    },
-    'MstrHierarchical_Bar_Chart':{
-        'bn' : 'Hierarchical_Bar_Chart',
-        'c' : 'Hierarchical_Bar_Chart'
-    },
-    'MstrInteractive_Tree':{
-        'bn' : 'Interactive_Tree',
-        'c' : 'Interactive_Tree'
-    },
-    'MstrReingoldTilfordTree_Cartesian':{
-        'bn' : 'ReingoldTilfordTree_Cartesian',
-        'c' : 'ReingoldTilfordTree_Cartesian'
-    },
-    'MstrReingoldTilfordTree_Radial':{
-        'bn' : 'ReingoldTilfordTree_Radial',
-        'c' : 'ReingoldTilfordTree_Radial'
-    },
-    'MstrSequenceSunburst':{
-        'bn' : 'SequenceSunburst',
-        'c' : 'SequenceSunburst'
-    },
-    'MstrSimpleGantt':{
-        'bn' : 'SimpleGantt',
-        'c' : 'SimpleGantt'
-    },
-    'MstrVisMicroChart':{
-        'bn' : 'VisMicroChart',
-        'c' : 'VisMicroChart'
-    },
-    'MstrZoomableHeatmap':{
-        'bn' : 'ZoomableHeatmap',
-        'c' : 'ZoomableHeatmap'
-    }
-};
-
 var widgetConfiguration,
     mstrMobileApp = window.mstrMobileApp,
     isDebugging = window.isDebugging;
@@ -252,11 +103,6 @@ function setupWidgetLoader() {
             dpi = 320,
             head = document.getElementsByTagName('head')[0],
             forEach = mstrmojo.array.forEach;
-
-        window.loadModel = function loadModel () {
-        	widgetConfiguration = JSON.parse(mstrMobileApp.getWidgetConfiguration());
-        	mstrMobileTransport && mstrMobileTransport.loadModelComplete();
-        };
 
         window.renderWidget = function renderWidget () {
         	try {
@@ -285,11 +131,6 @@ function setupWidgetLoader() {
                     return;
                 }
 
-                // document.body.width = window.widgetWidth;
-                // document.body.height = window.widgetHeight;
-                // document.body.style.width = window.widgetWidth + 'px';
-                // document.body.style.height = window.widgetHeight + 'px';
-
                 visConfig.width = window.widgetWidth + 'px';
                 visConfig.height = window.widgetHeight + 'px';
 
@@ -302,25 +143,7 @@ function setupWidgetLoader() {
                 }
 
                 var vis = {};
-                if (visConfig.model && visConfig.model.visName) {
-                    vis = VIS_LIST[visConfig.model.visName];
-                    if (vis) {
-                        var className;
-                        // if the widget doesn't have that kind of class, just use the default one
-                        if (visConfig.isReport.toString() !== 'true' && vis.dc) {
-                            className = vis.dc;
-                        } else {
-                            className = vis.c;
-                        }
-
-                        if (className) {
-                            //add a prefix 'Native' so that we can use a subclass to modify the widget without touching the original file, and thus would not break any functionality on other platform
-                            className = 'plugins.' + className + "." + className;
-                        }
-
-                    }
-                }
-
+                var className = getVisMojoClassName();
                 if (!className) {
                     console.log('Cannot find the scriptClass for the widget, abort...');
                     return;
@@ -436,9 +259,6 @@ function setupWidgetLoader() {
         //load widget
         window.loadModelAndRenderWidget = function loadModelAndRenderWidget() {
             try {
-            	if (!window.isUsingMockupData) {
-            		loadModel();
-            	}
                 renderWidget();
             } catch (e) {
 	            if (window.isDebugging) {
@@ -492,21 +312,21 @@ function loadScriptFile(url, callback, scope) {
 function getVisName() {
     return widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visName || '';
 }
-function getBundleName() {
-    var visName = getVisName();
-    return VIS_LIST[visName] && VIS_LIST[visName].bn || '';
-}
-function loadBundle() {
-    var bundleName = getBundleName();
-    if (bundleName) {
-        // bundleName = 'mojo-widgets-' + bundleName;
-        if (window.isUsingDebugBundle) {
-            bundleName += '-debug';
-        }
-        if (!window.isUsingMinifiedBundle) {
-            bundleName += '-noMinify';
-        }
 
+function getVisMojoClassName() {
+    return widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visMojoClassName || '';
+}
+
+function loadBundle() {
+    var mojoClassName = getVisMojoClassName();
+	var classArr = mojoClassName.split('.');
+	if (classArr.length !== 3 || classArr[0] !== 'plugins') {
+		return;
+	}
+
+    var bundleName = classArr[1];
+	
+    if (bundleName) {
         var cssPath = '../' + bundleName + '/style/global.css'
         var link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet');
@@ -515,7 +335,7 @@ function loadBundle() {
         head = document.getElementsByTagName('head')[0];
         head.appendChild(link);
 
-        var filePath = '../' + bundleName + '/javascript/mojo/js/source/' + bundleName + '.js';
+        var filePath = '../' + bundleName + '/javascript/mojo/js/source/' + classArr[2] + '.js';
 
         loadScriptFile(filePath, function () {
             console.log('bundle name: ' + bundleName);
@@ -552,7 +372,7 @@ if (window.isUsingMockupData) {
     
     if (window.dataModel && window.docDef){
         widgetConfiguration = {
-       	    model: window.dataModel,
+       	  model: window.dataModel,
 		  defn: "",
 		  docDef: window.docDef,
  		  controller: {view: {model: {}}},
