@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE StyleCatalog SYSTEM "styleCatalog.dtd">
+<StyleCatalog version="2.0">
+    <Styles>
+        <Style name="D3FlowHighlightVisualizationStyle" description="Style to render D3FlowHighlight visualization"
+               transform="ReportAjaxMojoVisualizationTransform">
+            <ActualParameters>
+                <ActualParameter name="mojoClassName" type="1" value="plugins.D3FlowHighlight.D3FlowHighlight"/>
+                <ActualParameter name="reportXMLStyle" type="1" value="VisualizationDataStyle"/>
+                <ActualParameter name="documentStyle" type="1" value="RWGridJsonStyle" />
+            </ActualParameters>
+            <Layouts>
+                <Layout layout_source="AppLayoutSourceFile" order="1">
+                    <![CDATA[/WEB-INF/xml/layouts/MojoVisualizationLayout.xml]]>
+                </Layout>
+            </Layouts>
+        </Style>
+        <Style name="D3FlowHighlightPropertiesStyle" transform="VisualizationPropertiesTransform"
+               description="" >
+            <Layouts>
+                <Layout layout_source="AppLayoutSourceFile">
+                    <![CDATA[@D3FlowHighlight:/WEB-INF/xml/layouts/D3FlowHighlightProperties.xml]]>
+                </Layout>
+            </Layouts>
+        </Style>
+    </Styles>
+</StyleCatalog>
