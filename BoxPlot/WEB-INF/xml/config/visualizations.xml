@@ -1,0 +1,7 @@
+<visualizations>
+	<visualization-list name="ajax">
+		<visualization id="D3PlusBoxPlot" desc="D3PlusBoxPlot"
+			scope="19" style-name="D3PlusBoxPlot" is-mojo="true"
+			attribute-minimum="1" metric-minimum="1" />
+	</visualization-list>
+</visualizations>
