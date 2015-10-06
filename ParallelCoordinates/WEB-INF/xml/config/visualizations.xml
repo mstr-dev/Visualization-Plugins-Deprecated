@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">
+        <visualization id="D3ParallelCoordinates" desc="D3ParallelCoordinates" scope="19" projects="" style-name="D3ParallelCoordinates" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
+</visualizations>
