@@ -4,7 +4,7 @@
 
 **Contributor's Orgnization:** Polarys Group
 
-**Usage:** This visualization needs 2 or more attributes and 1 or more metrics.
+**Usage:** This visualization needs 2 attributes and 1 metric.
 
 **Description:** Google Sankey diagrams visualize the magnitude of flow between nodes in a network.
 
