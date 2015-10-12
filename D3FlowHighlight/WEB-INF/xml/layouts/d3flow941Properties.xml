@@ -1,0 +1,41 @@
+<!DOCTYPE mstrlayout:layout SYSTEM "mstrlayout.dtd">
+<mstrlayout:layout>
+	<table>
+		<tr>
+			<td>
+				Default tooltip style (you can always switch this by double clicking on the diagram)
+			</td>
+			<td>
+				<mstrlayout:render name="SelectBox">
+					<mstrlayout:argument type="string" value="tooltipStyle" />
+					<mstrlayout:argument type="string" value="rich^Rich|simple^Simple"/>
+					<mstrlayout:argument type="string" value="rich" /> <!--default value -->
+				</mstrlayout:render>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Number Format
+			</td>
+			<td>
+				<mstrlayout:render name="SelectBox">
+					<mstrlayout:argument type="string" value="numFormat" />
+					<mstrlayout:argument type="string" value="^Default|g^General|f^Fixed|s^SI-prefix|p^Percentage|d^Integer"/>
+					<mstrlayout:argument type="string" value="s" /> <!--default value -->
+				</mstrlayout:render>
+			</td>
+		</tr>
+		<tr>
+			<td>
+			    Number Precision. Enter digits, or leave empty if not specified
+			</td>
+			<td>
+				<mstrlayout:render name="Textbox">
+					<mstrlayout:argument type="string" value="precision" />
+					<mstrlayout:argument type="string" value="" />
+					<mstrlayout:argument type="string" value="1" />
+				</mstrlayout:render>
+			</td>
+		</tr>
+	</table>
+</mstrlayout:layout>

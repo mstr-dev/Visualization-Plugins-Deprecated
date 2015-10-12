@@ -1,0 +1,97 @@
+/*body {
+  background: #000;
+}
+
+ellipse {
+  fill: #fff;
+}
+
+.mid {
+  stroke-width: 4px;
+}
+
+.tail {
+  stroke-width: 2px;
+}*/
+
+text {
+    font: 10px sans-serif;
+}
+
+.node rect {
+  cursor: move;
+  fill-opacity: .9;
+  shape-rendering: crispEdges;
+}
+
+.node text {
+  pointer-events: none;
+  text-shadow: 0 1px 0 #fff;
+}
+
+path.link {
+    fill: none;
+    stroke: #000;
+    stroke-opacity: .2;
+    stroke-linecap: butt;
+}
+
+path.highlight {
+    stroke: #45699f;
+    stroke-opacity: .8;
+    z-index: 1;
+}
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml #mnuInsertWgD3Flow {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3Flow{
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+/*Tooltips */
+/*Credit: tooltip style sheets are based on c3js.org with MIT license (https://github.com/masayuki0812/c3/blob/master/LICENSE)*/
+#tooltip-container {
+  position: fixed;
+  pointer-events: none;
+}
+.tooltip {
+  border-collapse:collapse;
+  border-spacing:0;
+  background-color:#fff;
+  empty-cells:show;
+  -webkit-box-shadow: 7px 7px 12px -9px rgb(119,119,119);
+     -moz-box-shadow: 7px 7px 12px -9px rgb(119,119,119);
+          box-shadow: 7px 7px 12px -9px rgb(119,119,119);
+  opacity: 0.85;
+}
+.tooltip tr {
+  border:1px solid #CCC;
+}
+.tooltip td.head, .tooltip th {
+  background-color: #c7e1ff;
+  font-size:12px;
+  padding:2px 5px;
+  text-align:center;
+  color:#000;
+}
+.tooltip td {
+  font-size:11px;
+  padding: 3px 6px;
+  text-align:left;
+  background-color:#fff;
+  border-left:1px dotted #999;
+}
+.tooltip td.value{
+  text-align: right;
+}
+/*little colorful squre*/
+.tooltip td > span {
+  display: inline-block;
+  width: 2px;
+  height: 11px;
+  margin-right: 6px;
+}
