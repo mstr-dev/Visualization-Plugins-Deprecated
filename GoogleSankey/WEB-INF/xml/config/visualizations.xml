@@ -1,0 +1,5 @@
+<visualizations>
+    <visualization-list name="ajax">
+        <visualization id="GoogleSankey" desc="Google Sankey Diagram" scope="19" projects="" style-name="GoogleSankey" is-mojo="true" attribute-minimum="2" metric-minimum="1"/>
+    </visualization-list>
+</visualizations>
