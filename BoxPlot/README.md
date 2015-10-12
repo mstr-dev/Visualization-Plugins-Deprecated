@@ -1,3 +1,5 @@
+**Notes:** Critical issue #77, there is JavaScript compile error. Please don't use this plugin before this issue gets fixed.
+
 **Contributor:** Christoph Kiefer
 
 **Contributor's Contact Info.:** <christoph.kiefer@kieferitsolutions.ch>
