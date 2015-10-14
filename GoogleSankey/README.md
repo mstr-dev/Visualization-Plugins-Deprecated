@@ -1,3 +1,5 @@
+**Notes:** The chart doesn't render in the dashboard. Please don't use this plugin untill this issue gets fixed.
+
 **Contributor:** Karim FAIZ
 
 **Contributor's Contact Info.:** <kfaiz@polarysgroup.com> 
