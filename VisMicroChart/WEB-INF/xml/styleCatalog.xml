@@ -2,7 +2,7 @@
 <!DOCTYPE StyleCatalog SYSTEM "styleCatalog.dtd">
 <StyleCatalog version="2.0">
     <Styles>
-        <Style name="MicroChartsVisualizationStyle" description="Microcharts" transform="ReportAjaxMojoVisualizationTransform">
+        <Style name="VIMicroCharts" description="Microcharts" transform="ReportAjaxMojoVisualizationTransform">
             <ActualParameters>
                 <ActualParameter name="documentStyle" type="1" value="RWGridJsonStyle" />
                 <ActualParameter name="reportXMLStyle" type="1" value="VisualizationDataStyle" />
