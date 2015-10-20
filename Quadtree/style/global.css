@@ -1,0 +1,30 @@
+/*
+style definitions for visualization - in this case empty
+*/
+.custom-vis-layout.quadtree .point {
+    fill: #999;
+    stroke: #fff;
+}
+
+.custom-vis-layout.quadtree .point.scanned {
+    fill: orange;
+    fill-opacity: 1;
+    stroke: brown;
+}
+
+.custom-vis-layout.quadtree .point.selected {
+    fill: red;
+    fill-opacity: 1;
+}
+
+.custom-vis-layout.quadtree .node {
+    fill: none;
+    stroke: #ccc;
+    shape-rendering: crispEdges;
+}
+
+.custom-vis-layout.quadtree .brush .extent {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+}
