@@ -1,7 +1,7 @@
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-VIMicroCharts>div>div {
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-VIMicroCharts >div>div {
     background-image: url(images/gallery.png);
        background-position: 0 0;
 }
-.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-VIMicroCharts> div > div {
+.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-VIMicroCharts > div > div {
 background-position: 0 0;
 }
