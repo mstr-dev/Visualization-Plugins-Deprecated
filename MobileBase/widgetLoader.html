@@ -81,6 +81,42 @@ var widgetConfiguration,
     mstrMobileApp = window.mstrMobileApp,
     isDebugging = window.isDebugging;
 
+var VIS_LIST = {
+    'MstrVisCircularHeatChart':{
+        'c' : 'plugins.CircularHeatChart.CircularHeatChart'
+    },
+    'MstrD3BarChart':{
+        'c' : 'plugins.D3BarChart.D3BarChart'
+    },
+    'MstrD3BubbleChart':{
+        'c' : 'plugins.D3BubbleChart.D3BubbleChart'
+    },
+    'MstrD3Calendar':{
+        'c' : 'plugins.D3Calendar.D3Calendar'
+    },
+	'MstrD3Flow':{
+        'c' : 'plugins.D3Flow.D3Flow'
+    },
+    'MstrSequenceSunburst':{
+        'c' : 'plugins.SequenceSunburst.SequenceSunburst'
+    },
+    'MstrGoogleTimeLine':{
+        'c' : 'plugins.GoogleTimeLine.GoogleTimeLine'
+    },
+    'MstrD3DifferenceChart':{
+        'c' : 'plugins.DifferenceChart.DifferenceChart'
+    },
+    'MstrD3LineChart':{
+        'c' : 'plugins.D3LineChart.D3LineChart'
+    },
+    'MstrD3ZoomableCirclePacking':{
+        'c' : 'plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking'
+    },
+    'MstrZoomableHeatmap':{
+        'c' : 'plugins.ZoomableHeatmap.ZoomableHeatmap'
+    }
+    
+};
 function setupWidgetLoader() {
     var fnStartFailed = function (e) {
         var msg = "Application failed to start due to an irrecoverable error: " + e;
@@ -310,7 +346,12 @@ function getVisName() {
 }
 
 function getVisMojoClassName() {
-    return widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visMojoClassName || '';
+    var mojoClassName = widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visMojoClassName;
+	if (!mojoClassName) {
+	    var visName = getVisName();
+		mojoClassName = VIS_LIST[visName] && VIS_LIST[visName].c;
+	}
+    return mojoClassName || '';
 }
 
 function loadBundle() {
