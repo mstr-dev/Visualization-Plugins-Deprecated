@@ -20,7 +20,7 @@
             errorDetails: "This visualization requires one or more attributes and one metric.",
 
            // externalLibraries: [{url: "http://d3js.org/d3.v3.min.js"}, {url: "../plugins/D3Flow/javascript/mojo/js/source/sankey.js"}, {url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"}],
-            externalLibraries: [{url: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "https://rawgit.com/mstr-dev/Visualization-Plugins/master/D3Flow/javascript/mojo/js/source/sankey.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
+            externalLibraries: [{url: "//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "https://rawgit.com/mstr-dev/Visualization-Plugins/master/D3Flow/javascript/mojo/js/source/sankey.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
 
             useRichTooltip: true,
 
