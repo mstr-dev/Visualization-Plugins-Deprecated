@@ -21,7 +21,7 @@
 
 // Use a sankey library that generates vertical links
 			//externalLibraries: [{url: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "../plugins/D3FlowV/javascript/mojo/js/source/sankeyV.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
-            externalLibraries: [{url: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "https://rawgit.com/mstr-dev/Visualization-Plugins/master/D3FlowV/javascript/mojo/js/source/sankeyV.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
+            externalLibraries: [{url: "//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}, {url: "https://rawgit.com/mstr-dev/Visualization-Plugins/master/D3FlowV/javascript/mojo/js/source/sankeyV.js"}, {url: "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"}],
 
             useRichTooltip: true,
 
