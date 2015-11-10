@@ -472,7 +472,7 @@
              * @private
              */
             handleTouchBegin: function handleTouchBegin(touchX, touchY) {
-                console.log('handle touch Begin');
+                //console.log('handle touch Begin');
                 if(!this.isHighlightOnTouch || !this.browserSupportsHtml5) {
                     return;
                 }
@@ -486,7 +486,7 @@
              * @private
              */
             handleTouchMove: function handleTouchMove(touchX, touchY) {
-                console.log('handle touch Move');
+                //console.log('handle touch Move');
                 var me = this,
                     m = me.model;
 
@@ -502,19 +502,11 @@
 
                 var margin = me.margin;
 
-                // if we have not touched in the chart area don't do anything
-               /* if(touchX < margin.l || touchY < margin.t || touchY > me.canvas.height - margin.b) {
-                    return;
-                }*/
-
                 //Get the index of the values array that matched the x coordinate where the event happened.
                 var touchVal = me.getTouchValue(touchX,touchY);
 
                 //The points falls within a valid window
                 if (touchVal !== null) {
-
-                    //	var x = (touchVal * me.RTX) + margin.l;
-
                     // adjust rns value if the difference is only 1 point
                     var rns = (m.rne - m.rns > 1) ? m.rns : m.rns - 1;
 
@@ -534,11 +526,8 @@
                     //cache the highlightpoint position
                     me.currentHighlight = touchVal;
 
-                    console.log('Render ToolTip' + touchVal);
-
                     //render the tooltip
                     me.renderTooltip(touchVal, posX, posY);
-                    //me.renderTooltip(touchVal, touchX, touchY);
 
                     //Call the method that will highlight the current point
                     if(this.isTimeSeries){
@@ -555,7 +544,7 @@
              * @private
              */
             handleTouchEnd: function handleTouchEnd() {
-                console.log('handle touch End');
+                //console.log('handle touch End');
                 if (!this.browserSupportsHtml5) {
                     return;
                 }
@@ -573,9 +562,6 @@
                 //me.highlightContext.clearRect(0, 0, me.getWidth(), me.highlightCanvas.height);
                 me.highlightCanvas.height = me.highlightCanvas.height;
 
-                //hide the tooltip
-                //me.tooltip.style.display = 'none';
-
                 //hide tooltip
                 me.hideTooltip();
             },
@@ -591,7 +577,7 @@
              */
             onmouseover: function(evt) {
                 if(!this.isAndroid) {
-                    console.log('mouse over');
+                    //console.log('mouse over');
                     this.handleTouchBegin(evt.e.pageX, evt.e.pageY);
                 }
             },
@@ -601,28 +587,7 @@
              */
             onmouseout: function(evt) {
                 if(!this.isAndroid) {
-                    console.log('mouse out');
-                    this.handleTouchEnd();
-                }
-            },
-
-
-            /**
-             * @ignore
-             */
-            onmousedown: function(evt) {
-                if(!this.isAndroid) {
-                    console.log('mouse down');
-                    this.handleTouchBegin(evt.e.pageX, evt.e.pageY);
-                }
-            },
-
-            /**
-             * @ignore
-             */
-            onmouseup: function(evt) {
-                if(!this.isAndroid) {
-                    console.log('mouse up');
+                    //console.log('mouse out');
                     this.handleTouchEnd();
                 }
             },
