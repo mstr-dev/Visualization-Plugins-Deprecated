@@ -7,6 +7,8 @@
     var CUSTOM_DARK_THEME = 3;
     var CUSTOM_LIGHT_THEME = 4;
 
+    var ttp_ParentNode = null;
+
     /**
      * @class
      * @extends mstrmojo.VisChart
@@ -197,14 +199,6 @@
                     var x = (i * this.RTX) + margin.l;
                     var y = utils.getYValue(this, val);
                     lines[i] = {x: x, y: y};
-                    /*if (k === 0) {
-                     maxYValue = minYValue = y;
-                     }
-                     if (y < minYValue) {
-                     minYValue = y;
-                     } else if (y > maxYValue) {
-                     maxYValue = y;
-                     }*/
 
                 }
                 if (lines.length === 0) {
@@ -310,7 +304,9 @@
             },
 
             renderTooltip: function rndrttp(valIndex, touchX, touchY) {
-            	ttp = this.widget._tooltip;
+            	var ttp = this.widget._tooltip;
+                if(ttp_ParentNode && !ttp.domNode.parentNode)
+                    ttp_ParentNode.appendChild(ttp.domNode);
                 if (valIndex < 0) {
                     ttp.toggle(false);
                     return;
@@ -376,25 +372,18 @@
                 	offset = Math.round(45*zf);
                 utils.positionTooltip(ttp.domNode, {x:touchX - posWdt.x, y: touchY - posWdt.y}, this.widget.domNode, offset);
                 ttp.domNode.style.visibility = 'visible';
-//                var relx = (valIndex * me.RTX) + margin.l,
-//            		rely = utils.getYValue(me, s[0].rv[valIndex]),
-//            		pos = mstrmojo.dom.position(this.domNode, true),
-//            		posWdt = mstrmojo.dom.position(this.widget.domNode, true);
-//                
-//                var ttpHeight = ttp.domNode.offsetHeight,
-//                	ttpWidth = ttp.domNode.offsetWidth;
-//                var topOff = (rely + pos.y - posWdt.y - ttpHeight - 20);
-//                if (topOff < 0) {
-//                    topOff = 0;
-//                }
-//                var leftOff = (relx + pos.x - posWdt.x + 20);
-//                if (leftOff > this.widget.getWidth() - ttpWidth) {
-//                    leftOff = (relx + pos.x - posWdt.x - ttpWidth - 20);
-//                    if (leftOff < 0) {
-//                        leftOff = 0;
-//                    }
-//                }
-//                ttp.posTo({x:leftOff, y:topOff});
+
+            },
+            hideTooltip: function hidettp() {
+                var ttp = this.widget._tooltip;
+                ttp.toggle(false);
+                var win = ttp.domNode;
+                if (win && win.parentNode) {
+                    ttp_ParentNode = win.parentNode;
+                    win.parentNode.removeChild(win);
+                    //this.tooltipShape = undefined;
+                }
+                return;
             },
 
             /***

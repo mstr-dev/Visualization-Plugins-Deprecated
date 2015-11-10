@@ -199,7 +199,7 @@
              * @ignore
              */
             markupString: '<div id="{@id}" class="mstrmojo-Chart {@cssClass}" style="width:{@width};height:{@height};top:{@top};left:{@left};position:relative;" ' +
-            ' mstrAttach:mousedown,mouseup,mousemove,click ' +
+            ' mstrAttach:mouseover,mouseout,mousemove ' +
             '><canvas width="{@width}" height="{@height}"></canvas>' +
             '<canvas style="position:absolute;left:0;top:0" width="{@width}" height="{@height}"></canvas>' +
             '<canvas style="position:absolute;left:0;top:0" width="{@width}" height="{@height}"></canvas>' +
@@ -472,6 +472,7 @@
              * @private
              */
             handleTouchBegin: function handleTouchBegin(touchX, touchY) {
+                console.log('handle touch Begin');
                 if(!this.isHighlightOnTouch || !this.browserSupportsHtml5) {
                     return;
                 }
@@ -485,12 +486,14 @@
              * @private
              */
             handleTouchMove: function handleTouchMove(touchX, touchY) {
+                console.log('handle touch Move');
                 var me = this,
                     m = me.model;
 
                 if (!me.tooltipOn || !me.isHighlightOnTouch || !this.browserSupportsHtml5 || this.windowSize <= 1) {
                     return;
                 }
+
 
                 var touchPointOnWidget = me.utils.getTouchXYOnWidget(touchX, touchY, me);
                 var posX = touchX, posY = touchY;
@@ -500,9 +503,9 @@
                 var margin = me.margin;
 
                 // if we have not touched in the chart area don't do anything
-                if(touchX < margin.l || touchY < margin.t || touchY > me.canvas.height - margin.b) {
+               /* if(touchX < margin.l || touchY < margin.t || touchY > me.canvas.height - margin.b) {
                     return;
-                }
+                }*/
 
                 //Get the index of the values array that matched the x coordinate where the event happened.
                 var touchVal = me.getTouchValue(touchX,touchY);
@@ -531,8 +534,11 @@
                     //cache the highlightpoint position
                     me.currentHighlight = touchVal;
 
+                    console.log('Render ToolTip' + touchVal);
+
                     //render the tooltip
                     me.renderTooltip(touchVal, posX, posY);
+                    //me.renderTooltip(touchVal, touchX, touchY);
 
                     //Call the method that will highlight the current point
                     if(this.isTimeSeries){
@@ -549,6 +555,7 @@
              * @private
              */
             handleTouchEnd: function handleTouchEnd() {
+                console.log('handle touch End');
                 if (!this.browserSupportsHtml5) {
                     return;
                 }
@@ -567,14 +574,45 @@
                 me.highlightCanvas.height = me.highlightCanvas.height;
 
                 //hide the tooltip
-                me.tooltip.style.display = 'none';
+                //me.tooltip.style.display = 'none';
+
+                //hide tooltip
+                me.hideTooltip();
             },
+
+            hideTooltip: function hidettp() {
+                this.tooltip.style.display = 'none';
+                return;
+
+            },
+
+            /**
+             * @ignore
+             */
+            onmouseover: function(evt) {
+                if(!this.isAndroid) {
+                    console.log('mouse over');
+                    this.handleTouchBegin(evt.e.pageX, evt.e.pageY);
+                }
+            },
+
+            /**
+             * @ignore
+             */
+            onmouseout: function(evt) {
+                if(!this.isAndroid) {
+                    console.log('mouse out');
+                    this.handleTouchEnd();
+                }
+            },
+
 
             /**
              * @ignore
              */
             onmousedown: function(evt) {
                 if(!this.isAndroid) {
+                    console.log('mouse down');
                     this.handleTouchBegin(evt.e.pageX, evt.e.pageY);
                 }
             },
@@ -584,6 +622,7 @@
              */
             onmouseup: function(evt) {
                 if(!this.isAndroid) {
+                    console.log('mouse up');
                     this.handleTouchEnd();
                 }
             },
@@ -591,6 +630,7 @@
             /**
              * @ignore
              */
+
             onmousemove: function(evt) {
                 if (!this.isAndroid) {
                     this.handleTouchMove(evt.e.pageX, evt.e.pageY);
