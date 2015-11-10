@@ -199,7 +199,7 @@
              * @ignore
              */
             markupString: '<div id="{@id}" class="mstrmojo-Chart {@cssClass}" style="width:{@width};height:{@height};top:{@top};left:{@left};position:relative;" ' +
-            ' mstrAttach:mousedown,mouseup,mousemove,click ' +
+            ' mstrAttach:mouseover,mouseout,mousemove ' +
             '><canvas width="{@width}" height="{@height}"></canvas>' +
             '<canvas style="position:absolute;left:0;top:0" width="{@width}" height="{@height}"></canvas>' +
             '<canvas style="position:absolute;left:0;top:0" width="{@width}" height="{@height}"></canvas>' +
@@ -472,6 +472,7 @@
              * @private
              */
             handleTouchBegin: function handleTouchBegin(touchX, touchY) {
+                //console.log('handle touch Begin');
                 if(!this.isHighlightOnTouch || !this.browserSupportsHtml5) {
                     return;
                 }
@@ -485,12 +486,14 @@
              * @private
              */
             handleTouchMove: function handleTouchMove(touchX, touchY) {
+                //console.log('handle touch Move');
                 var me = this,
                     m = me.model;
 
                 if (!me.tooltipOn || !me.isHighlightOnTouch || !this.browserSupportsHtml5 || this.windowSize <= 1) {
                     return;
                 }
+
 
                 var touchPointOnWidget = me.utils.getTouchXYOnWidget(touchX, touchY, me);
                 var posX = touchX, posY = touchY;
@@ -499,19 +502,11 @@
 
                 var margin = me.margin;
 
-                // if we have not touched in the chart area don't do anything
-                if(touchX < margin.l || touchY < margin.t || touchY > me.canvas.height - margin.b) {
-                    return;
-                }
-
                 //Get the index of the values array that matched the x coordinate where the event happened.
                 var touchVal = me.getTouchValue(touchX,touchY);
 
                 //The points falls within a valid window
                 if (touchVal !== null) {
-
-                    //	var x = (touchVal * me.RTX) + margin.l;
-
                     // adjust rns value if the difference is only 1 point
                     var rns = (m.rne - m.rns > 1) ? m.rns : m.rns - 1;
 
@@ -549,6 +544,7 @@
              * @private
              */
             handleTouchEnd: function handleTouchEnd() {
+                //console.log('handle touch End');
                 if (!this.browserSupportsHtml5) {
                     return;
                 }
@@ -566,15 +562,22 @@
                 //me.highlightContext.clearRect(0, 0, me.getWidth(), me.highlightCanvas.height);
                 me.highlightCanvas.height = me.highlightCanvas.height;
 
-                //hide the tooltip
-                me.tooltip.style.display = 'none';
+                //hide tooltip
+                me.hideTooltip();
+            },
+
+            hideTooltip: function hidettp() {
+                this.tooltip.style.display = 'none';
+                return;
+
             },
 
             /**
              * @ignore
              */
-            onmousedown: function(evt) {
+            onmouseover: function(evt) {
                 if(!this.isAndroid) {
+                    //console.log('mouse over');
                     this.handleTouchBegin(evt.e.pageX, evt.e.pageY);
                 }
             },
@@ -582,8 +585,9 @@
             /**
              * @ignore
              */
-            onmouseup: function(evt) {
+            onmouseout: function(evt) {
                 if(!this.isAndroid) {
+                    //console.log('mouse out');
                     this.handleTouchEnd();
                 }
             },
@@ -591,6 +595,7 @@
             /**
              * @ignore
              */
+
             onmousemove: function(evt) {
                 if (!this.isAndroid) {
                     this.handleTouchMove(evt.e.pageX, evt.e.pageY);

@@ -21197,7 +21197,7 @@ mstrmojo.DPIManager = {
                     title = getTitle(target);
 
                 if (title) {
-                    var tooltip = title.innerHTML;
+                    var tooltip = title.innerHTML || title.textContent;
 
                     if (tooltip.length) {
                         content = tooltip;

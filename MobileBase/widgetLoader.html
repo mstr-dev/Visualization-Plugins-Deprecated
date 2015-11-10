@@ -9,13 +9,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
     <!-- <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/> -->
     <title>MicroStrategy Mobile</title>
-    <!-- <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/core.css"/> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/android/all.css"/> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/android/tablet.css"/> -->
-    <!-- <link rel="stylesheet" type="text/css" href="../global.css"/> -->
-    <link rel="stylesheet" type="text/css" href="../_Interface/style/global.css"/>
+    <link rel="stylesheet" type="text/css" href="global.css"/>
     <script language="JavaScript" src="CustomVisBase.js"></script>
-    <script language="JavaScript" src="http://d3js.org/d3.v3.min.js"></script>
     <style>
         #errorMessage {
             font-family: "Tahoma";
@@ -36,7 +31,7 @@
     }
     </style>
 </head>
-<body onload="onPageload()" style="background-color: transparent">
+<body onload="onPageload()" style="background-color: transparent;margin:0;padding:0">
 <!--
 <h1 id="header" style="color:white; background-color:black; position:absolute; z-index:1000">hello world</h1>
 -->
@@ -85,6 +80,42 @@ var widgetConfiguration,
     mstrMobileApp = window.mstrMobileApp,
     isDebugging = window.isDebugging;
 
+var VIS_LIST = {
+    'MstrVisCircularHeatChart':{
+        'c' : 'plugins.CircularHeatChart.CircularHeatChart'
+    },
+    'MstrD3BarChart':{
+        'c' : 'plugins.D3BarChart.D3BarChart'
+    },
+    'MstrD3BubbleChart':{
+        'c' : 'plugins.D3BubbleChart.D3BubbleChart'
+    },
+    'MstrD3Calendar':{
+        'c' : 'plugins.D3Calendar.D3Calendar'
+    },
+	'MstrD3Flow':{
+        'c' : 'plugins.D3Flow.D3Flow'
+    },
+    'MstrSequenceSunburst':{
+        'c' : 'plugins.SequenceSunburst.SequenceSunburst'
+    },
+    'MstrGoogleTimeLine':{
+        'c' : 'plugins.GoogleTimeLine.GoogleTimeLine'
+    },
+    'MstrD3DifferenceChart':{
+        'c' : 'plugins.DifferenceChart.DifferenceChart'
+    },
+    'MstrD3LineChart':{
+        'c' : 'plugins.D3LineChart.D3LineChart'
+    },
+    'MstrD3ZoomableCirclePacking':{
+        'c' : 'plugins.D3ZoomableCirclePacking.D3ZoomableCirclePacking'
+    },
+    'MstrZoomableHeatmap':{
+        'c' : 'plugins.ZoomableHeatmap.ZoomableHeatmap'
+    }
+    
+};
 function setupWidgetLoader() {
     var fnStartFailed = function (e) {
         var msg = "Application failed to start due to an irrecoverable error: " + e;
@@ -314,7 +345,12 @@ function getVisName() {
 }
 
 function getVisMojoClassName() {
-    return widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visMojoClassName || '';
+    var mojoClassName = widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visMojoClassName;
+	if (!mojoClassName) {
+	    var visName = getVisName();
+		mojoClassName = VIS_LIST[visName] && VIS_LIST[visName].c;
+	}
+    return mojoClassName || '';
 }
 
 function loadBundle() {

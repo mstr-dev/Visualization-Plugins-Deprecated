@@ -22,7 +22,7 @@
                         var added = evt.added,
                             item = added && this.items[added[0]];
                         if (item) {
-                            this.parent.model.changeSelectedVisType(item.s || '', item.vt, item.wtp || WTP_GRID);
+                            this.parent.model.changeSelectedVisType(item); //DE22330 As for the API changeSelectedVisType: function changeSelectedVisType(newVizInfo) has changed params to only one
                         }
                     }
                 }
@@ -31,3 +31,4 @@
     );
     mstrmojo.vi.ui.VizGallery = mstrmojo.plugins._VisBuilder.VisBuilderGallery;
 }())
+//@ sourceURL=VisBuilderGallery.js
