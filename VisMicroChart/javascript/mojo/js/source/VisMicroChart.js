@@ -3029,7 +3029,7 @@
             dropShadowWidth: 5,
 
             markupString: '<div id="{@id}-microchart" class="mstrmojo-Chart {@cssClass}" style="width:{@width};height:{@height};left:{@left};top:{@top};z-index:{@zIndex};position:absolute" '
-            + ' mstrAttach:mousedown,mouseup,mousemove,click >'
+            + ' mstrAttach:mouseover,mouseout,click >'
             +
             '<div id="{@id}-microchart-left" style="width:{@leftWidth+"px"};height:{@height};left:0px;right:0px;position:absolute;z-index:1;" > </div>'
             +
