@@ -22,7 +22,8 @@
                         var added = evt.added,
                             item = added && this.items[added[0]];
                         if (item) {
-                            this.parent.model.changeSelectedVisType(item); //DE22330 As for the API changeSelectedVisType: function changeSelectedVisType(newVizInfo) has changed params to only one
+                            this.parent.model.changeSelectedVisType(item.s || '', item.vt, item.wtp || WTP_GRID);//For 10.1
+                            //this.parent.model.changeSelectedVisType(item); //DE22330 As for the API changeSelectedVisType: function changeSelectedVisType(newVizInfo) has changed params to only one
                         }
                     }
                 }

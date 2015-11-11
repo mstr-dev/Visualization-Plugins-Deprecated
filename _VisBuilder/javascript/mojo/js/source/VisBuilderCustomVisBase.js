@@ -93,7 +93,8 @@
 
         var path = deactivateStyle(folderName)+'?tstp='+ Date.now(), content = "";
         if (path !== "") {
-            content = mstrmojo.loadFileSync(path);
+            //content = mstrmojo.loadFileSync(path);
+            content = mstrmojo.loadFile(path); //For 10.1
             if (content && content.indexOf("<html>") !== -1) {
                 //if global.css is missing content will contain a 404 page, so we need to clear it
                 content = '';
