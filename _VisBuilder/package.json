@@ -1,4 +1,4 @@
-{"version": "v0.0.2",
+{"version": "v0.0.3",
 "commit":"380938f82c3624b32938f7be846ce8edafc1e15a",
 "require":"10.2 or higher",
 "others":"JDK 1.6 or higher and Tomcat 6 or higher",
