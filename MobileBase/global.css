@@ -1,0 +1,174 @@
+.mstrmojo-Tooltip {
+    position: absolute
+}
+
+.mstrmojo-Tooltip.vi-regular,.mstrmojo-Tooltip.vi-warning {
+    z-index: 1001;
+    /* background: rgba(100, 49, 187, 0); */
+    /* border:0 */
+}
+
+.mstrmojo-Tooltip.vi-regular .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-arrow {
+    position: absolute;
+    height: 0;
+    width: 0
+}
+
+.mstrmojo-Tooltip.vi-regular .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-arrow:after {
+    content: " ";
+    display: block;
+    height: 0;
+    position: absolute;
+    width: 0;
+    -moz-transform: scale(0.9999)
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-contentWrapper,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-contentWrapper,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-contentWrapper,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-contentWrapper {
+    min-width: 33px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-arrow {
+    left: 10px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-arrow:after {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A.A-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-regular.vi-tooltip-A.V-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V.A-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V.V-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A.A-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A.V-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V.A-center .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V.V-center .mstrmojo-Tooltip-arrow {
+    left: 50%
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A.A-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-A.A-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-regular.vi-tooltip-A.V-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-A.V-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V.A-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V.A-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V.V-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-V.V-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A.A-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A.A-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A.V-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A.V-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V.A-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V.A-center .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V.V-center .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V.V-center .mstrmojo-Tooltip-arrow:after {
+    -webkit-transform: translate(-50%,0);
+    -moz-transform: translate(-50%,0);
+    -ms-transform: translate(-50%,0);
+    -o-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    -moz-transform: scale(0.9999) translate(-50%,0)
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-arrow {
+    top: 0
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-arrow:before {
+    border-bottom: 8px solid transparent;
+    top: -8px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-A .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-A .mstrmojo-Tooltip-arrow:after {
+    border-bottom: 8px solid transparent;
+    top: -6px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-arrow {
+    bottom: 0
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-arrow:before {
+    border-top: 8px solid transparent;
+    bottom: -8px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-V .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-V .mstrmojo-Tooltip-arrow:after {
+    border-top: 8px solid transparent;
+    bottom: -6px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-C .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-regular.vi-tooltip-D .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-C .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-D .mstrmojo-Tooltip-arrow {
+    top: 8px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-C .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-C .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-regular.vi-tooltip-D .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-regular.vi-tooltip-D .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-C .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-C .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-D .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-D .mstrmojo-Tooltip-arrow:after {
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-C .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-C .mstrmojo-Tooltip-arrow {
+    left: 0
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-C .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-C .mstrmojo-Tooltip-arrow:before {
+    border-right: 8px solid transparent;
+    left: -8px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-C .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-C .mstrmojo-Tooltip-arrow:after {
+    border-right: 8px solid transparent;
+    left: -6px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-D .mstrmojo-Tooltip-arrow,.mstrmojo-Tooltip.vi-warning.vi-tooltip-D .mstrmojo-Tooltip-arrow {
+    right: 0
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-D .mstrmojo-Tooltip-arrow:before,.mstrmojo-Tooltip.vi-warning.vi-tooltip-D .mstrmojo-Tooltip-arrow:before {
+    border-left: 8px solid transparent;
+    right: -8px
+}
+
+.mstrmojo-Tooltip.vi-regular.vi-tooltip-D .mstrmojo-Tooltip-arrow:after,.mstrmojo-Tooltip.vi-warning.vi-tooltip-D .mstrmojo-Tooltip-arrow:after {
+    border-left: 8px solid transparent;
+    right: -6px
+}
+
+.mstrmojo-Tooltip.vi-regular .mstrmojo-Tooltip-contentWrapper,.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-contentWrapper {
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -ms-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: rgba(0,0,0,0.4) 0 0 5px 0;
+    -moz-box-shadow: rgba(0,0,0,0.4) 0 0 5px 0;
+    box-shadow: rgba(0,0,0,0.4) 0 0 5px 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 1px solid transparent;
+    max-height: 200px;
+    max-width: 300px;
+    overflow: hidden;
+    padding: 6px 8px;
+	background-color: white;
+	opacity: 0.9;
+}
+
+.mstrmojo-Tooltip.vi-regular .mstrmojo-Tooltip-contentWrapper .mstrmojo-Tooltip-content,.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-contentWrapper .mstrmojo-Tooltip-content {
+    background: 0;
+    border: 0;
+    cursor: default;
+    display: block;
+    font-size: 14px;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
+    line-height: 14px;
+    max-width: 300px;
+    max-height: 186px;
+    white-space: normal;
+    word-wrap: break-word;
+    opacity: 1
+}
+
+.mstrmojo-Tooltip.vi-regular .mstrmojo-scrollbar-host.hasVertical .mstrmojo-scrollNode.hasVertical,.mstrmojo-Tooltip.vi-warning .mstrmojo-scrollbar-host.hasVertical .mstrmojo-scrollNode.hasVertical {
+    margin-right: -30px;
+    padding-right: 13px
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    .mstrmojo-Tooltip.vi-regular .mstrmojo-scrollbar-host.hasVertical .mstrmojo-scrollNode.hasVertical,.mstrmojo-Tooltip.vi-warning .mstrmojo-scrollbar-host.hasVertical .mstrmojo-scrollNode.hasVertical {
+        margin-right: -21px;
+        padding-right: 10px
+    }
+}
+
+.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-content {
+    padding-left: 30px
+}
+
+.mstrmojo-Tooltip.vi-warning .mstrmojo-Tooltip-content:before {
+    content: ' ';
+    height: 14px;
+    left: 8px;
+    position: absolute;
+    width: 17px
+}
