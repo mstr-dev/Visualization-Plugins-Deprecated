@@ -139,7 +139,8 @@
     border: 0;
     cursor: default;
     display: block;
-    font-size: 11px;
+    font-size: 14px;
+    font-family: -apple-system, Helvetica, Arial, sans-serif;
     line-height: 14px;
     max-width: 300px;
     max-height: 186px;
