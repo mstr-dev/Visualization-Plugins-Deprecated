@@ -1,6 +1,10 @@
 //*removing Vis Gallery
 (function () {
-    mstrmojo.requiresCls("mstrmojo.vi.controllers.DocumentController", "mstrmojo.plugins._VisBuilder.ui.VisBuilderSaveAsDialog", "mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor");
+    mstrmojo.requiresCls(
+        "mstrmojo.vi.controllers.DocumentController",
+        "mstrmojo.plugins._VisBuilder.ui.VisBuilderSaveAsDialog",
+        "mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor",
+        "mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog");
     var $VI = mstrmojo.vi;
 
     /**
@@ -152,6 +156,29 @@
                     taskId: 'VisExpDefined'
                 }, cb);
             },
+            /**
+             * Get Visualization Builder version Information
+             */
+            showVersion: function(){
+                var cb = {
+                    success: function (res) {
+                        //openCreateViEditor(res.result.visNames);
+                        if(res && res.result){
+                            var packageJson = JSON.parse(res.result);
+                            versionInfoWindow = new mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog(packageJson);
+                            versionInfoWindow.open();
+                        } else{
+                            mstrmojo.alert("Provide correct version file.");
+                        }
+                    },
+                    failure: function (res) {
+                        mstrmojo.alert("Get version info failure.");
+                    }
+                };
+                mstrApp.serverRequest({
+                    taskId: 'GetVersionInfo'
+                }, cb);
+            },
             newVisualizationPlugin: function () {
                 gallery.vizList.singleSelect(0);
             },
@@ -169,3 +196,4 @@
     );
     mstrmojo.vi.controllers.DocumentController = mstrmojo.plugins._VisBuilder.VisBuilderDocumentController;
 }())
+//@ sourceURL=VisBuilderDocumentController.js

@@ -16,5 +16,8 @@
 		<task adminTask="false"
 			class="com.microstrategy.web.tasks.VisBuilderUploadIconTask"
 			registerAs="VisBuilderIconUpload" />
+        <task adminTask="false"
+              class="com.microstrategy.web.tasks.VisBuilderGetVersionTask"
+              registerAs="GetVersionInfo" />
 	</tasks>
 </aggregatingTaskFactory>

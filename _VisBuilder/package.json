@@ -1,0 +1,9 @@
+{"version": "v1.0.0",
+"commit":"293bf1912036b4bf8185d850ea2fcdecb035e6b0",
+"require":"10.1 or higher",
+"others":"JDK 1.6 or higher and Tomcat 6 or higher",
+"target_commitish": "master",
+"body": "Add version control",
+"draft": false,
+"prerelease": false
+}

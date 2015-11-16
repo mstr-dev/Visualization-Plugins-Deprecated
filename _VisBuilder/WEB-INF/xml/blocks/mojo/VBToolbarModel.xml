@@ -75,6 +75,11 @@
                                 <property name="desc">{desc:mstrWeb.10096|Quick Tips}</property>
                                 <property name="cmd">showTutorial</property>
                             </block>
+                            <block name="MojoToolbarButtonModel">
+                                <property name="n">aboutVisBuilder</property>
+                                <property name="desc">About Visualization Builder</property>
+                                <property name="cmd">showVersion</property>
+                            </block>
                         </list>
                     </property>
                 </block>
