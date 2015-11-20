@@ -1,8 +1,0 @@
-/*
-style definitions for icon on gallery view - in this case empty we will use default one
-*/
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-Quadtree>div>div {
-    background-image: url(images/icon.png);
-    background-position: 0 0;
-    margin: 5px;
-}

@@ -2,4 +2,10 @@
     <visualization-list name="ajax">
         <visualization id="D3BubbleChart" desc="D3 Bubble Chart" scope="19" projects="" style-name="D3BubbleChart" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
     </visualization-list>
+    <visualization-list name="ipad" view-mode="71" show-in-web="false">
+        <visualization id="D3BubbleChart" desc="D3 Bubble Chart" scope="19" projects="" style-name="D3BubbleChart" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
+    <visualization-list name="iphone" view-mode="70" show-in-web="false">
+        <visualization id="D3BubbleChart" desc="D3 Bubble Chart" scope="19" projects="" style-name="D3BubbleChart" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
 </visualizations>

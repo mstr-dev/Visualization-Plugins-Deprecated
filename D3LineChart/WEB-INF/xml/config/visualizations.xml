@@ -2,4 +2,10 @@
     <visualization-list name="ajax">
         <visualization id="D3LineChart" desc="Trianz D3 Line Chart" scope="19" projects="" style-name="D3LineChart" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
     </visualization-list>
+    <visualization-list name="ipad" view-mode="71" show-in-web="false">
+        <visualization id="D3LineChart" desc="Trianz D3 Line Chart" scope="19" projects="" style-name="D3LineChart" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
+    <visualization-list name="iphone" view-mode="70" show-in-web="false">
+        <visualization id="D3LineChart" desc="Trianz D3 Line Chart" scope="19" projects="" style-name="D3LineChart" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
 </visualizations>

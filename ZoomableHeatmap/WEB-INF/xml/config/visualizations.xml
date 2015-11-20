@@ -10,4 +10,10 @@
       <!--style-name is the name of the style used to render the visualization. Replace "visualization rendering style" with the name of the style in styleCatalog.xml that renders the visualization-->
       <visualization id="ZoomableHeatmap" desc="Zoomable Heatmap" is-mojo="true" scope="18" style-name="ZoomableHeatmapStyle" attribute-minimum="1" metric-minimum="1"/>
    </visualization-list>
+   <visualization-list name="ipad" view-mode="71" show-in-web="false">
+      <visualization id="ZoomableHeatmap" desc="Zoomable Heatmap" scope="19" projects="" style-name="ZoomableHeatmapStyle" attribute-minimum="1" metric-minimum="1"/>
+   </visualization-list>
+    <visualization-list name="iphone" view-mode="70" show-in-web="false">
+      <visualization id="ZoomableHeatmap" desc="Zoomable Heatmap" scope="19" projects="" style-name="ZoomableHeatmapStyle" attribute-minimum="1" metric-minimum="1"/>
+    </visualization-list>
 </visualizations>
