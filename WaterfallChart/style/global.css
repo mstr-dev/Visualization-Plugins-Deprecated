@@ -1,0 +1,14 @@
+.custom-vis-layout.waterfallchart body {
+	font: 10px sans-serif;
+}
+
+.custom-vis-layout.waterfallchart .axis path, .custom-vis-layout.waterfallchart .axis line
+	{
+	fill: none;
+	stroke: #000;
+	shape-rendering: crispEdges;
+}
+
+.custom-vis-layout.waterfallchart .x.axis path {
+	display: none;
+}
