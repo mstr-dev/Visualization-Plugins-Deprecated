@@ -1,0 +1,13 @@
+.custom-vis-layout.d3plusboxplot text {
+	font: 10px sans-serif;
+}
+
+.custom-vis-layout.d3plusboxplot body {
+	padding: 30px;
+}
+
+.custom-vis-layout.d3plusboxplot svg {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
