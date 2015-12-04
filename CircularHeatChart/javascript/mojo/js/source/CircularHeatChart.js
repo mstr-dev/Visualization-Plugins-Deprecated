@@ -145,6 +145,9 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                     dataInterface = new $DI(this.model.data),
                     segmentKey = dataInterface.getRowTitles().getTitle(1).getName(),
                     metricKey = dataInterface.getColHeaders(0).getHeader(0).getName(),
+                    //zones = this.zonesModel.getDropZones().zones,
+                    attributesArray = dataInterface.getRowTitles().titles,
+                    metricsArray = dataInterface.getColTitles().titles[0].es,
                     getNormalizedModel = function getNormalizedModel() {
                         var normalizedArray = [],
                             md = this.model.data,
@@ -175,6 +178,32 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                     height = parseInt(this.height, 10),
                     margins = [height * 0.125, width * 0.125, height * 0.125, width * 0.125];
 
+
+                var tooltipDiv = d3.select("body").append("div")
+                    .attr("class", "tooltip CircularHeatChartTooltip")
+                    .style("opacity", 0);
+
+                var getTooltipText = function(segment){
+                    var content = "<div>"+"<table>";
+
+                    attributesArray.forEach(function(zoneElement){
+                        var zoneName = zoneElement.n;
+                        if(segment[zoneName]){
+                            content = content + "<tr><td><strong>"+ zoneName +":</strong></td>" +"<td><div>"+ segment[zoneName]+ "</div></td></tr>"
+                        }
+                    });
+                    metricsArray.forEach(function(zoneElement){
+                        var zoneName = zoneElement.n;
+                        if(segment[zoneName]){
+                            content = content + "<tr><td><strong>"+ zoneName +":</strong></td>" +"<td><div>"+  segment[zoneName].v + "</div></td></tr>"
+                        }
+                    });
+                    content = content+ "</table></div>";
+
+                    return content;
+                };
+
+
                 var svg = d3.select(this.domNode).select("svg");
 
                 if (svg.empty()) {
@@ -204,6 +233,8 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                 var g = containerGroup.selectAll("g")
                     .data(this.normalizedModel);
 
+
+
                 g.enter().append("svg:g")
                     .attr("class", "radial");
 
@@ -213,7 +244,8 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                     h = parseInt(this.height, 10) - margins[0] - margins[2],
                     x = d3.time.scale().range([0, w - 60]),
                     y = d3.scale.linear().range([h / 4 - 20, 0]),
-                    color = d3.scale.linear().range(['#4a5a11', '#c7f918']),
+                    //color = d3.scale.linear().range(['#4a5a11', '#c7f918']),
+                    color = d3.scale.category20(),
                     radius = Math.min(w, h) / 2,
                     innerRadius = radius * 0.4,
                     that = this,
@@ -270,14 +302,27 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
                         }, function (o, segment) {
                             o.rad = d.key;
                             o.seg = segment[segmentKey];
+                            o.segment = segment;
                         }));
-                    color.domain([d.minPrice, d.maxPrice]);
+                    //color.domain([d.minPrice, d.maxPrice]);
                     donut.enter().append("svg:path")
                         .style("stroke", '#242225')
                         .style("stroke-width", '2')
                         .attr("class", "slice")
                         .on('mouseover', function (s) {
                             showFill(s.value, d.maxPrice, 0.3 * radius, s.display);
+                            //tip.show();
+                            tooltipDiv.transition()
+                                .duration(100)
+                                .style("opacity", 1);
+                            tooltipDiv.html(getTooltipText(s.segment))
+                                .style("left", (d3.event.pageX) + "px")
+                                .style("top", (d3.event.pageY - 28) + "px");
+                        })
+                        .on("mouseout", function(d) {
+                            tooltipDiv.transition()
+                                .duration(200)
+                                .style("opacity", 0);
                         });
 
                     donut.exit()
@@ -394,3 +439,4 @@ ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.*/
         }
     );
 }());
+//@ sourceURL=CircularHeatChart.js
