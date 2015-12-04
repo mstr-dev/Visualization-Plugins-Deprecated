@@ -22,3 +22,26 @@
     background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
     padding: 3px 0pt 3px 14px;
 }
+
+div.tooltip.CircularHeatChartTooltip {
+    position: absolute;
+    text-align: center;
+    width: auto;
+    height: auto;
+    padding: 5px;
+    font: 12px Arial;
+    background: lightsteelblue;
+    border: 0px;
+    border-radius: 8px;
+    pointer-events: none;
+    z-index: 1000;
+}
+div.tooltip.CircularHeatChartTooltip td{
+    text-align: right;
+    padding: 2px;
+}
+
+div.tooltip.CircularHeatChartTooltip td div{
+    text-align: left;
+    padding: 2px;
+}
