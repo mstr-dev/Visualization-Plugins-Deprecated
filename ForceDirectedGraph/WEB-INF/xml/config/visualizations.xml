@@ -1,0 +1,7 @@
+<visualizations>
+	<visualization-list name="ajax">
+		<visualization id="ForceDirectedGraph" desc="ForceDirectedGraph"
+			scope="19" projects="" style-name="ForceDirectedGraph" is-mojo="true"
+			attribute-minimum="1" metric-minimum="1" />
+	</visualization-list>
+</visualizations>
