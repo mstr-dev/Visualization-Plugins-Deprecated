@@ -16,7 +16,7 @@
             cssClass: "clusterdendrogram_cartesian",
             errorMessage: "Either there is not enough data to display the visualization or the visualization configuration is incomplete.",
             errorDetails: "This visualization requires one or more attributes and one metric.",
-            externalLibraries: [{url:"http://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}],
+            externalLibraries: [{url:"//cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"}],
             useRichTooltip: false,
             reuseDOMNode: false,
             plot:function(){
