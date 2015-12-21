@@ -4,4 +4,10 @@
 			scope="19" style-name="WaterfallChart" is-mojo="true"
 			attribute-minimum="1" metric-minimum="1" />
 	</visualization-list>
+	<visualization-list name="ipad" view-mode="71" show-in-web="false">
+    	<visualization id="WaterfallChart" desc="WaterfallChart" scope="19" projects="" style-name="WaterfallChart" attribute-minimum="1" metric-minimum="1"/>
+  	</visualization-list>
+  	<visualization-list name="iphone" view-mode="70" show-in-web="false">
+    	<visualization id="WaterfallChart" desc="WaterfallChart" scope="19" projects="" style-name="WaterfallChart" attribute-minimum="1" metric-minimum="1"/>
+  	</visualization-list>
 </visualizations>
