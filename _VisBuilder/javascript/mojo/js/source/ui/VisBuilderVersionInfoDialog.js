@@ -4,41 +4,41 @@
         "mstrmojo.hash",
         "mstrmojo.vi.ui.editors.EditorGroup");
 
-    var $H = mstrmojo.hash,
-        $NWB = mstrmojo.Button.newWebButton;
+    var $NWB = mstrmojo.Button.newWebButton;
 
 
     function getVersionGroup(vLabel, vValue, vAlias ) {
-        var content = this.descField = new mstrmojo.TextBoxWithLabel({
+        return new mstrmojo.TextBoxWithLabel({
             cssDisplay: 'block',
             cssClass: 'VersionPropertiesLine',
+            slot: 'containerNode',
             label: vLabel,
             value: vValue,
             hint: vLabel,
             readOnly: true,
             alias: vAlias
         });
-        return new mstrmojo.vi.ui.editors.EditorGroup($H.copy(null, {
-            children: [content]
-        }));
     }
+
+
     /**
      *
      *
      * @extends mstrmojo.Editor
      *
      */
-
     mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog = mstrmojo.declare(
 
         mstrmojo.Editor,
 
-        [null],
+        null,
 
         /**
-         * @lends mstrmojo.vi.ui.VisBuilderVersionInfoDialog.prototype
+         * @lends  mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog.prototype
          */
         {
+            id: "VisBuilderVersionInfoDialog",
+
             scriptClass: "mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog",
 
             title: "Visualization Builder", //mstrmojo.desc(*****, 'Visualization Builder'),
@@ -54,48 +54,6 @@
             packageJson : null,
 
 
-            markupString: '<div id="{@id}" class="mstrmojo-Editor-wrapper">' +
-            '<div class="mstrmojo-Editor {@cssClass}" style="z-index:{@zIndex};{@cssText}" mstrAttach:mouseup,mousedown,click,contextmenu>' +
-            '{@titlebarHTML}' +
-            '<div class="mstrmojo-Editor-content"></div>' +
-            '<div class="mstrmojo-Editor-buttons"></div>' +
-            '</div>' +
-            '<div class="mstrmojo-Editor-curtain"></div>' +
-            '</div>',
-
-            titleMarkupString: '<div class="mstrmojo-Editor-title-container">' +
-            '<div class="mstrmojo-Editor-title"></div>' +
-            '<div class="edt-title-btn mstrmojo-Editor-help" tooltip="' + mstrmojo.desc(1143, "help") + '"></div>' +
-            '<div class="edt-title-btn mstrmojo-Editor-close" tooltip="' + mstrmojo.desc(2102, "Close") + '"></div>' +
-            '</div>' +
-            '<div class="mstrmojo-Editor-titleSpacer"></div>',
-
-            markupSlots: {
-                editorNode: function editorNode() {
-                    return this.domNode.firstChild;
-                },
-                titlebarNode: function titlebarNode() {
-                    return this.showTitle ? this.domNode.firstChild.firstChild.firstChild : null;
-                },
-                titleNode: function titleNode() {
-                    return this.showTitle ? this.domNode.firstChild.firstChild.firstChild : null;
-                },
-                helpNode: function helpNode() {
-                    return this.showTitle ? this.domNode.firstChild.firstChild.children[1] : null;
-                },
-                closeNode: function closeNode() {
-                    return this.showTitle ? this.domNode.firstChild.firstChild.lastChild : null;
-                },
-                containerNode: function containerNode() {
-                    return this.domNode.firstChild.childNodes[2];
-                },
-                buttonNode: function buttonNode() {
-                    return this.domNode.firstChild.childNodes[3];
-                },
-                curtainNode: function curtainNode() {
-                    return this.domNode.lastChild;
-                }
-            },
 
             init: function init(props) {
                 var that = this;
@@ -111,11 +69,7 @@
             postBuildRendering: function postBuildRendering() {
 
                 var contents = this.getContent(this.packageJson);
-                contents.forEach(function (child) {
-                    child.slot = 'containerNode';
-                });
                 this.addChildren(contents );
-
                 this._super();
             },
 

@@ -1,10 +1,9 @@
 //*removing Vis Gallery
 (function () {
-    mstrmojo.requiresCls(
-        "mstrmojo.vi.controllers.DocumentController",
-        "mstrmojo.plugins._VisBuilder.ui.VisBuilderSaveAsDialog",
-        "mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor",
-        "mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog");
+    mstrmojo.requiresCls("mstrmojo.vi.controllers.DocumentController",
+                         "mstrmojo.plugins._VisBuilder.ui.VisBuilderSaveAsDialog", 
+                         "mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor",
+                         "mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog");
     var $VI = mstrmojo.vi;
 
     /**
@@ -12,6 +11,48 @@
      * new actions added - like save, save as, new and open for visualization
      * hide vis gallery by default
      */
+
+
+     /**
+     *
+     * @param folderName: _VisBuilder
+     * @param packageName: package.json
+     * @returns {string}
+     */
+    function getPackageJson(folderName, packageName) {
+        var styleSheets = document.styleSheets, path = "plugins/" + folderName + "/style/VisBuilderPage.css", size = styleSheets.length, i = 0, hrefToReturn = "",content = "", packageJson= null;
+        for (i = size-1; i >= 0; i--) {//search web path for visbuilder/package.json
+            var style = styleSheets[i];
+            if (style.href && style.href.indexOf(path) > -1) {
+                hrefToReturn = style.href;
+                break;
+            }
+        }
+
+        if (!hrefToReturn) {
+            hrefToReturn = "../plugins/" + folderName + "/" +  packageName;
+        }else{
+            var end = hrefToReturn.indexOf("/style/VisBuilderPage.css");
+            hrefToReturn = hrefToReturn.substr(0, end) + "/" +  packageName;
+        }
+
+        path = hrefToReturn+'?tstp='+ Date.now() ;
+        if (path !== "") {
+            if (mstrmojo.loadFileSync) {
+                content = mstrmojo.loadFileSync(path);
+            } else {
+                content = mstrmojo.loadFile(path);
+            }
+        }
+
+        try{
+            packageJson = JSON.parse( content );
+            //eval("packageJson = " + content);
+        }catch (e){
+            packageJson= {};
+        }
+        return packageJson;
+    }
 
     function getSaveWindow(host) {
         var onOk = function () {
@@ -160,24 +201,15 @@
              * Get Visualization Builder version Information
              */
             showVersion: function(){
-                var cb = {
-                    success: function (res) {
-                        //openCreateViEditor(res.result.visNames);
-                        if(res && res.result){
-                            var packageJson = JSON.parse(res.result);
-                            versionInfoWindow = new mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog(packageJson);
-                            versionInfoWindow.open();
-                        } else{
-                            mstrmojo.alert("Provide correct version file.");
-                        }
-                    },
-                    failure: function (res) {
-                        mstrmojo.alert("Get version info failure.");
-                    }
-                };
-                mstrApp.serverRequest({
-                    taskId: 'GetVersionInfo'
-                }, cb);
+
+                var versionInfoWindow = mstrmojo.all.VisBuilderVersionInfoDialog;
+                if(! versionInfoWindow) {
+                    //var packageJson = JSON.parse(res.result);
+                    var packageJson = getPackageJson("_VisBuilder", "package.json");
+                    versionInfoWindow = new mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog(packageJson);
+                    this.addDisposable(versionInfoWindow);
+                }
+                versionInfoWindow.open();
             },
             newVisualizationPlugin: function () {
                 gallery.vizList.singleSelect(0);
@@ -196,4 +228,3 @@
     );
     mstrmojo.vi.controllers.DocumentController = mstrmojo.plugins._VisBuilder.VisBuilderDocumentController;
 }())
-//@ sourceURL=VisBuilderDocumentController.js

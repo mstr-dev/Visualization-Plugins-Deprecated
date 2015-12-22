@@ -256,6 +256,37 @@
     background-repeat: no-repeat border-style : none;
 }
 
+
+/* version Info window style*/
+/*Begin*/
+.VersionPropertiesLine{
+    width: 430px;
+    padding: 5px 5px;
+}
+.VersionPropertiesLine .mstrmojo-TextBox {
+    width: 65%;
+    background-color: #f3f3f4;
+    border: #f3f3f4;
+    box-shadow: none;
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: arial;
+}
+.VersionPropertiesLine .mstrmojo-TextBox-label {
+    /*this is ugly but do works*/
+   display: inline-block;
+    width: 35%;
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: arial;
+}
+
+.VersionPropertiesLine:nth-of-type(n+2) {
+    box-shadow: #ededed 0 -1px 0 0px;
+    border-top: 1px solid #fff;
+}
+/*End*/
+/* version Info window style*/
 /*to remove*/
 /*
 .mstrmojo-vi-PropEditor td {
