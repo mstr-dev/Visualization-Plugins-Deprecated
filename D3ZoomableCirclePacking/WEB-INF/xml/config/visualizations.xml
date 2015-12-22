@@ -2,4 +2,10 @@
   <visualization-list name="ajax" show-in-web="true" view-mode="51">
     <visualization desc="Zoomable Circle Packing with D3js" id="D3ZoomableCirclePacking" is-mojo="true" scope="18" style-name="D3ZoomableCirclePacking" attribute-minimum="1" metric-minimum="1"/>
   </visualization-list>
+  <visualization-list name="ipad" view-mode="71" show-in-web="false">
+    <visualization id="D3ZoomableCirclePacking" desc="Zoomable Circle Packing with D3js" scope="19" projects="" style-name="D3ZoomableCirclePacking" attribute-minimum="1" metric-minimum="1"/>
+  </visualization-list>
+  <visualization-list name="iphone" view-mode="70" show-in-web="false">
+    <visualization id="D3ZoomableCirclePacking" desc="Zoomable Circle Packing with D3js" scope="19" projects="" style-name="D3ZoomableCirclePacking" attribute-minimum="1" metric-minimum="1"/>
+  </visualization-list>
 </visualizations>

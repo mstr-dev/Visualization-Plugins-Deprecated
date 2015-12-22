@@ -18,7 +18,7 @@
             useRichTooltip: true,
             reuseDOMNode: true,
             externalLibraries: [
-                { url: 'http://d3js.org/d3.v3.min.js' }
+                { url: '//d3js.org/d3.v3.min.js' }
             ],
             plot: function () {
                 if (this.domNode.childNodes.length === 1) {

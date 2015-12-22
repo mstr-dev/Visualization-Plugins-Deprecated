@@ -18,7 +18,7 @@
         {
             // Define the JavaScript class that renders your visualization as mstrmojo.plugins.{plugin name}.{js file name}
             scriptClass: 'mstrmojo.plugins.ZoomableHeatmap.ZoomableHeatmap',
-            externalLibraries: [{url: "http://d3js.org/d3.v3.min.js"}],
+            externalLibraries: [{url: "//d3js.org/d3.v3.min.js"}],
             plot: function () {
  	            console.log("ZoomTree:starting...");
                 

@@ -2,4 +2,10 @@
   <visualization-list name="ajax" show-in-web="true" view-mode="51">
     <visualization attribute-minimum="1" desc="Collapsible Indented Tree" is-mojo="true" metric-minimum="0" scope="19" style-name="CollapsibleIndentedTree"/>
   </visualization-list>
+  <visualization-list name="ipad" view-mode="71" show-in-web="false">
+    <visualization desc="Collapsible Indented Tree" scope="19" projects="" style-name="CollapsibleIndentedTree" attribute-minimum="1" metric-minimum="0"/>
+  </visualization-list>
+  <visualization-list name="iphone" view-mode="70" show-in-web="false">
+    <visualization desc="Collapsible Indented Tree" scope="19" projects="" style-name="CollapsibleIndentedTree" attribute-minimum="1" metric-minimum="0"/>
+  </visualization-list>
 </visualizations>
