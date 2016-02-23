@@ -1,9 +1,3 @@
-**Contributor:** Dennis Liao @ Visa
-
-**Contributor's Contact Info.:** <yliao@visa.com>
-
-**Contributor's Orgnization:** Visa Inc.
-
 **Original Author:** Phoung Le
 
 **Original Author's Orgnization:** MicroStrategy Inc.
