@@ -1,0 +1,7 @@
+<visualizations>
+    <visualization-list name="ajax">
+		<visualization id="HighChartsDynamicLine" desc="High Chart Dynamic Line" scope="3" projects="" style-name="HighChartsDynamicLine" is-mojo="true" show-in-htmlvi="true"/>
+		<visualization id="HighChartsMapDrillDown" desc="High Map Drill Down" scope="3" projects="" style-name="HighChartsMapDrillDown" is-mojo="true" show-in-htmlvi="true"/>
+		<visualization id="HighStockCandleStick" desc="High Stock Candle Stick" scope="3" projects="" style-name="HighStockCandleStick" is-mojo="true" show-in-htmlvi="true"/>
+    </visualization-list>
+</visualizations>
