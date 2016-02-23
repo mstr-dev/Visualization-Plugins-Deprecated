@@ -1,0 +1,49 @@
+svg {
+  font-family: "Helvetica Neue", Helvetica;
+}
+
+.line {
+  fill: none;
+  stroke: #000;
+  stroke-width: 2px;
+}
+
+.ic-D3Line > div > div {
+    background-position: -28px -28px;
+}
+
+.ic-D3Horizon {
+    
+}
+
+.ic-D3Area {
+    
+}
+
+.ic-D3StackedArea {
+    
+}
+
+.ic-D3Streamgraph {
+    
+}
+
+.ic-D3OverlappingArea {
+    
+}
+
+.ic-D3GroupedBar {
+    
+}
+
+.ic-D3StackedBar {
+    
+}
+
+.ic-D3Bar {
+    
+}
+
+.ic-D3Donut {
+    
+}
