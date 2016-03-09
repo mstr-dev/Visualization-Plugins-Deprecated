@@ -11,11 +11,13 @@
     mstrmojo.requiresCls("mstrmojo.plugins._VisBuilder.VisBuilderVIBoxAbstractEditor");
     mstrmojo.requiresCls("mstrmojo.vi.models.XtabDropZones");
     mstrmojo.requiresCls("mstrmojo.vi.models.BaseVisDropZones");
+    mstrmojo.requiresCls("mstrmojo.plugins._VisBuilder.VisBuilderCustomVisDropZones");
+    mstrmojo.requiresCls("mstrmojo.plugins._VisBuilder.VisBuilderCustomPropertyEditorModel");
     mstrmojo.requiresCls("mstrmojo.vi.ui.rw.Xtab","mstrmojo.plugins._VisBuilder.VisBuilderNew");
     mstrmojo.requiresCls("mstrmojo.List");
 
     var newList = {}, key;
-    newList.VisBuilderNew = {c: "plugins._VisBuilder.VisBuilderNew",d: "New Visualization",s: "VisBuilderNew"};
+    newList.VisBuilderNew = {c: "plugins._VisBuilder.VisBuilderNew",d: "New Visualization",s: "VisBuilderNew", scp:19, wtp:"7", dz:"vi.models.BaseVisDropZones", em:"vi.models.editors.BaseEditorModel"};
     for(key in mstrConfig.pluginsVisList){
         if (mstrConfig.pluginsVisList.hasOwnProperty(key)) {
             var vis = mstrConfig.pluginsVisList[key], path=vis.c.split('.');
@@ -45,5 +47,8 @@
         }
     }
     mstrConfig.pluginsVisList =newList;
-    mstrmojo.vi.models.XtabDropZones = mstrmojo.vi.models.BaseVisDropZones;
+
+    mstrmojo.vi.models.XtabDropZones = mstrmojo.plugins._VisBuilder.VisBuilderCustomVisDropZones; //mstrmojo.vi.models.BaseVisDropZones;
+    //mstrmojo.vi.models.XtabDropZones = mstrmojo.vi.models.CustomVisDropZones; //mstrmojo.vi.models.BaseVisDropZones;
+    mstrmojo.vi.models.editors.BaseEditorModel = mstrmojo.plugins._VisBuilder.VisBuilderCustomPropertyEditorModel;
 }());

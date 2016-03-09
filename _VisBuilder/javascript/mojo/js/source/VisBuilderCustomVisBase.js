@@ -200,6 +200,15 @@
     }
 
     function constructTaskParameters(p) {
+        //ADD to support dropzone api
+        var zonesModel = this.zonesModel,//dropZoneEditorModel
+            editorModel = this.edtModel;//propertyEditorModel
+        p.dzcode = zonesModel.getGetCustomDropZonesCode();
+        p.aocode = zonesModel.getShouldAllowObjectsInDropZoneCode();
+        p.odcode = zonesModel.getGetActionsForObjectsDroppedCode();
+        p.orcode = zonesModel.getGetActionsForObjectsRemovedCode();
+        p.cmcode = zonesModel.getGetDropZoneContextMenuItemsCode();
+        p.propertycode = editorModel.vbGetCustomPropertyCode();//get property code
         p.dsc = this.description;
         p.jsc = this.vbGetJSCode();
         p.csssc = this.cssCode;
@@ -393,5 +402,28 @@
         }
     );
     mstrmojo.CustomVisBase = mstrmojo.plugins._VisBuilder.VisBuilderCustomVisBase;
+
+
+//To avoid browser caches
+        if (mstrmojo.loadFileSync) {
+            mstrmojo.loadFileSyncBak = mstrmojo.loadFileSync;
+        } else {
+            mstrmojo.loadFileSyncBak = mstrmojo.loadFile;
+        }
+        //to avoid browsers caching files
+        function loadfile(file) {
+            var path = null;
+            if (!Date.now) {
+                Date.now = function() { return new Date().getTime(); };
+            }
+            var path = file+'?tstp='+ Date.now();
+            return mstrmojo.loadFileSyncBak(path);
+        };
+        if (mstrmojo.loadFileSync) {
+            mstrmojo.loadFileSync = loadfile;
+        } else {
+            mstrmojo.loadFile = loadfile;
+        }
+
 }());
 //@ sourceURL=VisBuilderCustomVisBase.js

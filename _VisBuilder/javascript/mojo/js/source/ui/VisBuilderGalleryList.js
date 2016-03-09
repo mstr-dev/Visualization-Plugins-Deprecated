@@ -32,3 +32,4 @@
         }
     );
 }());
+//@ sourceURL=VisBuilderGalleryList.js

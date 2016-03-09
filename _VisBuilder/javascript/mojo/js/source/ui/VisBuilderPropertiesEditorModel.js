@@ -267,9 +267,10 @@
                 getPropertiesGroup.call(this)
                 results.push(getScopeGroup.call(this));
                 results.push(getJSLibraryGroup.call(this));
-                window.currentPropsTab = this;
+                this.getHost().controller.currentPropsTab = this;
                 return results;
             }
         }
     );
 }())
+//@ sourceURL=VisBuilderPropertiesEditorModel.js
