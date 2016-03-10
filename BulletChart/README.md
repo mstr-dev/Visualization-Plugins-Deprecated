@@ -4,11 +4,11 @@
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 
-**Original Author:** Mike Bostock
+**Original Author:** <fniu@microstrategy.com>
 
-**Original Author's Orgnization:** The New York Times
+**Original Author's Orgnization:** MicroStrategy, Inc
 
-**Original Author's Contact Info.:** <mike@ocks.org>
+**Original Author's Contact Info.:** <fniu@microstrategy.com>
 
 **Original Visualization Source Link:** <a href = "" target = "_blank">Link</a>
 
