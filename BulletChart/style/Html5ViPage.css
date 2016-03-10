@@ -1,0 +1,14 @@
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-BulletChart >div>div {
+    background-image: url(images/bullet_light.png);
+    background-position: 0 0;
+}
+.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-BulletChart > div > div {
+background-image: url(images/bullet_dark.png);
+    background-position: 0 0;
+}
+
+
+
+
+
+
