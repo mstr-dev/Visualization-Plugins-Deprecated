@@ -17,17 +17,44 @@
                     alias: 'vizList',
                     selectionPolicy: 'reselect',
                     items: [],
+                    //TODO: to check in
+                    type:2,//add to create custom visualization list instead of ootb, Jan 29th, 2016
 
                     postselectionChange: function (evt) {
                         var added = evt.added,
                             item = added && this.items[added[0]];
                         if (item) {
-                            this.parent.model.changeSelectedVisType(item.s || '', item.vt, item.wtp || WTP_GRID, item.dz);
+                            this.parent.model.changeSelectedVisType(item.s || '', item.vt, item.wtp || WTP_GRID,  item.dz);
                         }
                     }
                 }
-            ]
+            ],
+
+            /**
+             * update custom visualization list
+             *
+             */
+            update: function update() {
+                if (mstrApp.getRecentGallery) {
+                    mstrApp.getRecentGallery();
+                }
+
+                /* This is causing unrendering and rendering of this.vizList node which results in loss of scroll properties of it.
+                 *  So call updateScrollbars(true) again to render the scroll functionality*/
+                this.vizList.set("items", [].concat(mstrmojo.vi.ui.VizGalleryList.getVizList(2)));// get custom visualization list
+
+                //Detach event listeners to avoid any memory leak, as calling updateScrollbars() will register them again.
+                this.cleanUpListeners();
+
+                /*Passing "true" here to differentiate the call of updateScrollbars() btw default rendering scenario
+                 * and this(on adding new custom visualization) scenario*/
+                this.updateScrollbars(true);
+
+            }
+
+
         }
     );
     mstrmojo.vi.ui.VizGallery = mstrmojo.plugins._VisBuilder.VisBuilderGallery;
 }())
+//@ sourceURL=VisBuilderGallery.js

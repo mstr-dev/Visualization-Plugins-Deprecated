@@ -1,5 +1,5 @@
 <visualizations>
     <visualization-list name="ajax">
-        <visualization id="VisBuilderNew" desc="New Visualization" scope="0" projects="" style-name="VisBuilderNew" is-mojo="true"/>
+        <visualization id="VisBuilderNew" desc="New Visualization" scope="19" style-name="VisBuilderNew" is-mojo="true" drop-zones="vi.models.BaseVisDropZones" widget-type="7" editor-model="vi.models.editors.BaseEditorModel" />
     </visualization-list>
 </visualizations>

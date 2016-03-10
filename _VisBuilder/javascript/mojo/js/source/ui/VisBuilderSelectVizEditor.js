@@ -37,6 +37,8 @@
                     slot: 'containerNode',
                     selectionPolicy: 'reselect',
                     items: [],
+                    //TODO: to check in
+                    type:2,//add to create custom visualization list instead of ootb, Jan 29th, 2016
                     postselectionChange: function (evt) {
                         var added = evt.added, item = added && this.items[added[0]];
                         gallery.vizList.singleSelect(item._renderIdx+1);
@@ -65,3 +67,4 @@
 
         });
 }());
+//@ sourceURL=VisBuilderSelectVizEditor.js

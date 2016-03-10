@@ -54,3 +54,4 @@
     );
     mstrmojo.vi.ui.DocumentView = mstrmojo.plugins._VisBuilder.VisBuilderDocumentView;
 }())
+//@ sourceURL=VisBuilderDocumentView.js
