@@ -54,11 +54,12 @@
             if (style.href && style.href.indexOf(path) > -1) {
                 style.disabled = true;
                 hrefToReturn = style.href;
-            } else {
+            }
+            /*else {
                 if (style.disabled) {
                     style.disabled = false;
                 }
-            }
+            }*/
         }
         if (folderName !== "ui" && !hrefToReturn) {
             hrefToReturn = "../" + path;
