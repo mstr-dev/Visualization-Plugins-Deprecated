@@ -142,3 +142,4 @@
         }
     );
 }())
+//@ sourceURL=VisBuilderIconSection.js

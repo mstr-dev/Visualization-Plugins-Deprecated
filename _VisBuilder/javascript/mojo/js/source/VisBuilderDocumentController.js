@@ -12,6 +12,16 @@
      * hide vis gallery by default
      */
 
+    function deactivateStyle(folderName) {
+        var styleSheets = document.styleSheets, path = "plugins/" + folderName + "/style/Html5ViPage.css", size = styleSheets.length, i = 0, hrefToReturn = "";
+        for (i = 0; i < size; i++) {
+            var style = styleSheets[i];
+            if (style.href && style.href.indexOf(path) > -1) {
+                style.disabled = true;
+            }
+        }
+    }
+
 
     /**
      *
@@ -90,7 +100,15 @@
                             mstrmojo.invalidateCls('mstrmojo.' + data.em);
                         }
 
+                        deactivateStyle(data.s);
+
+                        //AS html5VIPage.css may be modified, should be reload
+                        var prePath = "../plugins/##/style/".replace("##", data.s);
+                        mstrmojo.insertCSSLinks([
+                            (prePath + "Html5ViPage.css" + '?tstp='+ Date.now())
+                        ]);
                         VisBuilderGallery.model.changeSelectedVisType(res.name , -1 , mstrConfig.pluginsVisList[res.name].wtp || "7", mstrConfig.pluginsVisList[res.name].dz);
+
 
                     },
                     complete: function () {
@@ -196,6 +214,7 @@
                 if (host.scriptClass === 'mstrmojo.plugins._VisBuilder.VisBuilderNew') {
                     this.showSaveAsVisualization();
                 } else {
+
                     this.currentCodeTab.apply();
                     this.currentPropsTab.apply();
                     this.currentDZCodeTab.apply();

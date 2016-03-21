@@ -10,7 +10,8 @@
         if (!code) {
             return "";
         }
-        var bracketBegin = (code.indexOf('{') + 1),
+       // var bracketBegin = (code.indexOf('{') + 2),
+        var bracketBegin = (code.indexOf('{') + 1), // as for , shouldAllowObjectsInDropZone will be defined in customvisdropzone.js, there will be no empty characters
             bracketEnd = (code.lastIndexOf('}') - (bracketBegin));
         code = code.substr(bracketBegin, bracketEnd);
         return code;

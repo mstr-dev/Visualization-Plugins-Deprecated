@@ -41,25 +41,9 @@
             getActionsForObjectsDroppedTxt:null,
             getActionsForObjectsRemovedTxt: null,
             getDropZoneContextMenuItemsTxt : null,
-            /**
-             * [
-                {
-                    name: ZONE_PACKAGE,
-                     title: mstrmojo.desc(13828, 'Drag attributes here'),
-                     maxCapacity: 1,
-                     allowObjectType: ENUM_ALLOW_DROP_TYPE.ATTRIBUTE,
-                     disabled: false
-                },
-                ....
-             ];
-             */
+
             alias:'DZCodeTab',
 
-            /*init: function(props){
-                this._super(props);
-
-                //this.attachEventListener('VIUnitSelected', targetUnit.id, "" );
-                },*/
 
             apply: function () {
                 var host = this.getHost(),
@@ -70,8 +54,6 @@
                     return false;
                 }
 
-
-                //host.vbSetDZCode(this.dropzoneTxt.getValue());
                 if(dropzoneModel){
                     dropzoneModel.setDropZonesCode(this.dropzones);
                     dropzoneModel.setShouldAllowObjectsInDropZoneCode(this.shouldAllowObjectsInDropZoneTxt.getValue());
@@ -80,16 +62,14 @@
                     dropzoneModel.setGetDropZoneContextMenuItemsCode(this.getDropZoneContextMenuItemsTxt.getValue());
                 }
 
-
-
                 //Update Visualization Editor Panel
                 mstrmojo.all.VisBuilderDocLayoutViewer.getViPanel('editPanel').onRender();
 
-                //host.vbReRender = true;
+                host.vbReRender = false;
                 this._super();
 
                 //TODO: ClEAR drop zone data, when applying
-                dropzoneModel.clearAllDropZones(dropzoneModel.docModel.clearVisAsFilterAction(targetUnit));
+                //dropzoneModel.clearAllDropZones(dropzoneModel.docModel.clearVisAsFilterAction(targetUnit));
             },
 
             getContent: function getContent(results) {
