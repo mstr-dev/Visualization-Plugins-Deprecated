@@ -34,7 +34,7 @@
 <!--
 <h1 id="header" style="color:white; background-color:black; position:absolute; z-index:1000">hello world</h1>
 -->
-<div id="mainApp">This is widget loader page!</div>
+<div id="mainApp"></div>
 <div id="mainAppMsg"></div>
 <div id="errorMessage"></div>
 
@@ -302,6 +302,9 @@ function setupWidgetLoader() {
                     widget.render();
                 }else if (widget.plot){
                     widget.render();
+                    if (window.isAndroid) {
+                        mstrMobileTransport && mstrMobileTransport.onRenderComplete();
+                    }
                 }
 
                 var time1 = new Date();
