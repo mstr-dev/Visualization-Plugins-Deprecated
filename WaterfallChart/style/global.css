@@ -2,7 +2,7 @@
 	font: 10px sans-serif;
 }
 
-.custom-vis-layout.waterfallchart .axis path, .custom-vis-layout.waterfallchart .axis line
+.custom-vis-layout.waterfallchart .axis path, .axis line
 	{
 	fill: none;
 	stroke: #000;

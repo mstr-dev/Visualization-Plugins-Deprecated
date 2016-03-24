@@ -1,4 +1,7 @@
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-WaterfallChart>div>div
-	{
-	background-image: url(images/WaterfallChart.png);
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-WaterfallChart > div > div {
+    background-image: url("http://localhost:8080/MicroStrategy/plugins/WaterfallChart/style/images/WaterfallChart.png");
+background-position: 0 0;
+}.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-WaterfallChart > div > div {
+    background-image: url("http://localhost:8080/MicroStrategy/plugins/WaterfallChart/style/images/WaterfallChart.png");
+background-position: 0 0;
 }

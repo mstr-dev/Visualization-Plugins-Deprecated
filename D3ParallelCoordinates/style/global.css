@@ -1,4 +1,4 @@
-.parcoords>svg, .parcoords>canvas {
+.custom-vis-layout.d3parallelcoordinates .parcoords>svg, .parcoords>canvas {
 	font: 14px sans-serif;
 	position: absolute;
 }
@@ -7,41 +7,41 @@
 	pointer-events: none;
 }
 
-.parcoords text.label {
+.custom-vis-layout.d3parallelcoordinates .parcoords text.label {
 	cursor: default;
 }
 
-.parcoords rect.background {
+.custom-vis-layout.d3parallelcoordinates .parcoords rect.background {
 	fill: transparent;
 }
 
-.parcoords rect.background:hover {
+.custom-vis-layout.d3parallelcoordinates .parcoords rect.background:hover {
 	fill: rgba(120, 120, 120, 0.2);
 }
 
-.parcoords .resize rect {
+.custom-vis-layout.d3parallelcoordinates .parcoords .resize rect {
 	fill: rgba(0, 0, 0, 0.1);
 }
 
-.parcoords rect.extent {
+.custom-vis-layout.d3parallelcoordinates .parcoords rect.extent {
 	fill: rgba(255, 255, 255, 0.25);
 	stroke: rgba(0, 0, 0, 0.6);
 }
 
-.parcoords .axis line, .parcoords .axis path {
+.custom-vis-layout.d3parallelcoordinates .parcoords .axis line, .parcoords .axis path {
 	fill: none;
 	stroke: #222;
 	shape-rendering: crispEdges;
 }
 
-.parcoords canvas {
+.custom-vis-layout.d3parallelcoordinates .parcoords canvas {
 	opacity: 1;
 	-moz-transition: opacity 0.3s;
 	-webkit-transition: opacity 0.3s;
 	-o-transition: opacity 0.3s;
 }
 
-.parcoords canvas.faded {
+.custom-vis-layout.d3parallelcoordinates .parcoords canvas.faded {
 	opacity: 0.25;
 }
 
@@ -54,11 +54,11 @@
 	user-select: none;
 }
 
-#grid {
+.custom-vis-layout.d3parallelcoordinates #grid {
 	height: 198px;
 }
 
-.row, .header {
+.row, .custom-vis-layout.d3parallelcoordinates .header {
 	clear: left;
 	font-size: 12px;
 	line-height: 18px;
@@ -73,7 +73,7 @@
 	font-weight: bold;
 }
 
-.cell {
+.custom-vis-layout.d3parallelcoordinates .cell {
 	float: left;
 	overflow: hidden;
 	white-space: nowrap;
@@ -81,6 +81,6 @@
 	height: 18px;
 }
 
-.col-0 {
+.custom-vis-layout.d3parallelcoordinates .col-0 {
 	width: 180px;
 }
