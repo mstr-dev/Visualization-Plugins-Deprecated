@@ -10,7 +10,6 @@
     <!-- <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon"/> -->
     <title>MicroStrategy Mobile</title>
     <link rel="stylesheet" type="text/css" href="global.css"/>
-    <script language="JavaScript" src="CustomVisBase.js"></script>
     <style>
         #errorMessage {
             font-family: "Tahoma";
@@ -35,13 +34,17 @@
 <!--
 <h1 id="header" style="color:white; background-color:black; position:absolute; z-index:1000">hello world</h1>
 -->
-<div id="mainApp"></div>
+<div id="mainApp">This is widget loader page!</div>
 <div id="mainAppMsg"></div>
 <div id="errorMessage"></div>
 
 <script>
 var time0 = new Date();
 window.isUsingMockupData = true;
+if (window.mstrMobileApp) {  // Android 
+    window.isUsingMockupData = false;
+}
+window.isAndroid = !window.isUsingMockupData;
 window.isDebugging = window.isUsingMockupData;
 window.isPlugIn = true;
 
@@ -57,7 +60,16 @@ window.widget = widget;
 //
 var descriptors;
 if (window.mstrMobileApp) {
-    descriptors = eval(String(mstrMobileApp.getResourceBundleJson()));
+    /**
+     * Currently for js widgets in native android platform, we need to get locale strings from native side.
+     * In order to reduce the locale string size in the client app, we add the strings into MSTRAndroidLibrary.res.values.strings
+     * And use mstrMobileApp.getLocaleString javascript interfacc to get the locale string.
+     */
+    //descriptors = eval(String(mstrMobileApp.getResourceBundleJson()));
+    descriptors = {};
+    window.getLocaleString = function (stringName, defaultString) {
+        return String(window.mstrMobileApp.getLocaleString(stringName, defaultString));
+    }
 } else {
     descriptors = '';
     console.log('warning: mstrMobileApp is not defined.');
@@ -116,6 +128,11 @@ var VIS_LIST = {
     }
     
 };
+
+</script>
+<script language="JavaScript" src="CustomVisBase.js"></script>
+<script>
+
 function setupWidgetLoader() {
     var fnStartFailed = function (e) {
         var msg = "Application failed to start due to an irrecoverable error: " + e;
@@ -134,6 +151,11 @@ function setupWidgetLoader() {
             dpi = 320,
             head = document.getElementsByTagName('head')[0],
             forEach = mstrmojo.array.forEach;
+
+        window.loadModel = function loadModel () {
+            widgetConfiguration = JSON.parse(mstrMobileApp.getWidgetConfiguration());
+            mstrMobileTransport && mstrMobileTransport.loadModelComplete();
+        };
 
         window.renderWidget = function renderWidget () {
         	try {
@@ -164,6 +186,11 @@ function setupWidgetLoader() {
 
                 visConfig.width = window.widgetWidth + 'px';
                 visConfig.height = window.widgetHeight + 'px';
+
+                if (window.isAndroid) {
+                    visConfig.width = document.body.offsetWidth + 'px';
+                    visConfig.height = document.body.offsetHeight + 'px';
+                }
 
                 // add layout styles into head
                 var layoutStyles = visConfig.layoutStyles || visConfig.model && visConfig.model.xtabStyles;
@@ -290,6 +317,9 @@ function setupWidgetLoader() {
         //load widget
         window.loadModelAndRenderWidget = function loadModelAndRenderWidget() {
             try {
+                if (!window.isUsingMockupData) {
+                    loadModel();
+                }
                 renderWidget();
             } catch (e) {
 	            if (window.isDebugging) {
@@ -341,10 +371,14 @@ function loadScriptFile(url, callback, scope) {
 
 
 function getVisName() {
-    return widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visName || '';
+    return mstrMobileApp && mstrMobileApp.getVisualizationStyle && mstrMobileApp.getVisualizationStyle() || widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visName || '';
 }
 
 function getVisMojoClassName() {
+    if (window.isAndroid) {
+        return mstrMobileApp && mstrMobileApp.getVisualizationMojoClassName && mstrMobileApp.getVisualizationMojoClassName() || '';
+    }
+
     var mojoClassName = widgetConfiguration && widgetConfiguration.model && widgetConfiguration.model.visMojoClassName;
 	if (!mojoClassName) {
 	    var visName = getVisName();
@@ -354,6 +388,12 @@ function getVisMojoClassName() {
 }
 
 function loadBundle() {
+
+    // initialize the Java->JavaScript interface
+    if (mstrMobileApp && mstrMobileApp.initInterface) {
+        mstrMobileApp.initInterface();
+    }   
+
     var mojoClassName = getVisMojoClassName();
 	var classArr = mojoClassName.split('.');
 	if (classArr.length !== 3 || classArr[0] !== 'plugins') {
@@ -424,7 +464,7 @@ if (window.isUsingMockupData) {
 }
 
 function onPageload() {
-	mstrMobileTransport && mstrMobileTransport.webViewInitComplete();
+    mstrMobileTransport && mstrMobileTransport.webViewInitComplete();
 }
 
 </script>
