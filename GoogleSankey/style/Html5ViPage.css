@@ -1,7 +1,7 @@
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-GoogleSankey > div > div {
-    background-image: url("http://localhost:8080/MicroStrategy/plugins/GoogleSankey/style/images/icon.png");
-background-position: 0 0;
-}.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-GoogleSankey > div > div {
-    background-image: url("http://localhost:8080/MicroStrategy/plugins/GoogleSankey/style/images/icon.png");
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-GoogleSankey>div>div {
+    background-image: url(images/icon.png);
+    background-position: 0 0;
+}
+.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-GoogleSankey > div > div {
 background-position: 0 0;
 }

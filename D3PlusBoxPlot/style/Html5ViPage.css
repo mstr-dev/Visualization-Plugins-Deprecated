@@ -1,7 +1,8 @@
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3PlusBoxPlot > div > div {
-    background-image: url("http://localhost:8080/MicroStrategy/plugins/D3PlusBoxPlot/style/images/BoxPlot.png");
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3PlusBoxPlot>div>div
+	{
+	background-image: url(images/BoxPlot.png);
 background-position: 0 0;
-}.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3PlusBoxPlot > div > div {
-    background-image: url("http://localhost:8080/MicroStrategy/plugins/D3PlusBoxPlot/style/images/BoxPlot.png");
+}
+.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3PlusBoxPlot > div > div {
 background-position: 0 0;
 }

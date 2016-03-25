@@ -1,7 +1,8 @@
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-ForceDirectedGraph > div > div {
-    background-image: url("http://localhost:8080/MicroStrategy/plugins/ForceDirectedGraph/style/images/ForceDirectedGraph.png");
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-ForceDirectedGraph>div>div
+	{
+	background-image: url(images/ForceDirectedGraph.png);
 background-position: 0 0;
-}.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-ForceDirectedGraph > div > div {
-    background-image: url("http://localhost:8080/MicroStrategy/plugins/ForceDirectedGraph/style/images/ForceDirectedGraph.png");
+}
+.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-ForceDirectedGraph > div > div {
 background-position: 0 0;
 }
