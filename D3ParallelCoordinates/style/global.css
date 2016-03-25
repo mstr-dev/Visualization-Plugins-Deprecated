@@ -84,3 +84,12 @@
 .col-0 {
 	width: 180px;
 }
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgD3ParallelCoordinates {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3ParallelCoordinates {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;

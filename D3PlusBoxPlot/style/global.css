@@ -11,3 +11,12 @@
 	margin-right: auto;
 	display: block;
 }
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgD3PlusBoxPlot {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3PlusBoxPlot {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
