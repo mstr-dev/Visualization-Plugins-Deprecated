@@ -1,4 +1,7 @@
-.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3ParallelCoordinates>div>div
-	{
-	background-image: url(images/Parallel.png);
+.mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3ParallelCoordinates > div > div {
+    background-image: url("http://localhost:8080/MicroStrategy/plugins/D3ParallelCoordinates/style/images/icon.png");
+background-position: 0 0;
+}.mojo-theme-dark .mstrmojo-VIGallery .mstrmojo-VIGalleryList .item.ic-D3ParallelCoordinates > div > div {
+    background-image: url("http://localhost:8080/MicroStrategy/plugins/D3ParallelCoordinates/style/images/darkIcon.png");
+background-position: 0 0;
 }
