@@ -8,6 +8,7 @@
         "mstrmojo.ui.Checkbox",
         "mstrmojo.css",
         "mstrmojo._HasLayout",
+        "mstrmojo.ui.menus.MenuConfig",
         "mstrmojo.ui.menus._HasMenuPopup");
 
 

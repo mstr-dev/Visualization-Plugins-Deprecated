@@ -105,7 +105,9 @@
                 });
             },
             attacheCodeMirror: function () {
-                var parent = this.parent.parent;
+                //DE31269 to handle case: this.parent is null
+                var parent = this.parent && this.parent.parent;
+                if(!parent) return;
                 var properties = {
                     mode: this.mode,
                     lineNumbers: true,

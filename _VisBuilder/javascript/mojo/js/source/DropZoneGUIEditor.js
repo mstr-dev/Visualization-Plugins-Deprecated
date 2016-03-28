@@ -66,17 +66,11 @@
             },
 
             onwidthChange: function onwidthChange(e) {
-                //handleDimensionChange.call(this, 'width');
-               // this.updateContent();
-                console.log("dropzone gui editor width change.\n");
-                var width = parseInt(e.value, 10);
-                //this.zonesNode.set("width", width + "px");
-                this.zonesNode.width = width + "px";
-                /*var width = parseInt(evt.value, 10);
 
-                if (width > 0) {
-                    this.pulldown.set("width", width - (this.btnRefreshNS.visible ? REFRESH_NS_BUTTON_WIDTH : 0) + "px"); // refresh button width 24px + margin 5px
-                }*/
+                var width = parseInt(e.value, 10);
+
+                this.zonesNode.width = width + "px";
+
                 this.updateContent();
             },
 
@@ -88,7 +82,6 @@
              */
             init: function init(props) {
                 this._super(props);
-                //this.model = props.model;
                 $EID = this.id;
             },
 
@@ -98,8 +91,6 @@
              */
             postBuildRendering : function postBuildRendering() {
                 this._super();
-
-                //var content = this.content;
 
                 this.updateContent();
 
@@ -130,10 +121,14 @@
              * @param visible {Boolean}
              */
             setRowPanelVisibility: function toggleRowPanelVisibility(visible) {
-                var content = this.content;
+                //var content = this.content;
 
-                content.rowPanel.set('visible', visible);
-                content.newZone.set('visible', visible);
+                /*content.rowPanel.set('visible', visible);
+                content.newZone.set('visible', visible);*/
+
+                this.rowPanel.set('visible', visible);
+                this.newZone.set('visible', visible);
+
 
                 // Update the scrollbars.
                 this.updateScrollbars();
@@ -146,13 +141,11 @@
                     idx = isNaN(props && props.idx)? (children && children.length) || 0 : (props && props.idx),
                     model = this.model,
                     allZones = model.dropzones,
-                    //$ID = "NewDropZoneRowDialog",
-                    dropZoneDialog; //= mstrmojo.all[$ID];
+                    dropZoneDialog;
 
                 if (!allZones) {
                     allZones = model.dropzones = {};
                 }
-
 
                 dropZoneDialog =  new mstrmojo.plugins._VisBuilder.NewDropZoneRowDialog({
                         "guiEditor": this,
@@ -216,7 +209,6 @@
                             text: "New Zone",
                             slot: "zonesNode",
                             onclick: function onclick() {
-                                //addZoneRow.call(mstrmojo.all[$EID]);
                                 mstrmojo.all[$EID].addZoneRow();
                             }
                         }
