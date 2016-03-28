@@ -1,6 +1,7 @@
 (function () {
 
-    mstrmojo.requiresCls("mstrmojo.Dialog",
+    mstrmojo.requiresCls("mstrmojo.Editor",
+        "mstrmojo.TextBoxWithLabel",
         "mstrmojo.hash",
         "mstrmojo.vi.ui.editors.EditorGroup");
 

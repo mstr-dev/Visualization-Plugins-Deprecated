@@ -1,10 +1,25 @@
 (function () {
 
-    mstrmojo.requiresCls("mstrmojo.Dialog",
+    if(!mstrmojo.plugins){
+        mstrmojo.plugins = {};
+    }
+    if(!mstrmojo.plugins._VisBuilder){
+        mstrmojo.plugins._VisBuilder ={};
+    }
+
+    if(!mstrmojo.plugins._VisBuilder.ui){
+        mstrmojo.plugins._VisBuilder.ui = {};
+    }
+
+
+    mstrmojo.requiresCls("mstrmojo.Editor",
+        "mstrmojo.TextBoxWithLabel",
+        "mstrmojo.Label",
         "mstrmojo.hash",
         "mstrmojo.RadioButton",
         "mstrmojo.TextAreaWithLabel",
         "mstrmojo.ValidationTextBox",
+        "mstrmojo.plugins._VisBuilder.ui.CodeMirror",
         "mstrmojo.vi.ui.editors.EditorGroup");
 
     var $H = mstrmojo.hash;
@@ -124,6 +139,8 @@
 
             type: 'text',
 
+            value: '',
+
             widgetCssClass : 'mstrmojo-ValidationTextBoxWithLabel',
 
             markupString: '<div class=" mstrmojo-TextBoxWithLabel {@widgetCssClass} {@cssClass}" style="{@cssText}">' +
@@ -142,7 +159,18 @@
                 lblNode: function () {
                     return this.domNode.firstChild;
                 }
-            }
+            },
+
+           /* init: function init(props) {
+
+                this.value = props.value;
+                this.label = props.label;
+                this.cssClass = props.cssClass;
+                this.cssDisplay = props.cssDisplay;
+                this.hint = props.hint;
+                this.alias = props.alias;
+                this._super(props);
+            }*/
         }
     );
 
