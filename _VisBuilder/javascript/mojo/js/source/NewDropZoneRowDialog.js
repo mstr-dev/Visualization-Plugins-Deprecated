@@ -159,18 +159,7 @@
                 lblNode: function () {
                     return this.domNode.firstChild;
                 }
-            },
-
-           /* init: function init(props) {
-
-                this.value = props.value;
-                this.label = props.label;
-                this.cssClass = props.cssClass;
-                this.cssDisplay = props.cssDisplay;
-                this.hint = props.hint;
-                this.alias = props.alias;
-                this._super(props);
-            }*/
+            }
         }
     );
 
