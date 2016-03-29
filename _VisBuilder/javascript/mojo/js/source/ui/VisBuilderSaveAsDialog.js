@@ -87,6 +87,8 @@
                 VisBuilderGallery.update();
                 VisBuilderGallery.vizList.refresh();
                 VisBuilderGallery.refresh();
+                //DE31330 start to work in the latest save-as visualization instead of original version
+                VisBuilderGallery.model.changeSelectedVisType(res.name , -1 , mstrConfig.pluginsVisList[res.name].wtp || "7", mstrConfig.pluginsVisList[res.name].dz);
 
             },
             complete: function () {
