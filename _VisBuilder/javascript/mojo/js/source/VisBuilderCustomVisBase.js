@@ -55,7 +55,8 @@
                 style.disabled = true;
                 hrefToReturn = style.href;
             }
-            /*else {
+            /* delete this part, as html5vipage should  also be true sometimes, should not be reset
+            else {
                 if (style.disabled) {
                     style.disabled = false;
                 }
@@ -79,8 +80,12 @@
         var styles = styleElement.sheet.cssRules, i = styles.length;
         while (i) {
             i--;
-            var txt = styles[i].selectorText;
-            content = content.replace(txt, prefix + txt);
+            var txt = styles[i].selectorText,
+                subTxts = txt.split(",");
+            subTxts.forEach(function(subTxt){
+                subTxt = subTxt.trim();
+                content = content.replace(subTxt, prefix + subTxt);
+            });
         }
         return content;
     }
