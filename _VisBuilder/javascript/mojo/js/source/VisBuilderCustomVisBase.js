@@ -74,20 +74,24 @@
 
     function addCSSClassPrefix(content, prefix) {
         var doc = document.implementation.createHTMLDocument(""),
-            styleElement = document.createElement("style");
+            styleElement = document.createElement("style"),
+            result = "";
         styleElement.textContent = content;
         doc.body.appendChild(styleElement);
         var styles = styleElement.sheet.cssRules, i = styles.length;
         while (i) {
             i--;
             var txt = styles[i].selectorText,
-                subTxts = txt.split(",");
+                subTxts = txt.split(","),//special process for comma, add prefix before both labels besides comma
+                cssText = styles[i].cssText;
             subTxts.forEach(function(subTxt){
                 subTxt = subTxt.trim();
-                content = content.replace(subTxt, prefix + subTxt);
+                cssText  = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
             });
+            cssText = cssText.replace(/{/g, "{\n").replace(/;/g,";\n");
+            result = cssText + "\n\n" + result;
         }
-        return content;
+        return result;
     }
 
     function getStyle(folderName) {
