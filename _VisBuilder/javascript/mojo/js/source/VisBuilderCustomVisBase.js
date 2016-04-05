@@ -91,7 +91,7 @@
         doc.body.appendChild(styleElement);
         var styles = styleElement.sheet.cssRules, i = styles.length,
             rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
-            ignoreLabel = new RegExp("RwMenuModelEditor_WEB\-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
+            ignoreLabel = new RegExp("InsertDHTMLWidgetMenuLayoutxml|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
         while (i) {
             i--;
             var txt = styles[i].selectorText,
