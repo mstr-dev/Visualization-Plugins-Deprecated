@@ -69,7 +69,18 @@
     }
 
     function removeCSSClassPrefix(content, prefix) {
-        return content.split(prefix).join("");
+        //Remove prefix automatically, While for case:
+        // prefix { }
+        //Should not remove prefix, should keep prefix to avoid css error
+        var rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
+            regex = new RegExp(rePrefix + "\\s*{"),
+            subContents = content.split(regex);
+        subContents.forEach(
+            function(subString, index){
+                subContents[index] = subString.split(prefix).join("");
+            }
+        );
+        return subContents.join(prefix + " {");
     }
 
     function addCSSClassPrefix(content, prefix) {
@@ -78,12 +89,17 @@
             result = "";
         styleElement.textContent = content;
         doc.body.appendChild(styleElement);
-        var styles = styleElement.sheet.cssRules, i = styles.length;
+        var styles = styleElement.sheet.cssRules, i = styles.length,
+            rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
+            ignoreLabel = new RegExp("RwMenuModelEditor_WEB\-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
         while (i) {
             i--;
             var txt = styles[i].selectorText,
                 subTxts = txt.split(","),//special process for comma, add prefix before both labels besides comma
                 cssText = styles[i].cssText;
+            if(txt.search(ignoreLabel) >= 0){//find non-need prefix string
+                continue;
+            }
             subTxts.forEach(function(subTxt){
                 subTxt = subTxt.trim();
                 cssText  = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
