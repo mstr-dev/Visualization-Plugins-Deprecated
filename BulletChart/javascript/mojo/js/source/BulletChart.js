@@ -453,7 +453,7 @@
                     metTarget = this.metTarget = dzModel.getDropZoneObjectsByIndex(2);
                     metsRange = this.metsRange = dzModel.getDropZoneObjectsByIndex(3);
                     metsKPI = this.metsKPI = dzModel.getDropZoneObjectsByIndex(4);
-                }else if(dataDz && Object.keys(dataDz).length) {//converted document
+                }else if(dataDz && Object.keys(dataDz).length >1) {//converted document
                     attsCategory = dataDz.XAxis.TemplateUnit;
                     metActual = this.metActual = dataDz.YAxis.TemplateMetric;
                     metTarget =  this.metTarget = dataDz.BreakBy.TemplateMetric;
@@ -1079,7 +1079,7 @@
                 if(dzModel){
                     metricCount = [dzModel.getDropZoneObjectsByIndex(1).length, dzModel.getDropZoneObjectsByIndex(2).length, dzModel.getDropZoneObjectsByIndex(3).length, dzModel.getDropZoneObjectsByIndex(4).length];//Actual,Target,Range,KPI
                 }
-                else if(dataDz &&  Object.keys(dataDz).length ) {//converted document
+                else if(dataDz &&  Object.keys(dataDz).length > 1 ) {//converted document
                         //attsCategory = dataDz.XAxis.TemplateUnit;
                     metricCount[0] = dataDz.YAxis.TemplateMetric? dataDz.YAxis.TemplateMetric.length :0;
                     metricCount[1] = dataDz.BreakBy.TemplateMetric? dataDz.BreakBy.TemplateMetric.length: 0;
