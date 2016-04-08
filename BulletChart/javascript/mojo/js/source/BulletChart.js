@@ -215,6 +215,80 @@
 
     }
 
+    /**
+     * for convereted document, if dz is suitable for bullet, render bullet chart as dashboard bulletchart
+     * or, if dz is not suitable, render bullet chart as newly created bulletchart, this case could happen,
+     * when converted from a pie VI to document and then change widget to bullet chart
+     *
+     * @param dz
+     */
+    function validateDocumentDZ(dz){
+
+        function isEmpty(obj) {
+            for(var prop in obj) {
+                if(obj.hasOwnProperty(prop))
+                    return false;
+            }
+            return true && JSON.stringify(obj) === JSON.stringify({});
+        }
+
+        var result = true,
+            dz_map = [
+            'XAxis',
+            'YAxis',
+            'BreakBy',
+            'SliceBy',
+            'ColorBy',
+            'SizeBy',
+            'AdditionalMetrics',
+            'AngleBy', // AngleBy
+            'Grp', // Grp
+            'Geo', // Geo
+            'layout', // layout
+            'from', // from
+            'to', // to
+            'itemsz', // itemsz
+            'Lat', // Lat
+            'Long' // Long
+        ];
+        dz_map.forEach(function(element, index){
+            if(dz.hasOwnProperty(element)){//First: must contain all these 19 items
+                var zoneItem = dz[element];
+                //SliceBy Metric--->Range, XAxis Unit; YAxis Metric-->Actual; ColorBy Metric-->KPI; BreakBy Metric---->Tareget
+                switch (index){
+                    case 0://For Category, it should be attribute
+                        if(zoneItem.TemplateMetric){
+                            result = false;
+                        }
+                        break;
+                    case 1:
+                    case 2://For Actual and Target, there should be no more than 1 metric
+                        if(zoneItem.TemplateMetric && zoneItem.TemplateMetric.length >1 || zoneItem.TemplateUnit){
+                            result = false;
+                        }
+                        break;
+                    case 3://For Range, there should be no more than 3 metric
+                        if(zoneItem.TemplateMetric && zoneItem.TemplateMetric.length >3 || zoneItem.TemplateUnit){
+                            result = false;
+                        }
+                        break;
+                    case 4://For KPI, it should be metric
+                        if(zoneItem.TemplateUnit){
+                            result = false;
+                        }
+                        break;
+                    default ://index >4
+                        if(!isEmpty(zoneItem)){//Second: for the last 14, it should be null
+                            result = false;
+                        }
+                }
+            }else{
+                result = false;
+            }
+        });
+        return result;
+    }
+
 
 
     mstrmojo.plugins.BulletChart.BulletChart = mstrmojo.declare(
@@ -453,38 +527,42 @@
                     metTarget = this.metTarget = dzModel.getDropZoneObjectsByIndex(2);
                     metsRange = this.metsRange = dzModel.getDropZoneObjectsByIndex(3);
                     metsKPI = this.metsKPI = dzModel.getDropZoneObjectsByIndex(4);
-                }else if(dataDz && Object.keys(dataDz).length) {//converted document
+                }else if(dataDz && validateDocumentDZ(dataDz)) {//converted document directly from dashboard
                     attsCategory = dataDz.XAxis.TemplateUnit;
                     metActual = this.metActual = dataDz.YAxis.TemplateMetric;
                     metTarget =  this.metTarget = dataDz.BreakBy.TemplateMetric;
                     metsRange = this.metsRange = dataDz.SliceBy.TemplateMetric;
                     metsKPI =this.metsKPI =  dataDz.ColorBy.TemplateMetric;
-                }else{//newly-created document
+                }else{//newly-created document, or converted document, but change display widget
                     attsCategory = modelGts.row;
-                    var gtsCols = modelGts.col[0].es,
-                        index = 0,
-                        i;
-
-                        for(i = 0; i < metricCount[0] ; i ++){
-                          metActual.push(gtsCols[index++]);
-                          metActual[i].id = metActual[i].oid;
+                    for(var index=0; index<modelGts.col.length; index++){
+                        var tmpCol = modelGts.col[index];
+                        if(tmpCol.n === "Metrics"){//ingore column attribute
+                            var gtsCols = tmpCol.es,
+                                index = 0,
+                                i;
+                            for(i = 0; i < metricCount[0] ; i ++){
+                                metActual.push(gtsCols[index++]);
+                                metActual[i].id = metActual[i].oid;
+                            }
+                            for(i =0; i < metricCount[1]; i++){
+                                metTarget.push(gtsCols[index ++]);
+                                metTarget[i].id = metTarget[i].oid;
+                            }
+                            for(i = 0; i< metricCount[2];i++){
+                                metsRange.push(gtsCols[index ++]);
+                                metsRange[i].id = metsRange[i].oid;
+                            }
+                            for(i = 0; i< metricCount[3]; i ++){
+                                metsKPI.push(gtsCols[index ++]);
+                                metsKPI[i].id = metsKPI[i].oid;
+                            }
+                            this.metActual = metActual;
+                            this.metTarget = metTarget;
+                            this.metsRange = metsRange;
+                            this.metsKPI = metsKPI;
                         }
-                        for(i =0; i < metricCount[1]; i++){
-                            metTarget.push(gtsCols[index ++]);
-                            metTarget[i].id = metTarget[i].oid;
-                        }
-                        for(i = 0; i< metricCount[2];i++){
-                            metsRange.push(gtsCols[index ++]);
-                            metsRange[i].id = metsRange[i].oid;
-                        }
-                        for(i = 0; i< metricCount[3]; i ++){
-                            metsKPI.push(gtsCols[index ++]);
-                            metsKPI[i].id = metsKPI[i].oid;
-                        }
-                        this.metActual = metActual;
-                    this.metTarget = metTarget;
-                    this.metsRange = metsRange;
-                    this.metsKPI = metsKPI;
+                    }
                 }
 
 
@@ -1079,7 +1157,7 @@
                 if(dzModel){
                     metricCount = [dzModel.getDropZoneObjectsByIndex(1).length, dzModel.getDropZoneObjectsByIndex(2).length, dzModel.getDropZoneObjectsByIndex(3).length, dzModel.getDropZoneObjectsByIndex(4).length];//Actual,Target,Range,KPI
                 }
-                else if(dataDz &&  Object.keys(dataDz).length ) {//converted document
+                else if(dataDz &&  validateDocumentDZ(dataDz)) {//converted document
                         //attsCategory = dataDz.XAxis.TemplateUnit;
                     metricCount[0] = dataDz.YAxis.TemplateMetric? dataDz.YAxis.TemplateMetric.length :0;
                     metricCount[1] = dataDz.BreakBy.TemplateMetric? dataDz.BreakBy.TemplateMetric.length: 0;
@@ -1088,24 +1166,25 @@
 
                 }
                 else{
-                    var colNames = this.model.data.gts.col[0],
-                        num;
-                    if(colNames){
-                        num = colNames.es.length;
-                        if(num < 5) {
-                            metricCount = [0,0,0,num];
-                        }else{
-                            metricCount = [1,1,3,num - 5];
-                        }
-                    }else{
-                        this.errorDetails = "Either Actual or KPI should have data to display the visualization";
-                        throw 'ERROR';
+                    var metricCols = this.model.data.gts.col;
+                    for(var index = 0; index <metricCols.length; index ++ ){
+                        var colNames  = metricCols[index];
+                        if(colNames.n === "Metrics"){
+                            if(index !== 0){//atrribute in column
+                                this.errorDetails = "Attribute should be in the Row instead of Column";
+                                throw 'ERROR';
+                            }
+
+                            //colNames = this.model.data.gts.col[0],
+                            var   num = colNames.es.length;
+                                if(num < 5) {
+                                    metricCount = [0,0,0,num];
+                                }else{
+                                    metricCount = [1,1,3,num - 5];
+                                }
+                            }
                     }
-
                 }
-
-
-
                 //TODO: as 10.2 has not supported threshold, thus change back to no threshold status
                 this.advancedModel = (new $DI(this.model.data)).getRawData($DI.ENUM_RAW_DATA_FORMAT.ROWS_ADV, {hasTitleName:true, hasSelection:true, needDecode:true, hasThreshold: true});
                 //this.advancedModel = (new $DI(this.model.data)).getRawData($DI.ENUM_RAW_DATA_FORMAT.ROWS_ADV, {hasTitleName:true, hasSelection:true, needDecode:true});
