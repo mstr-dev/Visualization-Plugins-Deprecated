@@ -452,7 +452,8 @@ if (window.isUsingMockupData) {
     if (window.dataModel && window.docDef){
         widgetConfiguration = {
        	  model: window.dataModel,
-		  defn: "",
+		  //defn: "",
+          defn: window.dataDefn,
 		  docDef: window.docDef,
  		  controller: {view: {model: {}}},
             isReport: false,
