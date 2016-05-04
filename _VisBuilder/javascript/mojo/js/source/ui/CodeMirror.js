@@ -41,7 +41,7 @@
         return code;
     }
 
-    mstrmojo.requiresCls("mstrmojo.Widget", "mstrmojo.css", "mstrmojo.dom", "mstrmojo._HasLayout");
+    mstrmojo.requiresCls("mstrmojo.Container", "mstrmojo.Widget", "mstrmojo.css", "mstrmojo.dom", "mstrmojo._HasLayout","mstrmojo._LoadsScript", "mstrmojo._FillsBrowser");
     mstrmojo.plugins._VisBuilder.ui.CodeMirror = mstrmojo.declare(
         mstrmojo.Container,
         [mstrmojo._LoadsScript, mstrmojo._FillsBrowser, mstrmojo._HasLayout],
@@ -51,8 +51,9 @@
             type: "text",
             tabIndex: "",
             codeMirrorEditor: "",
+            cssClass:'',
             mode: "text/html",
-            markupString: '<div style="position: relative" ><div class="CMMaxMin CMin" mstrAttach:click ></div><div class="CMContainer" ></div></div>',
+            markupString: '<div class="codemirror {@cssClass}" style="position: relative" ><div class="CMMaxMin CMin" mstrAttach:click ></div><div class="CMContainer" ></div></div>',
             markupSlots: {
                 c: function () {
                     return this.domNode.lastChild;
@@ -104,7 +105,9 @@
                 });
             },
             attacheCodeMirror: function () {
-                var parent = this.parent.parent;
+                //DE31269 to handle case: this.parent is null
+                var parent = this.parent && this.parent.parent;
+                if(!parent) return;
                 var properties = {
                     mode: this.mode,
                     lineNumbers: true,
@@ -133,6 +136,10 @@
                     this.codeMirrorEditor = CodeMirror(this.c, properties);
                     this.codeMirrorEditor.on("change", function() {
                         //if code has changed call container to resfresh heigh - so scrolls if needed will be displayed
+                        parent.parent.onheightChange();
+                    });
+                    this.codeMirrorEditor.on("focus", function() {
+                        //DE29010 : if code has selected call container to refresh height - so scrolls if needed will be displayed
                         parent.parent.onheightChange();
                     });
                 }
@@ -177,3 +184,4 @@
     );
 
 }());
+//@ sourceURL=CodeMirror.js

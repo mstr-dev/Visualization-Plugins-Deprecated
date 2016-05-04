@@ -6,12 +6,63 @@
         "mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor",
         "mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog");
     var $VI = mstrmojo.vi;
-
     /**
      * Overwrites / extends mstrmojo.vi.controllers.DocumentController
      * new actions added - like save, save as, new and open for visualization
      * hide vis gallery by default
      */
+
+    function deactivateStyle(folderName) {
+        var styleSheets = document.styleSheets, path = "plugins/" + folderName + "/style/Html5ViPage.css", size = styleSheets.length, i = 0, hrefToReturn = "";
+        for (i = 0; i < size; i++) {
+            var style = styleSheets[i];
+            if (style.href && style.href.indexOf(path) > -1) {
+                style.disabled = true;
+            }
+        }
+    }
+
+
+    /**
+     *
+     * @param folderName: _VisBuilder
+     * @param packageName: package.json
+     * @returns {string}
+     */
+    function getPackageJson(folderName, packageName) {
+        var styleSheets = document.styleSheets, path = "plugins/" + folderName + "/style/VisBuilderPage.css", size = styleSheets.length, i = 0, hrefToReturn = "",content = "", packageJson= null;
+        for (i = size-1; i >= 0; i--) {//search web path for visbuilder/package.json
+            var style = styleSheets[i];
+            if (style.href && style.href.indexOf(path) > -1) {
+                hrefToReturn = style.href;
+                break;
+            }
+        }
+
+        if (!hrefToReturn) {
+            hrefToReturn = "../plugins/" + folderName + "/" +  packageName;
+        }else{
+            var end = hrefToReturn.indexOf("/style/VisBuilderPage.css");
+            hrefToReturn = hrefToReturn.substr(0, end) + "/" +  packageName;
+        }
+
+        path = hrefToReturn+'?tstp='+ Date.now() ;
+        if (path !== "") {
+            if (mstrmojo.loadFileSync) {
+                content = mstrmojo.loadFileSync(path);
+            } else {
+                content = mstrmojo.loadFile(path);
+            }
+        }
+
+        try{
+            packageJson = JSON.parse( content );
+            //eval("packageJson = " + content);
+        }catch (e){
+            packageJson= {};
+        }
+        return packageJson;
+    }
 
     function getSaveWindow(host) {
         var onOk = function () {
@@ -19,6 +70,47 @@
             parameters = host.vbGetSaveParameters(parameters);
             mstrApp.showWait({'message': 'Saving visualization, please wait'});
             mstrApp.serverRequest(parameters, {
+                    success: function (res) {
+                        mstrmojo.alert(res.name + ' has been saved: ' + res.sc);
+
+                        var data ={},
+                            VisBuilderGallery = mstrmojo.all.VisBuilderGallery;
+                        data.c = res.sc;
+                        data.d = host.vbGetDescription();
+                        data.ma=host.vbGetMinAttributes();
+                        data.mm=host.vbGetMinMetrics();
+                        data.s = res.name;
+                        data.scp=host.scope;
+                        data.dz = data.c + "DropZones";
+                        data.em = data.c+"EditorModel";//Add to support property API
+                        data.wtp = "7";
+                        mstrConfig.pluginsVisList[res.name]=data;
+                        VisBuilderGallery.update();
+                        VisBuilderGallery.vizList.refresh();
+                        VisBuilderGallery.refresh();
+
+                        if (data.s) {
+                            mstrmojo.invalidateCls('mstrmojo.' + data.c);
+                        }
+                        if(data.dz){
+                            mstrmojo.invalidateCls('mstrmojo.' + data.dz);
+                        }
+                        //force to reload property editor model files
+                        if(data.em){
+                            mstrmojo.invalidateCls('mstrmojo.' + data.em);
+                        }
+
+                        deactivateStyle(data.s);
+
+                        //AS html5VIPage.css may be modified, should be reload
+                        var prePath = "../plugins/##/style/".replace("##", data.s);
+                        mstrmojo.insertCSSLinks([
+                            (prePath + "Html5ViPage.css" + '?tstp='+ Date.now())
+                        ]);
+                        VisBuilderGallery.model.changeSelectedVisType(res.name , -1 , mstrConfig.pluginsVisList[res.name].wtp || "7", mstrConfig.pluginsVisList[res.name].dz);
+
+
+                    },
                     complete: function () {
                         mstrApp.hideWait();
                     }
@@ -38,11 +130,13 @@
 
     function getSelectVizEditor() {
         var editor = mstrmojo.all.VisBuilderSelectVizEditor;
-        if (!editor) {
-            editor = new mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor();
+
+        //Modified for DE23690, save and save as work in open dialog
+        if(editor) {
+            editor.destroy();
         }
 
-        return editor;
+        return new mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor();
     }
 
     mstrmojo.plugins._VisBuilder.VisBuilderDocumentController = mstrmojo.declare(
@@ -117,18 +211,21 @@
 
             showSaveVisualization: function () {
                 var host = window.currentVis;
-                window.currentCodeTab.apply();
-                window.currentPropsTab.apply();
-                 if (host.scriptClass === 'mstrmojo.plugins._VisBuilder.VisBuilderNew') {
+                if (host.scriptClass === 'mstrmojo.plugins._VisBuilder.VisBuilderNew') {
                     this.showSaveAsVisualization();
                 } else {
+
+                    this.currentCodeTab.apply();
+                    this.currentPropsTab.apply();
+                    this.currentDZCodeTab.apply();
                     getSaveWindow(host);
                 }
 
             },
             showSaveAsVisualization: function () {
-                window.currentCodeTab.apply();
-                window.currentPropsTab.apply();
+                this.currentCodeTab.apply();
+                this.currentPropsTab.apply();
+                this.currentDZCodeTab.apply();
                 var $ID = "saveAsVisBuilder",
                     saveAsViEditor = mstrmojo.all[$ID],
                     host = window.currentVis,
@@ -160,24 +257,14 @@
              * Get Visualization Builder version Information
              */
             showVersion: function(){
-                var cb = {
-                    success: function (res) {
-                        //openCreateViEditor(res.result.visNames);
-                        if(res && res.result){
-                            var packageJson = JSON.parse(res.result);
-                            versionInfoWindow = new mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog(packageJson);
-                            versionInfoWindow.open();
-                        } else{
-                            mstrmojo.alert("Provide correct version file.");
-                        }
-                    },
-                    failure: function (res) {
-                        mstrmojo.alert("Get version info failure.");
-                    }
-                };
-                mstrApp.serverRequest({
-                    taskId: 'GetVersionInfo'
-                }, cb);
+
+                var versionInfoWindow = mstrmojo.all.VisBuilderVersionInfoDialog;
+                if(! versionInfoWindow) {
+                    var packageJson = getPackageJson("_VisBuilder", "package.json");
+                    versionInfoWindow = new mstrmojo.plugins._VisBuilder.ui.VisBuilderVersionInfoDialog(packageJson);
+                    this.addDisposable(versionInfoWindow);
+                }
+                versionInfoWindow.open();
             },
             newVisualizationPlugin: function () {
                 gallery.vizList.singleSelect(0);
@@ -186,7 +273,6 @@
                 getSelectVizEditor().open(gallery);
             },
             exportVisualization: function () {
-                //mstrmojo.form.send({ taskId: 'VisExport', sc: window.currentVis.scriptClass}, mstrConfig.taskURL, mstrConfig.taskURL, '_blank');
                 mstrmojo.form.send({ taskId: 'VisExport', sc: window.currentVis.scriptClass}, mstrConfig.taskURL, null, '_blank');
             },
             isDocChanged: function isDocChanged() {
@@ -195,5 +281,5 @@
         }
     );
     mstrmojo.vi.controllers.DocumentController = mstrmojo.plugins._VisBuilder.VisBuilderDocumentController;
-}())
+}());
 //@ sourceURL=VisBuilderDocumentController.js

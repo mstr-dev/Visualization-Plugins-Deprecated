@@ -1,0 +1,22 @@
+.custom-vis-layout.d3plusboxplot text {
+	font: 10px sans-serif;
+}
+
+.custom-vis-layout.d3plusboxplot body {
+	padding: 30px;
+}
+
+.custom-vis-layout.d3plusboxplot svg {
+	margin-left: auto;
+	margin-right: auto;
+	display: block;
+}
+
+#RwMenuModel_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuLayoutxml   #mnuInsertWgD3PlusBoxPlot {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;
+}
+
+#RwMenuModelEditor_WEB-INFxmllayoutsblocksInsertDHTMLWidgetMenuEditorLayoutxml #mnuInsertWgD3PlusBoxPlot {
+    background:url(images/defaultimage_RWD.png) no-repeat scroll 4px;
+    padding: 3px 0pt 3px 14px;

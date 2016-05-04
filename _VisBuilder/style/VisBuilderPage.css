@@ -13,7 +13,28 @@
 .mojo-theme-dark .mstrmojo-VIIconTabList .item.cedt div:after {
     background: transparent url(images/codeicon_darktheme.png) no-repeat;
     background-position: 0 3px;
+}
 
+/* configuration icon setting*/
+.mstrmojo-VIIconTabList .item.config div:after {
+    background: url(images/menu_icons.png) no-repeat;
+    background-position: 0 -146px;
+}
+.mojo-theme-dark .mstrmojo-VIIconTabList .item.config div:after {
+    background: url(images/menu_icons.png)  no-repeat;
+    background-position: 0 -346px;
+}
+
+
+/*DropZoneCode tab icon */
+.mstrmojo-VIIconTabList .item.dzcedt div:after {
+    background: transparent url(images/codeicon_lighttheme.png) no-repeat;
+    background-position: 0 3px;
+}
+
+.mojo-theme-dark .mstrmojo-VIIconTabList .item.dzcedt div:after {
+    background: transparent url(images/codeicon_darktheme.png) no-repeat;
+    background-position: 0 3px;
 }
 
 /* Open popup window styling */
@@ -256,6 +277,40 @@
     background-repeat: no-repeat border-style : none;
 }
 
+
+/* version Info window style*/
+/*Begin*/
+.VersionPropertiesLine{
+    width: 430px;
+    padding: 5px 5px;
+}
+.VersionPropertiesLine .mstrmojo-TextBox {
+    width: 65%;
+    background-color: #f3f3f4;
+    border: #f3f3f4;
+    box-shadow: none;
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: arial;
+}
+.VersionPropertiesLine .mstrmojo-TextBox-label {
+    /*this is ugly but do works*/
+    display: inline-block;
+    width: 35%;
+    font-weight: bold;
+    font-size: 10pt;
+    font-family: arial;
+}
+
+.VersionPropertiesLine:nth-of-type(n+2) {
+    box-shadow: #ededed 0 -1px 0 0px;
+    border-top: 1px solid #fff;
+}
+/*End*/
+/* version Info window style*/
+
+
+/*End*/
 /*to remove*/
 /*
 .mstrmojo-vi-PropEditor td {
@@ -342,3 +397,207 @@
 }
 
 */
+/*Dropzone editor begin*/
+
+.vb-dzcode-editor .mstrmojo-vi-EditorGroup .mstrmojo-Label.edt-title{
+    width: 90%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.mstrmojo-Box.advanced-dropzone {
+    overflow: hidden;
+    margin-top: 5px;
+}
+
+.vb-dzcode-editor .mstrmojo-Label.dz-cdedt-title-helptooltip:hover {
+    background-position: -29px -114px;
+}
+.vb-dzcode-editor .mstrmojo-Label.dz-cdedt-title-helptooltip {
+    outline: none;
+    outline-width: 0;
+    right: 36px;
+    background: url(images/menu_icons.png) no-repeat -29px -84px;
+}
+
+
+
+
+.mstrmojo-Box.advanced-dropzone .rulesTitles {
+    font-weight: bold;
+    line-height: 26px;
+    height: 26px;
+    border: 1px solid #AAA;
+    border-bottom: 0 none;
+}
+
+.mstrmojo-Box.advanced-dropzone  .rulesTitles>div {
+    position: relative;
+    float: left;
+}
+
+.mstrmojo-Box.advanced-dropzone  .rulesTitles .order {
+    margin-left: 20px;
+}
+
+.mstrmojo-Box.advanced-dropzone  .rulesTitles .condition {
+    margin-left: 30px;
+}
+
+.mstrmojo-Box.advanced-dropzone   .scroll-container {
+    border: 1px solid #AAA;
+    background-color: #FFF;
+    overflow: hidden;
+    height: 120px;
+}
+
+.mstrmojo-Box.advanced-dropzone   .no-overflow {
+    overflow: visible;
+}
+
+
+.mstrmojo-Box.advanced-dropzone    .scroll-container .mstrmojo-dropzoneRow{
+    border-bottom: solid 1px #E5E5E5;
+    min-height: 30px;
+}
+
+.mstrmojo-Box.advanced-dropzone    .scroll-container .link {
+    line-height: 30px;
+    color: #0c83c4;
+    padding-left: 9px;
+}
+
+.mstrmojo-Box.advanced-dropzone    .scroll-container .link:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/*
+.mstrmojo-Box.advanced-dropzone .scroll-container.hasVertical.mstrmojo-scrollbar-host .mstrmojo-scrolltrack.vertical{
+    right: -6px;
+}
+*/
+
+
+/*NewDropZoneRowDialog*/
+/*Properties tab value styling*/
+.ZonePropertyLine{
+    width: 430px;
+    padding: 5px 5px;
+}
+
+.ZonePropertyLine .mstrmojo-TextBox-label {
+    width: 40%;
+    font-weight: bold;
+    display: inline-block;
+}
+
+.ZonePropertyLine .mstrmojo-TextBox {
+    width: 60%;
+}
+
+
+.ZonePropertyLine .mstrmojo-TextArea-label {
+    font-weight: bold;
+    display: inline-block;
+    margin: 5px 0px 5px 0px
+}
+
+.ZonePropertyLine .mstrmojo-TextArea {
+    width: 425px;
+    max-width: 425px;
+    margin: 5px 5px;
+}
+
+.mstrmojo-ElementTypeRadioSelectorPane .ElementTypeTitle {
+    font-weight: bold;
+    display: inline-block;
+    margin: 5px 5px;
+}
+
+.mstrmojo-ElementyTypeRadio{
+    display: inline-block;
+    margin: 5px 10px 10px 10px;
+}
+.mstrmojo-visbuilder-newzone .mstrmojo-Label.disabled-edt-title{
+    display: block;
+    width: 430px;
+    padding: 5px 5px;
+    font-weight: bold;
+}
+.mstrmojo-visbuilder-newzone .disabledCode{
+    position: relative;
+    width: 430px;
+    padding: 5px 5px;
+}
+
+
+
+
+/*Dropzone Row*/
+.mstrmojo-dropzoneRow>div {
+    position: relative;
+    float: left;
+    width: 50%;
+}
+.mstrmojo-dropzoneRow .draggable-icon{
+    background: url(images/drag_icon.png) no-repeat 2px 3px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.mstrmojo-dropzoneRow .container>div, .mstrmojo-dropzoneRow .container>div >input {
+    position: relative;
+    float: left;
+}
+
+.mstrmojo-dropzoneRow .container .leftText >div.mstrmojo-Label {
+    margin: 5px 0px 5px 0px;
+    text-align: center;
+}
+.mstrmojo-dropzoneRow .container .rightText >input.mstrmojo-TextBox {
+    display: inline;
+    background-color: #f3f3f4;
+    border: #f3f3f4;
+    box-shadow: none;
+    font-weight: normal;
+    font-size: 10pt;
+    font-family: arial;
+    /* line-height: 20px; */
+    margin: 5px 0px 5px 0px;
+    /*width: 40%;*/
+    text-overflow: ellipsis;
+}
+
+.mstrmojo-dropzoneRow>div>div.menu:hover {
+    background: url(images/menu_icons.png) no-repeat -59px -29px;
+}
+
+.mstrmojo-dropzoneRow>div>div.menu {
+    background: url(images/menu_icons.png) no-repeat -59px 1px;
+}
+
+.mstrmojo-dropzoneRow>div>div.delete {
+    background: url(images/d1.png) no-repeat 2px 6px;
+    margin-left: 0px;
+}
+.mstrmojo-dropzoneRow>div>div.delete:hover {
+    background: url(images/d2.png) no-repeat 7px 6px;
+    margin-left: 0px;
+}
+
+.mstrmojo-dropzoneRow>div>div.draggable-icon, .mstrmojo-dropzoneRow>div>div.menu, .mstrmojo-dropzoneRow>div>div.delete {
+    width: 15px;
+    height: 15px;
+    margin: 7px 5px 6px 5px;
+}
+.mstrmojo-visbuilder-newzone .mstrmojo-Editor-buttons{
+    float: right
+}
+
+/** End AdvancedThresholdEditor **/
+
+.noDataSource .mstrmojo-VIVizPanel-content  .mstrmojo-UnitContainer .mstrmojo-UnitContainer-content .ctrlOverlay .mstrmojo-Label.dropMsg {
+    background-image: url(images/icnVisualization.png);
+    color: rgba(0, 0, 0, 0.98);
+}

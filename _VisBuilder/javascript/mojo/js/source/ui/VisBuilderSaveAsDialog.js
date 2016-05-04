@@ -10,6 +10,9 @@
         "mstrmojo.TextBox",
         "mstrmojo.CheckBox"
     );
+
+    var $MOJO = mstrmojo, $VIZ = $MOJO.vi.viz, $WIDGET_TYPES = $VIZ.EnumWidgetTypes, WTP_GRID = $WIDGET_TYPES.GRID, $VIZ_TEMPLATES = $VIZ.EnumVisualizationTemplates;
+
     function validateValue() {
         var wind = this.parent.parent, definedNames = wind.usedName, definedNamesC = definedNames.length;
         if (this.changedTooltip === true) {
@@ -27,8 +30,12 @@
                     return;
                 }
             }
-            if (this.value.indexOf(' ') > -1) {
-                this.set('tooltip', "Name cannot have space in it");
+
+            //TODO: check in
+            //TODO: DE19655;
+            var re =new RegExp("^[a-zA-Z0-9_]+$");
+            if(!re.test(this.value)){
+                this.set('tooltip', "Name should consist of character, number, or underline");
                 wind.btns.okbutton.set('enabled', false);
                 mstrmojo.css.addClass(this.domNode, "error");
                 this.changedTooltip = true;
@@ -41,6 +48,20 @@
         }
     }
 
+    /**
+     * Insert new plugin CSS to document.
+     *
+     * @param styleName {String}
+     * @param html5Postfix {String=}
+     */
+    function insertCSSLinks(styleName, html5Postfix) {
+        var prePath = "../plugins/##/style/".replace("##", styleName);
+        mstrmojo.insertCSSLinks([
+            (prePath + "Html5ViPage.css") + (html5Postfix || ''),
+            (prePath + "global.css")
+        ]);
+    }
+
     function sendSaveAsRequest(editor) {
         editor.close();
         var newFolderName = editor.d1.nameBox.value, host = editor.host, params = {taskID: 'VisExpSaveAs'};
@@ -49,16 +70,25 @@
         mstrApp.serverRequest(params, {
             success: function (res) {
                 mstrmojo.alert(res.name + ' created with class: ' + res.sc);
-                var data ={};
+                // Insert pluginCSS to document.
+                insertCSSLinks(res.name);
+                var data ={},
+                    VisBuilderGallery = mstrmojo.all.VisBuilderGallery;
                 data.c = res.sc;
                 data.d = host.vbGetDescription();
                 data.ma=host.vbGetMinAttributes();
                 data.mm=host.vbGetMinMetrics();
                 data.s = res.name;
                 data.scp=host.scope;
+                data.dz = data.c + "DropZones";
+                data.em = data.c + "EditorModel";//Add to support property API
+                data.wtp = "7";
                 mstrConfig.pluginsVisList[res.name]=data;
-                mstrmojo.all.VisBuilderGallery.vizList.refresh();
-                mstrmojo.all.VisBuilderGallery.refresh();
+                VisBuilderGallery.update();
+                VisBuilderGallery.vizList.refresh();
+                VisBuilderGallery.refresh();
+                //DE31330 start to work in the latest save-as visualization instead of original version
+                VisBuilderGallery.model.changeSelectedVisType(res.name , -1 , mstrConfig.pluginsVisList[res.name].wtp || "7", mstrConfig.pluginsVisList[res.name].dz);
 
             },
             complete: function () {
@@ -163,3 +193,4 @@
 
         });
 }());
+//@ sourceURL=VisBuilderSaveAsDialog.js

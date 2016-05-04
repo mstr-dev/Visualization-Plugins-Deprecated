@@ -1,9 +1,1 @@
-{"version": "v1.0.1",
-"commit":"793c09e47f4d39f77609cedb2ba74da377f154e4",
-"require":"10.1 or higher",
-"others":"JDK 1.6 or higher and Tomcat 6 or higher",
-"target_commitish": "master",
-"body": "Add version control",
-"draft": false,
-"prerelease": false
-}
+{ "version" : "v1.3.0", "commit": "094ec35d7f2f656068adde4022ce210d8fec3c62","require": "MSTR 10.3 or higher","others":   "JDK 1.6 or higher and Tomcat 6 or higher"}

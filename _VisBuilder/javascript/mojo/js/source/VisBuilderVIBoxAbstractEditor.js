@@ -33,3 +33,4 @@
         }
     );
 }());
+//@ sourceURL=VisBuilderVIBoxAbstractEditor.js

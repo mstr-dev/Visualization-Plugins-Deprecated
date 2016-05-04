@@ -1,6 +1,6 @@
 **Contributor:** MicroStrategy, Inc.
 
-**Contributor's Contact Info.:** <fding@microstrategy.com>
+**Contributor's Contact Info.:** <fniu@microstrategy.com>, <fding@microstrategy.com>
 
 **Contributor's Orgnization:** MicroStrategy, Inc.
 

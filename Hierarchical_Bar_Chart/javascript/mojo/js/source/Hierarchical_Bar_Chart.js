@@ -16,7 +16,7 @@
             cssClass: "hierarchical_bar_chart",
             errorMessage: "Either there is not enough data to display the visualization or the visualization configuration is incomplete.",
             errorDetails: "This visualization requires one or more attributes and one metric.",
-            externalLibraries: [{url:"http://d3js.org/d3.v3.min.js"}],
+            externalLibraries: [{url:"//d3js.org/d3.v3.min.js"}],
             useRichTooltip: false,
             reuseDOMNode: false,
             plot:function(){

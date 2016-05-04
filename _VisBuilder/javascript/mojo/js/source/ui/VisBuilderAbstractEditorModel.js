@@ -63,3 +63,4 @@
         }
     );
 }())
+//@ sourceURL=VisBuilderAbstractEditorModel.js

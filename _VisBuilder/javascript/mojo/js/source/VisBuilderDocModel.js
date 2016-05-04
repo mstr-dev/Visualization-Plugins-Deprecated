@@ -35,3 +35,4 @@
     );
     mstrmojo.vi.models.DocModel = mstrmojo.plugins._VisBuilder.VisBuilderDocModel;
 }())
+//@ sourceURL=VisBuilderDocModel.js

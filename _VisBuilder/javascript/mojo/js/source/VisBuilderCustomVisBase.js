@@ -54,11 +54,13 @@
             if (style.href && style.href.indexOf(path) > -1) {
                 style.disabled = true;
                 hrefToReturn = style.href;
-            } else {
+            }
+            /* delete this part, as html5vipage should  also be true sometimes, should not be reset
+            else {
                 if (style.disabled) {
                     style.disabled = false;
                 }
-            }
+            }*/
         }
         if (folderName !== "ui" && !hrefToReturn) {
             hrefToReturn = "../" + path;
@@ -67,21 +69,45 @@
     }
 
     function removeCSSClassPrefix(content, prefix) {
-        return content.split(prefix).join("");
+        //Remove prefix automatically, While for case:
+        // prefix { }
+        //Should not remove prefix, should keep prefix to avoid css error
+        var rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
+            regex = new RegExp(rePrefix + "\\s*{"),
+            subContents = content.split(regex);
+        subContents.forEach(
+            function(subString, index){
+                subContents[index] = subString.split(prefix).join("");
+            }
+        );
+        return subContents.join(prefix + " {");
     }
 
     function addCSSClassPrefix(content, prefix) {
         var doc = document.implementation.createHTMLDocument(""),
-            styleElement = document.createElement("style");
+            styleElement = document.createElement("style"),
+            result = "";
         styleElement.textContent = content;
         doc.body.appendChild(styleElement);
-        var styles = styleElement.sheet.cssRules, i = styles.length;
+        var styles = styleElement.sheet.cssRules, i = styles.length,
+            rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
+            ignoreLabel = new RegExp("InsertDHTMLWidget|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
         while (i) {
             i--;
-            var txt = styles[i].selectorText;
-            content = content.replace(txt, prefix + txt);
+            var txt = styles[i].selectorText,
+                subTxts = txt.split(","),//special process for comma, add prefix before both labels besides comma
+                cssText = styles[i].cssText;
+            if(txt.search(ignoreLabel) < 0){//find non-need prefix string
+                subTxts.forEach(function(subTxt){
+                    subTxt = subTxt.trim();
+                    cssText  = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
+                });
+            }
+
+            cssText = cssText.replace(/{/g, "{\n").replace(/;/g,";\n");
+            result = cssText + "\n\n" + result;
         }
-        return content;
+        return result;
     }
 
     function getStyle(folderName) {
@@ -200,6 +226,15 @@
     }
 
     function constructTaskParameters(p) {
+        //ADD to support dropzone api
+        var zonesModel = this.zonesModel,//dropZoneEditorModel
+            editorModel = this.edtModel;//propertyEditorModel
+        p.dzcode = zonesModel.getGetCustomDropZonesCode();
+        p.aocode = zonesModel.getShouldAllowObjectsInDropZoneCode();
+        p.odcode = zonesModel.getGetActionsForObjectsDroppedCode();
+        p.orcode = zonesModel.getGetActionsForObjectsRemovedCode();
+        p.cmcode = zonesModel.getGetDropZoneContextMenuItemsCode();
+        p.propertycode = editorModel.vbGetCustomPropertyCode();//get property code
         p.dsc = this.description;
         p.jsc = this.vbGetJSCode();
         p.csssc = this.cssCode;
@@ -393,5 +428,28 @@
         }
     );
     mstrmojo.CustomVisBase = mstrmojo.plugins._VisBuilder.VisBuilderCustomVisBase;
+
+
+//To avoid browser caches
+        if (mstrmojo.loadFileSync) {
+            mstrmojo.loadFileSyncBak = mstrmojo.loadFileSync;
+        } else {
+            mstrmojo.loadFileSyncBak = mstrmojo.loadFile;
+        }
+        //to avoid browsers caching files
+        function loadfile(file) {
+            var path = null;
+            if (!Date.now) {
+                Date.now = function() { return new Date().getTime(); };
+            }
+            var path = file+'?tstp='+ Date.now();
+            return mstrmojo.loadFileSyncBak(path);
+        };
+        if (mstrmojo.loadFileSync) {
+            mstrmojo.loadFileSync = loadfile;
+        } else {
+            mstrmojo.loadFile = loadfile;
+        }
+
 }());
 //@ sourceURL=VisBuilderCustomVisBase.js

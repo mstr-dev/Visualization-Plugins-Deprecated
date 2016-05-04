@@ -2,4 +2,10 @@
   <visualization-list name="ajax" show-in-web="true" view-mode="51">
     <visualization attribute-minimum="0" desc="DifferenceChart" is-mojo="true" metric-minimum="0" scope="19" style-name="DifferenceChart"/>
   </visualization-list>
+  <visualization-list name="ipad" view-mode="71" show-in-web="false">
+    <visualization id="DifferenceChart" desc="DifferenceChart" scope="19" projects="" style-name="DifferenceChart" attribute-minimum="0" metric-minimum="0"/>
+  </visualization-list>
+  <visualization-list name="iphone" view-mode="70" show-in-web="false">
+    <visualization id="DifferenceChart" desc="DifferenceChart" scope="19" projects="" style-name="DifferenceChart" attribute-minimum="0" metric-minimum="0"/>
+  </visualization-list>
 </visualizations>

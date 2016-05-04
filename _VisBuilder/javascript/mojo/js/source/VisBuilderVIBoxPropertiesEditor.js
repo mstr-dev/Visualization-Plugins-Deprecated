@@ -31,3 +31,4 @@
         }
     );
 }());
+//@ sourceURL=VisBuilderVIBoxPropertiesEditor.js

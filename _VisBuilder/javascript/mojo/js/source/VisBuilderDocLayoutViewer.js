@@ -25,7 +25,9 @@
         "mstrmojo.vi.models.EnumPanelTypes",
         "mstrmojo.vi.ui.rw.DocLayoutViewer",
         "mstrmojo.plugins._VisBuilder.VisBuilderVIBoxCodeEditor",
-        "mstrmojo.plugins._VisBuilder.VisBuilderVIBoxPropertiesEditor");
+        "mstrmojo.plugins._VisBuilder.VisBuilderVIBoxPropertiesEditor",
+        "mstrmojo.plugins._VisBuilder.VisBuilderDZCodeEditor",
+        "mstrmojo.vi.ui.VIBoxPropertyEditor");
 
     var MARGIN = 8,
         $ARR = mstrmojo.array,
@@ -43,6 +45,9 @@
         VI_PROPERTIES = PANEL_TYPES.PROPS,
         VI_FILTERS = PANEL_TYPES.FILTERS,
         VI_CODE_EDITOR = "vi_ceditor",
+        //ADD for DZ api
+        VI_DZCODE_EDITOR = "vi_dzceditor",
+        VI_CODE_CONFIG = "vi_config",
         SUPPRESS_DATA = mstrmojo.DocDataService.SUPPRESS_DATA,
         $ENUM_PANEL_TYPES = mstrmojo.vi.models.EnumPanelTypes;
 
@@ -77,6 +82,18 @@
         cls: 'flt',
         id: VI_FILTERS
     };
+    PANEL_ITEMS[VI_DZCODE_EDITOR] = {
+        n: ('DropZone editor'),
+        cls: 'dzcedt',
+        id: VI_DZCODE_EDITOR
+    };
+
+    PANEL_ITEMS[VI_CODE_CONFIG] = {
+        n: ('Configuration'),
+        cls: 'config',
+        id: VI_CODE_CONFIG
+    };
+
 
     /**
      * Converts the supplied panel type string to the appropriate integer id.
@@ -197,11 +214,16 @@
             return new mstrmojo.vi.ui.VisualizationEditor(props);
 
         case VI_PROPERTIES:
+            return new mstrmojo.vi.ui.VIBoxPropertyEditor(props);
+
+        case VI_CODE_CONFIG:
             // Return new instance.
             return new mstrmojo.plugins._VisBuilder.VisBuilderVIBoxPropertiesEditor(props);
             //return new mstrmojo.vi.ui.VIBoxPropertyEditor(props);
         case  VI_CODE_EDITOR:
             return new mstrmojo.plugins._VisBuilder.VisBuilderVIBoxCodeEditor(props);
+        case VI_DZCODE_EDITOR:
+            return new mstrmojo.plugins._VisBuilder.VisBuilderDZCodeEditor(props);
         default:
             // Get filter stack from document builder.
             var filterStack = getFilterStack(model, builder);
@@ -240,6 +262,12 @@
                 // Add id from layout.
                 box.id = docLayout.id;
             } else {
+                if(key.indexOf(VI_CODE_CONFIG) === -1) {
+                    key = VI_CODE_CONFIG + "|" + key;
+                }
+                if (key.indexOf(VI_DZCODE_EDITOR) === -1) {
+                    key = VI_DZCODE_EDITOR + "|" + key;
+                }
                 if (key.indexOf(VI_CODE_EDITOR) === -1) {
                     key = VI_CODE_EDITOR + "|" + key;
                 }
@@ -420,6 +448,8 @@
          * @lends mstrmojo.vi.ui.rw.DocLayoutViewer.prototype
          */
         {
+            id: "VisBuilderDocLayoutViewer",
+
             scriptClass: "mstrmojo.plugins._VisBuilder.VisBuilderDocLayoutViewer",
 
             markupString: '<div id="{@id}" class="mstrmojo-VIDocLayoutViewer {@cssClass}" style="{@cssText}"></div>',
@@ -920,3 +950,4 @@
     );
     mstrmojo.vi.ui.rw.DocLayoutViewer = mstrmojo.plugins._VisBuilder.VisBuilderDocLayoutViewer;
 }());
+//@ sourceURL=VisBuilderDocLayoutViewer.js

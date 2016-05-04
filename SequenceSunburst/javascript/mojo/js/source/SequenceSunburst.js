@@ -20,7 +20,7 @@
 
             errorDetails: "This visualization requires one or more attributes and one metric.",
 
-            externalLibraries: [{url: "http://d3js.org/d3.v3.min.js"}, {url: "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"}],
+            externalLibraries: [{url: "//d3js.org/d3.v3.min.js"}, {url: "//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.3.min.js"}],
 
             useRichTooltip: true,
 
