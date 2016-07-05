@@ -48,9 +48,11 @@ window.isAndroid = !window.isUsingMockupData;
 window.isDebugging = window.isUsingMockupData;
 window.isPlugIn = true;
 
-window.mstrApp = {
-    isSingleTier:false,
-};
+if (!window.mstrApp) {
+    window.mstrApp = {  // keep window.mstrApp as Global
+        isSingleTier:false,
+    };
+}
 
 var widget;
 window.widget = widget;
@@ -251,10 +253,15 @@ function setupWidgetLoader() {
 
                     if (dropZones) { // If drop zones are defined
                         var zonesClass = mstrmojo.hash.walk(dropZones, mstrmojo);
-                        var docModel = new mstrmojo.DocModel({
-                            defn:{epm : visConfig.docDef.epm},
-                            plt: visConfig.docDef.plt
-                        });
+                        var docModel = window.mstrApp.docModel;
+                        if (!docModel) {
+                            docModel = new mstrmojo.DocModel({
+                                defn:{epm : visConfig.docDef.epm},
+                                plt: visConfig.docDef.plt
+                            });
+                            window.mstrApp.docModel = docModel;
+                        }
+
                         widget.zonesModel = new zonesClass({
                             hostId: widget.id,
                             docModel: docModel,
@@ -262,10 +269,14 @@ function setupWidgetLoader() {
                         });
                         widget.model.docModel = docModel;
                     } else { // otherwise, use this default dropzone.
-                        var docModel = new mstrmojo.DocModel({
-                            defn:{epm : visConfig.docDef.epm},
-                            plt: visConfig.docDef.plt
-                        });
+                        var docModel = window.mstrApp.docModel;
+                        if (!docModel) {
+                            docModel = new mstrmojo.DocModel({
+                                defn:{epm : visConfig.docDef.epm},
+                                plt: visConfig.docDef.plt
+                            });
+                            window.mstrApp.docModel = docModel;
+                        }
                         widget.zonesModel = new mstrmojo.vi.models.BaseVisDropZones({
                             hostId: widget.id,
                             docModel: docModel,
@@ -369,6 +380,30 @@ function setupWidgetLoader() {
 	            if (window.isDebugging) {
 	            	console.log(e.stack);
 	        	}
+                throw e;
+            } finally {
+                widgetConfiguration = null;
+            }
+
+        };
+
+        window.partialUpdate = function partialUpdate() {
+            try {
+                if (window.dataModel && window.docDef){
+                    widgetConfiguration = {
+                      model: window.dataModel,
+                      defn: window.dataDefn,
+                      docDef: window.docDef,
+                      controller: {view: {model: {}}},
+                        isReport: false,
+                        layoutStyles: 'body {background: gray}'
+                    };
+                    loadModelAndRenderWidget();
+                }
+            } catch (e) {
+                if (window.isDebugging) {
+                    console.log(e.stack);
+                }
                 throw e;
             } finally {
                 widgetConfiguration = null;
