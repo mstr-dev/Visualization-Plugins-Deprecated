@@ -51,6 +51,9 @@ window.isPlugIn = true;
 if (!window.mstrApp) {
     window.mstrApp = {  // keep window.mstrApp as Global
         isSingleTier:false,
+        getThemeClassName: function (){
+            return "mojo-theme-light";
+        },
     };
 }
 
@@ -252,6 +255,7 @@ function setupWidgetLoader() {
                         editorModel = visConfig.model.data.editormodel;
 
                     if (dropZones) { // If drop zones are defined
+                        mstrmojo.requiresCls('mstrmojo.' + dropZones);
                         var zonesClass = mstrmojo.hash.walk(dropZones, mstrmojo);
                         var docModel = window.mstrApp.docModel;
                         if (!docModel) {
@@ -286,7 +290,7 @@ function setupWidgetLoader() {
                     }
 
                     if (editorModel) {
-            
+                        mstrmojo.requiresCls('mstrmojo.' + editorModel);
                         var ModelClass = mstrmojo.hash.walk(editorModel, mstrmojo);
                         widget.edtModel = new ModelClass({
                             hostId: widget.id,
