@@ -402,6 +402,8 @@ function setupWidgetLoader() {
                         isReport: false,
                         layoutStyles: 'body {background: gray}'
                     };
+                    document.body.style.height = window.widgetHeight + 'px';
+                    document.body.style.width = window.widgetWidth + 'px';
                     loadModelAndRenderWidget();
                 }
             } catch (e) {
