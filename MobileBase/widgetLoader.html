@@ -402,6 +402,10 @@ function setupWidgetLoader() {
                         isReport: false,
                         layoutStyles: 'body {background: gray}'
                     };
+                    if (!window.mstrApp) {
+                        window.mstrApp = {};
+                     }
+                    window.mstrApp.isVI = window.docDef.isVI;
                     document.body.style.height = window.widgetHeight + 'px';
                     document.body.style.width = window.widgetWidth + 'px';
                     loadModelAndRenderWidget();
@@ -540,6 +544,10 @@ if (window.isUsingMockupData) {
             isReport: false,
             layoutStyles: 'body {background: gray}'
         };
+        if (!window.mstrApp) {
+            window.mstrApp = {};
+        }
+        window.mstrApp.isVI = window.docDef.isVI;
         document.body.style.height = window.widgetHeight + 'px';
         document.body.style.width = window.widgetWidth + 'px';
         loadBundle();
