@@ -24,6 +24,8 @@
         },
         setStatic:function(){
         },
+        unrender: function(){
+        },
         moveTab:function(){
         }
     };

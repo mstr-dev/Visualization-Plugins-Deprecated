@@ -27,6 +27,10 @@
             if (selector.fileNode.files[0]) {
                 oFReader.readAsDataURL(selector.fileNode.files[0]);
                 oFReader.onload = function (oFREvent) {
+                    //Add for onetier, upload icon
+                    if(mstrApp.isSingleTier){
+                        selector.fileNode.baseDataValue = oFREvent.target.result;
+                    }
                     preview.set('src', oFREvent.target.result);
                     preview.set('cssClass', 'VisBuilderIconSectionIMG UploadedImage');
                 };

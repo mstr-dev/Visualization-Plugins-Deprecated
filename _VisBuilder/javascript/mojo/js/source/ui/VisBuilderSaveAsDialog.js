@@ -64,7 +64,7 @@
 
     function sendSaveAsRequest(editor) {
         editor.close();
-        var newFolderName = editor.d1.nameBox.value, host = editor.host, params = {taskID: 'VisExpSaveAs'};
+        var newFolderName = editor.d1.nameBox.value, host = editor.host, params = {taskId: 'VisExpSaveAs'};//to support Desktop VisBuilder, as desktop serverProxy needs a requst id created from taskId, referred to ServerProxy.js
         params = host.vbGetSaveAsParameters(params, newFolderName);
         mstrApp.showWait({'message': 'Creating visualization, please wait'});
         mstrApp.serverRequest(params, {
@@ -87,6 +87,7 @@
                 VisBuilderGallery.update();
                 VisBuilderGallery.vizList.refresh();
                 VisBuilderGallery.refresh();
+                console.log("VisBuilderSaveAsDialog:\t host.scope" + host.scope);
                 //DE31330 start to work in the latest save-as visualization instead of original version
                 VisBuilderGallery.model.changeSelectedVisType(res.name , -1 , mstrConfig.pluginsVisList[res.name].wtp || "7", mstrConfig.pluginsVisList[res.name].dz);
 

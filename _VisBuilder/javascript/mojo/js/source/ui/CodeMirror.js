@@ -81,7 +81,7 @@
             },
             loadCodeMirrorEditor: function () {
                 var scriptsObjectArray = [];
-                scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/lib/codemirror.js"});
+                /*scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/lib/codemirror.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/mode/javascript/javascript.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/mode/css/css.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/edit/matchbrackets.js"});
@@ -90,7 +90,7 @@
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/comment/comment.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/hint/show-hint.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/hint/javascript-hint.js"});
-                scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/hint/css-hint.js"});
+                scriptsObjectArray.push({uzrl: "../plugins/_VisBuilder/libs/addon/hint/css-hint.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/display/fullscreen.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/lib/xml.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/lint/jshint.js"});
@@ -98,7 +98,26 @@
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/lint/lint.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/lint/javascript-lint.js"});
                 scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/lint/json-lint.js"});
-                scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/lint/css-lint.js"});
+                scriptsObjectArray.push({url: "../plugins/_VisBuilder/libs/addon/lint/css-lint.js"});*/
+                //To load local libraries
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/lib/codemirror.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/mode/javascript/javascript.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/mode/css/css.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/edit/matchbrackets.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/edit/closebrackets.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/comment/continuecomment.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/comment/comment.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/hint/show-hint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/hint/javascript-hint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/hint/css-hint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/display/fullscreen.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/lib/xml.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/lint/jshint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/lint/csslint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/lint/lint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/lint/javascript-lint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/lint/json-lint.js"});
+                scriptsObjectArray.push({url: "file://../plugins/_VisBuilder/libs/addon/lint/css-lint.js"});
                 var me = this;
                 this.requiresExternalScripts(scriptsObjectArray, function () {
                     me.attacheCodeMirror();
@@ -136,11 +155,16 @@
                     this.codeMirrorEditor = CodeMirror(this.c, properties);
                     this.codeMirrorEditor.on("change", function() {
                         //if code has changed call container to resfresh heigh - so scrolls if needed will be displayed
-                        parent.parent.onheightChange();
+                        if(parent && parent.parent && parent.parent.onheightChange ){
+                            parent.parent.onheightChange();
+                        }
                     });
                     this.codeMirrorEditor.on("focus", function() {
                         //DE29010 : if code has selected call container to refresh height - so scrolls if needed will be displayed
-                        parent.parent.onheightChange();
+                        if(parent && parent.parent && parent.parent.onheightChange ){
+                            parent.parent.onheightChange();
+                        }
+
                     });
                 }
             },

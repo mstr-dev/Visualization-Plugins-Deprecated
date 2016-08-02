@@ -4,6 +4,16 @@
 @import "../libs/addon/display/fullscreen.css";
 @import "../libs/addon/hint/show-hint.css";
 
+/*
+Add CSS style for Menu Help toolbar button
+*/
+.mstrmojo-RootView-toolbar .mstrmojo-VIToolbar .visBuilderHelp .icn{
+   background-position:-797px -25px;
+}
+.mstrmojo-RootView-toolbar .mstrmojo-VIToolbar .visBuilderHelp{
+    float: right;
+}
+
 /*Code tab icon */
 .mstrmojo-VIIconTabList .item.cedt div:after {
     background: transparent url(images/codeicon_lighttheme.png) no-repeat;

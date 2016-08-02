@@ -33,7 +33,7 @@
             postBuildRendering: function postBuildRendering() {
                 // DE30732: Skip postBuildRendering() in VisGallery.js which updates the custom vis list.
                 return mstrmojo.Container.prototype.postBuildRendering.call(this);
-            },
+                },
 
             /**
              * update custom visualization list
