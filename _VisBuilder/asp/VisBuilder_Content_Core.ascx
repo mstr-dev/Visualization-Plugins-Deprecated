@@ -86,6 +86,7 @@ var mstrApp = new mstrmojo.vi.VisualInsightApp({
         getShowVITutorial: function(){return  '2' === '1';},
         helpLocaleId: '<web:connectionValue runat="server" mproperty="helpLocale"/>',
         helpUrl: '<web:value runat="server" type="systemPreference" name="helpUrl" />',
+        visBuidlerHelpUrl:'https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm',
         httpSessionId: '<web:connectionValue runat="server" mproperty="containerSessionId" />',
         isShare: <web:value runat="server" type="requestKey" name="share"/>,
         jsMojoRoot: '../javascript/mojo/js/source/',

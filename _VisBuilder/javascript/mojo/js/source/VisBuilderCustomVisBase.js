@@ -27,7 +27,11 @@
         document.body.appendChild(toAppend);
 
         var img = el1.children[0].children[0], style = img.currentStyle || window.getComputedStyle(img, false);
-        imageLink = style.backgroundImage.slice(4, -1);
+        
+        imageLink = style.backgroundImage.slice(4, -1);//"url("file://a.txt")", to remove extra "", while for mac, "url(file://a.txt)"
+        if(imageLink && (imageLink[0] === '\"' || imageLink[0] === '\'')){
+            imageLink = imageLink.slice(1, -1);
+        }
         //removing node from document since we do not need it any more
         document.body.removeChild(toAppend);
         return imageLink;
@@ -91,19 +95,19 @@
         doc.body.appendChild(styleElement);
         var styles = styleElement.sheet.cssRules, i = styles.length,
             rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
-            ignoreLabel = new RegExp("InsertDHTMLWidget|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
+            ignoreLabel = new RegExp("InsertDHTMLWidgetMenuLayoutxml|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
         while (i) {
             i--;
             var txt = styles[i].selectorText,
                 subTxts = txt.split(","),//special process for comma, add prefix before both labels besides comma
                 cssText = styles[i].cssText;
-            if(txt.search(ignoreLabel) < 0){//find non-need prefix string
-                subTxts.forEach(function(subTxt){
-                    subTxt = subTxt.trim();
-                    cssText  = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
-                });
+            if(txt.search(ignoreLabel) >= 0){//find non-need prefix string
+                continue;
             }
-
+            subTxts.forEach(function(subTxt){
+                subTxt = subTxt.trim();
+                cssText  = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
+            });
             cssText = cssText.replace(/{/g, "{\n").replace(/;/g,";\n");
             result = cssText + "\n\n" + result;
         }
@@ -427,6 +431,12 @@
             }
         }
     );
+
+    if (mstrmojo.CustomVisBase.ENUM_EXTERNAL_LIBS) {
+        mstrmojo.plugins._VisBuilder.VisBuilderCustomVisBase.ENUM_EXTERNAL_LIBS = mstrmojo.CustomVisBase.ENUM_EXTERNAL_LIBS;
+    }
+
+
     mstrmojo.CustomVisBase = mstrmojo.plugins._VisBuilder.VisBuilderCustomVisBase;
 
 

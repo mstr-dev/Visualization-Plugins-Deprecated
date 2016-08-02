@@ -3,14 +3,17 @@
         mstrmojo.plugins._VisBuilder.ui = {};
     }
     mstrmojo.requiresCls(
+        "mstrmojo.array",
         "mstrmojo.plugins._VisBuilder.ui.CodeMirror",
         "mstrmojo.plugins._VisBuilder.ui.VisBuilderAbstractEditorModel",
         "mstrmojo.plugins._VisBuilder.DropZoneGUIEditor",
-    "mstrmojo.plugins._VisBuilder.TemplateDropzones",
-    "mstrmojo.Label");
+        "mstrmojo.plugins._VisBuilder.TemplateDropzones",
+        "mstrmojo.Label");
 
     var $MOJO = mstrmojo,
+        $ARR = $MOJO.array,
         $HASH = $MOJO.hash;
+
     /**
      * Raise an event when model is edited.
      *
@@ -21,6 +24,7 @@
             name: 'dropzoneEdit'
         }));
     }
+
     /**
      * Class to generate content of dropzone code Editor pane
      *
@@ -38,11 +42,11 @@
             dropzoneGUI: null,
 
             shouldAllowObjectsInDropZoneTxt: null,
-            getActionsForObjectsDroppedTxt:null,
+            getActionsForObjectsDroppedTxt: null,
             getActionsForObjectsRemovedTxt: null,
-            getDropZoneContextMenuItemsTxt : null,
+            getDropZoneContextMenuItemsTxt: null,
 
-            alias:'DZCodeTab',
+            alias: 'DZCodeTab',
 
 
             apply: function () {
@@ -54,16 +58,127 @@
                     return false;
                 }
 
-                if(dropzoneModel){
-                    dropzoneModel.setDropZonesCode(this.dropzones);
-                    dropzoneModel.setShouldAllowObjectsInDropZoneCode(this.shouldAllowObjectsInDropZoneTxt.getValue());
-                    dropzoneModel.setGetActionsForObjectsDroppedCode(this.getActionsForObjectsDroppedTxt.getValue());
-                    dropzoneModel.setGetActionsForObjectsRemovedCode(this.getActionsForObjectsRemovedTxt.getValue());
-                    dropzoneModel.setGetDropZoneContextMenuItemsCode(this.getDropZoneContextMenuItemsTxt.getValue());
+                var setDropZoneModel = function (target) {
+                    if (dropzoneModel) {
+                        dropzoneModel.setDropZonesCode(target.dropzones);
+                        dropzoneModel.setShouldAllowObjectsInDropZoneCode(target.shouldAllowObjectsInDropZoneTxt.getValue());
+                        dropzoneModel.setGetActionsForObjectsDroppedCode(target.getActionsForObjectsDroppedTxt.getValue());
+                        dropzoneModel.setGetActionsForObjectsRemovedCode(target.getActionsForObjectsRemovedTxt.getValue());
+                        dropzoneModel.setGetDropZoneContextMenuItemsCode(target.getDropZoneContextMenuItemsTxt.getValue());
+                    }
+                };
+
+
+                var me = this,
+                    templateActions = [],
+                    w = targetUnit.boxContent,
+                    key = targetUnit.k,
+                    data = w.node.data,
+                    widgetType = "7",
+                    style = host.styleName;
+                var isCustomDZ = function (dz) {
+                    var DROP_ZONE_MAP = [
+                            'XAxis',
+                            'YAxis',
+                            'BreakBy',
+                            'SliceBy',
+                            'ColorBy',
+                            'SizeBy',
+                            'AdditionalMetrics',
+                            'AngleBy', // AngleBy
+                            'Grp', // Grp
+                            'Geo', // Geo
+                            'layout', // layout
+                            'from', // from
+                            'to', // to
+                            'itemsz', // itemsz
+                            'Lat', // Lat
+                            'Long' // Long
+                        ],
+                        result = true;
+
+                    $ARR.forEach(DROP_ZONE_MAP, function (item) {
+                        if (!dz[item]) {
+                            result = false;
+                        }
+                    });
+                    return result;
+                };
+
+                if (this.dropzones && !isCustomDZ(data.dz)) {
+                    //DE35633, as CustomDropZone is null, we will used the grid type dropzones instead of CustomDropzone
+                    //Thus we need to createDefaultDropZones with widgetType =7
+                    //lend code from _VisAction.js
+
+                    // Is a style specified?
+                    if (style !== "") {//&& visDefinition.id !== $KNOWN_VIZ.UNKNOWN
+                        // YES, make sure we have the appropriate drop zones created
+                        templateActions.push({
+                            "act": "updateTemplate",
+                            "keyContext": w.k,
+                            'actions': [{
+                                act: 'createDefaultDropZones',
+                                nodeKey: w.k,
+                                treeType: w.defn.tt,
+                                datasetId: data.datasetId,
+                                datasetType: 3,
+                                widgetType: widgetType,
+                                partialUpdate: {
+                                    nodes: [w.k]
+                                }
+                            }]
+                        });
+                    }
+
+                    // Notify backend.
+                    host.controller.submitUndoRedoUpdates(templateActions, null, {
+                        success: function success(res) {
+                            var currentLayoutKey = this.getCurrentLayoutKey(),
+                                panel = this.getPanel();
+                            // Copy new definition into old definition.
+                            this.refreshDefinition(key, this.getRawLayoutUnitDefn(key, res.defn));
+                            // Update the data cache.
+                            this.updateDataCache(res.data, this.getTargetDefn(key));
+
+                            //For VIsBuilder we can not selectVIUnit, as reselect will clear all dz editor panel information
+                            // Re-build the viz box.  Note that we must re-find the box using the key we cached earlier.  The
+                            // box passed via the vizBox parameter is no longer valid. (TQMS#899189)
+                            //this.selectVIUnit(panel.rebuildChild(panel.getUnitByKey(key)).id, true);
+
+                            var data,
+                            //k = me.dataInterface.data.k,
+                                findData = function (obj) {
+                                    if (obj.k === key) {
+                                        data = obj;
+                                        return;
+                                    }
+
+                                    for (var n in obj) {
+                                        if (obj[n] instanceof Array) {
+                                            obj[n].forEach(function (child) {
+                                                if (!data) {
+                                                    findData(child);
+                                                }
+                                            });
+                                        }
+                                    }
+                                };
+
+                            findData(res.data);
+                            host.model.data = data;
+                            setDropZoneModel(me);
+                            mstrmojo.all.rootView.documentView.layoutViewer.getViPanel('editPanel').refresh();
+                            host.unrender();
+                            host.render();
+                        }.bind(targetUnit.model)
+                    }, null);
+                } else {
+                    setDropZoneModel(this);
                 }
 
+
                 //Update Visualization Editor Panel
-                mstrmojo.all.VisBuilderDocLayoutViewer.getViPanel('editPanel').onRender();
+                // mstrmojo.all.VisBuilderDocLayoutViewer.getViPanel('editPanel').onRender();
 
                 host.vbReRender = false;
                 this._super();
@@ -74,8 +189,10 @@
 
             getContent: function getContent(results) {
                 var that = this,
-                    dropzoneModel = that.targetUnit.getZonesModel(),
-                    controller = that.getHost().controller;
+                    targetUnit = that.targetUnit,
+                    dropzoneModel = targetUnit.getZonesModel(),
+                    host = that.getHost(),
+                    controller = host.controller;
 
 
                 var getJSCode = function (code) {
@@ -171,7 +288,7 @@
 
             deleteDropZone: function deleteDropZone(dropzone) {
                 var dropzones = this.dropzones,
-                    dropzoneIdx =dropzones.indexOf(dropzone);
+                    dropzoneIdx = dropzones.indexOf(dropzone);
                 if (dropzoneIdx !== -1) {
                     this.dropzones.splice(dropzoneIdx, 1);
                 }
@@ -179,13 +296,13 @@
                 raiseModelEditEvent.call(this);
             },
 
-            addZone: function addZone(zone, index){
-                if(! this.dropzones || !this.dropzones.length){
+            addZone: function addZone(zone, index) {
+                if (!this.dropzones || !this.dropzones.length) {
                     this.dropzones = [];
                 }
-                if(index < this.dropzones.length){
+                if (index < this.dropzones.length) {
                     this.dropzones[index] = zone;
-                }else{
+                } else {
                     this.dropzones.push(zone);
                 }
                 raiseModelEditEvent.call(this);

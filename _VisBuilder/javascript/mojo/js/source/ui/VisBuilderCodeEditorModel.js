@@ -16,8 +16,8 @@
             height: 1000,
             scriptClass: "mstrmojo.plugins._VisBuilder.ui.VisBuilderCodeEditorModel",
             cssTxt: null, codeTxt: null,
-            propertyTxt:null,
-            alias:'CodeTab',
+            propertyTxt: null,
+            alias: 'CodeTab',
             apply: function () {
                 var host = this.getHost(),
                     propertyEditorModel = host.edtModel;
@@ -31,22 +31,37 @@
                 host.vbReRender = true;
 
                 //Update Visualization property editor Panel
-                mstrmojo.all.VisBuilderDocLayoutViewer.getViPanel('propertiesPanel').onRender();
+                mstrmojo.all.rootView.documentView.layoutViewer.getViPanel('propertiesPanel').onRender();
 
                 this._super();
             },
             getContent: function getContent(results) {
                 var host = this.getHost(),
                     propertyEditorModel = host.edtModel;
-                this.codeTxt = new mstrmojo.plugins._VisBuilder.ui.CodeMirror({value: host.vbGetJSCode(),
-                    mode: "javascript"});
-                this.propertyTxt = new  mstrmojo.plugins._VisBuilder.ui.CodeMirror({value: propertyEditorModel.vbGetCustomPropertyCode(),mode:"javascript"});
+                this.codeTxt = new mstrmojo.plugins._VisBuilder.ui.CodeMirror({
+                    value: host.vbGetJSCode(),
+                    mode: "javascript"
+                });
+                this.propertyTxt = new mstrmojo.plugins._VisBuilder.ui.CodeMirror({
+                    value: propertyEditorModel.vbGetCustomPropertyCode(),
+                    mode: "javascript"
+                });
                 this.cssTxt = new mstrmojo.plugins._VisBuilder.ui.CodeMirror({value: host.vbGetCSScode(), mode: "css"});
-                results.push(this.getEditorGroup([new mstrmojo.Label({cssClass: "edt-title", text: "Style"}), this.cssTxt]));
-                results.push(this.getEditorGroup([new mstrmojo.Label({cssClass: "edt-title", text: "Plot Code"}), this.codeTxt]));
-                results.push(this.getEditorGroup([new mstrmojo.Label({cssClass: "edt-title", text: "Property Code"}), this.propertyTxt]));
+                results.push(this.getEditorGroup([new mstrmojo.Label({
+                    cssClass: "edt-title",
+                    text: "Style"
+                }), this.cssTxt]));
+                results.push(this.getEditorGroup([new mstrmojo.Label({
+                    cssClass: "edt-title",
+                    text: "Plot Code"
+                }), this.codeTxt]));
+                results.push(this.getEditorGroup([new mstrmojo.Label({
+                    cssClass: "edt-title",
+                    text: "Property Code"
+                }), this.propertyTxt]));
                 host.controller.currentCodeTab = this;
                 return results;
-            }});
+            }
+        });
 }())
 //@ sourceURL=VisBuilderCodeEditorModel.js

@@ -448,7 +448,7 @@
          * @lends mstrmojo.vi.ui.rw.DocLayoutViewer.prototype
          */
         {
-            id: "VisBuilderDocLayoutViewer",
+            //id: "VisBuilderDocLayoutViewer",
 
             scriptClass: "mstrmojo.plugins._VisBuilder.VisBuilderDocLayoutViewer",
 

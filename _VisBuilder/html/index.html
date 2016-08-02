@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+
+    <title>Multi-Panel. MicroStrategy 9</title>
+
+
+    <link rel="shortcut icon" href="../style/mstr/images/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/core.css?v=1870924946"/>
+    <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/Vis.css?v=1870924946"/>
+    <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/cge.css"/>
+    <link rel="stylesheet" type="text/css" href="../javascript/mojo/css/one-tier.css"/>
+
+
+    <script src="../javascript/libraries/modernizr.js?v=1870924946" language="javascript"></script>
+    <script src="../javascript/libraries/jquery-2.0.3.min.js" language="javascript"></script>
+    <script src="../javascript/libraries/annotate.js" language="javascript"></script>
+    <script src="../javascript/libraries/jspdf.js" language="javascript"></script>
+
+
+    <style type="text/css">
+        .mstrConsole {
+            background: #fff;
+            border: 2px solid #666;
+            bottom: 50px;
+            height: auto;
+            position: absolute;
+            right: 50px;
+            width: auto;
+            z-index: 10001;
+
+            -webkit-transition: all 350ms;
+        }
+
+        .mstrDebugConsole {
+            background: #fff;
+            height: 260px;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            width: 600px;
+        }
+
+        .mstrDebugConsole div {
+            border: 1px solid transparent;
+            border-bottom-color: #999;
+            padding: 5px 10px;
+        }
+
+        .mstrDebugConsole div:nth-child(odd) {
+            background: #fff;
+        }
+
+        .mstrDebugConsole div:nth-child(even) {
+            background: #e5e5e5;
+        }
+
+        .mstrConsoleInput {
+            border-top: 1px solid #666;
+            height: 28px;
+            width: 590px;
+            padding: 5px;
+        }
+
+        .mstrConsoleInput input {
+            width: 500px;
+        }
+
+        .mstrConsoleInput input[type="button"] {
+            cursor: pointer;
+            margin: 0 0 0 5px;
+            padding: 1px 6px;
+            width: 80px;
+        }
+
+        .mstrConsoleToolbar {
+            position: absolute;
+            right: 0;
+            top: -30px;
+            width: 590px;
+        }
+
+        .mstrConsoleToolbar div {
+            background: #ccc;
+            border: 1px solid #000;
+            color: #333;
+
+            cursor: pointer;
+            float: right;
+            line-height: 20px;
+            margin-right: 5px;
+            text-align: center;
+            width: 20px;
+        }
+
+        .mstrConsole.min {
+            height: 0;
+            width: 0;
+        }
+    </style>
+</head>
+
+<body class="mstrWeb mstr-one-tier">
+<div id="mainApp"></div>
+<div id="mainAppMsg"></div>
+
+<script type="text/javascript">
+
+    // Does the FormWrapper NOT exist?
+    if (!window.FormWrapper) {
+        // Likely this is a mac so set to window.client.
+        window.FormWrapper = window.client;
+    }
+
+    window.console = window.console || {
+                log: function () {
+                }
+            };  //avoid IE9 error
+    window.mstr_profile = {
+        enabled: false,
+        timeStart: function (label) {
+            if (console.time && this.enabled) {
+                console.time(label);
+            }
+        },
+        timeEnd: function (label) {
+            if (console.timeEnd && this.enabled) {
+                console.timeEnd(label);
+            }
+        },
+        group: function () {
+            if (console.group && this.enabled) {
+                console.group(arguments);
+            }
+        },
+        groupEnd: function () {
+            if (console.groupEnd && this.enabled) {
+                console.groupEnd();
+            }
+        },
+        log: function () {
+            if (this.enabled) {
+                Function.prototype.apply.call(console.log, console, arguments);
+            }
+        }
+    };
+
+    //Set application config.
+    mstrConfig = {
+        taskURL: 'taskProc',
+        thousandsSep: ',',
+        decimalSep: '.',
+        listSep: ',',
+        units: '2',
+        unitsLabel: 'Inches',
+        jsLibs: '../../../javascript-libraries/',
+        onMobileDevice: false,
+        messageBundle: JSON.parse(FormWrapper.getMessageBundle()),
+        pluginNames: eval(FormWrapper.getCustomizationNames()) || [],
+        pluginsVisList: {
+            "VIHeatMapVisualizationStyle": {
+                "mm": "1",
+                "d": "Heat Map",
+                "desc": 11819,
+                "s": "VIHeatMapVisualizationStyle",
+                "c": "heatmap.vi.VisHeatMap",
+                "ma": "1",
+                "wtp": "2"
+            },
+            "GraphMatrixVisualizationStyle": {
+                "d": "Graph Matrix",
+                "s": "GraphMatrixVisualizationStyle",
+                "c": "gm.VisGraphMatrix",
+                "wtp": "1",
+                "st": [
+                    "BarChart",
+                    "LineChart",
+                    "AreaChart",
+                    "BubbleChart",
+                    "PieChart",
+                    "ComboChart"
+                ]
+            },
+            "ESRIMapVisualizationStyle": {
+                "d": "ESRI Map",
+                "desc": 11825,
+                "s": "ESRIMapVisualizationStyle",
+                "c": "esrimap.ESRIMapOIVM",
+                "ma": "1",
+                "wtp": "5"
+            },
+            "NetworkVisualizationStyle": {
+                "d": "Network",
+                "desc": 11827,
+                "s": "NetworkVisualizationStyle",
+                "c": "netviz.VisNetwork",
+                "ma": "1",
+                "wtp": "3"
+            }
+        },
+        pluginsWidgetVisMap: {
+            "com.microstrategy.web.vf.viewer.GoogleMapApplicationViewer": "GoogleMapVisualizationStyle"
+        },
+        // TODO: NS - Get this dynamically.
+        paletteThemes: {
+            "palettes": [
+                {
+                    "colors": [
+                        11826975,
+                        1381846,
+                        1810715,
+                        950271,
+                        12407690,
+                        2276796,
+                        13614615,
+                        8355711,
+                        15255470,
+                        9869567,
+                        9101208,
+                        7912447,
+                        376261,
+                        9296859,
+                        15063710,
+                        13092807
+                    ],
+                    "tp": 1,
+                    "n": "Light Theme Palette",
+                    "pltid": "76CB9F3E366345DF89811386CBAA82CB"
+                },
+                {
+                    "colors": [
+                        16756758,
+                        2701311,
+                        2275844,
+                        956159,
+                        14580142,
+                        2477516,
+                        14732825,
+                        11119017,
+                        15715763,
+                        9873407,
+                        9101208,
+                        8437759,
+                        15516634,
+                        9494752,
+                        15392673,
+                        14079702
+                    ],
+                    "tp": 1,
+                    "n": "Dark Theme Palette",
+                    "pltid": "6E672B0D40504C128EE6B189E82C0461"
+                }
+            ],
+            "themes": [
+                {
+                    "sup": [
+                        {
+                            "did": "76CB9F3E366345DF89811386CBAA82CB",
+                            "tp": 71,
+                            "ql": 0
+                        }
+                    ],
+                    "n": "Light Theme",
+                    "did": "21E8ECEA4EACEA161B5828BD79A4B1E2",
+                    "dplt": "76CB9F3E366345DF89811386CBAA82CB"
+                },
+                {
+                    "sup": [
+                        {
+                            "did": "6E672B0D40504C128EE6B189E82C0461",
+                            "tp": 71,
+                            "ql": 0
+                        }
+                    ],
+                    "n": "Dark Theme",
+                    "did": "F1FED8AC42B57AC1B0E9518FED0F89D6",
+                    "dplt": "6E672B0D40504C128EE6B189E82C0461"
+                }
+            ]
+        }
+    };
+
+
+    mstrConfig.mstrDescs = {descriptors: mstrConfig.messageBundle && mstrConfig.messageBundle.descriptors || []};
+    mstrConfig.messageBundle.descriptors = null;
+    var controllerNumber = mstrConfig.messageBundle.localeInfo.number;
+    mstrConfig.thousandsSep = controllerNumber.THOUSANDSEPARATOR;
+    mstrConfig.decimalSep = controllerNumber.DECIMALSEPARATOR;
+    mstrConfig.listSep = controllerNumber.LISTSEPARATOR; //DE19136 - Update mstrConfig from the value obtained from Controller(back-end)
+
+</script>
+
+
+<script src="../javascript/bundles/one-tier.js" language="javascript"></script>
+
+<script type="text/javascript">
+    (function () {
+
+
+        var mstrDebug = false;
+
+        if (mstrDebug) {
+            var queue = [],
+                    idx = -1,
+                    isMinimized = false;
+
+            // Create overall console container element and append to body.
+            var consoleContainer = document.createElement('div');
+            consoleContainer.className = 'mstrConsole';
+            document.body.appendChild(consoleContainer);
+
+            // Create console output element and append to container.
+            var consoleDiv = document.createElement('div');
+            consoleDiv.className = 'mstrDebugConsole';
+            consoleContainer.appendChild(consoleDiv);
+
+            var consoleInput = document.createElement('div');
+            consoleInput.className = "mstrConsoleInput";
+            consoleContainer.appendChild(consoleInput);
+
+            // Create execute input.
+            var execInput = document.createElement('input');
+            execInput.onkeydown = function (evt) {
+                function jumpQueue(isDown) {
+                    // Is the action valid?
+                    if (isDown ? idx < queue.length - 1 : idx > 0) {
+                        // Update index.
+                        idx = idx + (isDown ? 1 : -1);
+
+                        // Change input value.
+                        execInput.value = queue[idx];
+                    }
+
+                    return false;
+                }
+
+                switch (evt.keyCode) {
+                    case 13:                // Enter
+                        // Click the execute button.
+                        execButton.click();
+                        break;
+
+                    case 40:               // Down arrow.
+                        return jumpQueue(true);
+
+                    case 38:               // Up arrow.
+                        return jumpQueue(false);
+                }
+            };
+            consoleInput.appendChild(execInput);
+
+            // Create execute button.
+            var execButton = document.createElement('input');
+            execButton.setAttribute('type', 'button');
+            execButton.setAttribute('value', 'Execute');
+            execButton.onclick = function () {
+                // Cache value in queue.
+                var value = execInput.value;
+                idx = queue.push(value) - 1;
+
+                eval(value);
+            };
+            consoleInput.appendChild(execButton);
+
+            var dvToolbar = document.createElement('div');
+            dvToolbar.className = 'mstrConsoleToolbar';
+
+            var clearBtn = document.createElement('div');
+            clearBtn.setAttribute('title', 'Clear');
+            clearBtn.innerText = 'X';
+            clearBtn.onclick = function () {
+                consoleDiv.innerHTML = '';
+                execInput.value = '';
+            };
+
+            function configureMaxRestoreBtn(btn) {
+                btn.setAttribute('title', isMinimized ? 'Restore' : 'Minimize');
+                btn.innerText = isMinimized ? '?' : '?';
+            }
+
+            var minimizeBtn = document.createElement('div');
+            minimizeBtn.onclick = function () {
+                isMinimized = !isMinimized;
+                mstrmojo.css.toggleClass(consoleContainer, 'min', isMinimized);
+                configureMaxRestoreBtn(this);
+            };
+
+            configureMaxRestoreBtn(minimizeBtn);
+
+
+            dvToolbar.appendChild(minimizeBtn);
+            dvToolbar.appendChild(clearBtn);
+
+            consoleContainer.appendChild(dvToolbar);
+
+            window.console = {
+                log: function () {
+                    Array.prototype.slice.call(arguments).forEach(function (arg) {
+                        if (typeof arg === 'object') {
+                            arg = JSON.stringify(arg);
+
+                            arg = arg.replace(/{/g, '{<br/>');
+                            arg = arg.replace(/}/g, '<br/>}');
+                            arg = arg.replace(/,/g, ',<br/>');
+                        }
+
+                        var div = document.createElement('div');
+                        div.innerHTML = arg;
+                        consoleDiv.appendChild(div);
+                    });
+                }
+            };
+        }
+    }());
+
+    //Derived Metric Editor
+    var isQuickSearchEnabled = true;
+
+    var mstrApp = new mstrmojo.onetier.OneTierApp({
+        isVisBuilderApp: true,//Add for DE35023
+        placeholder: 'mainApp',
+        Privs: '<uaps><pris pgd="2168BF094415A4B4A499E880A63721A2"><pri>-25166091</pri><pri>125894239</pri><pri>-1</pri><pri>1876686812</pri><pri>23380215</pri><pri>-15728400</pri><pri>-16389</pri><pri>61809</pri></pris></uaps>',
+        name: 'mstrWeb',
+        localeId: '1033',
+        displayLocaleId: '1033',
+        jsRoot: '../javascript/',
+        jsMojoRoot: '../javascript/mojo/js/source/',
+        serverProxy: new mstrmojo.ServerProxy({
+            transport: mstrmojo.vi.models.OneTierServerTransport
+        }),
+
+        //Derived Metric Editor
+        useQuickSearch: function () {
+            return isQuickSearchEnabled && '1' == '1';
+        },
+        searchAutoComplete: function () {
+            return '1' == '1';
+        },
+        searchAutoCompleteDelay: function () {
+            return '200';
+        },
+        getMsgID: function () {
+            return mstrApp.rootCtrl.docCtrl.model.mid;
+        },
+        visBuidlerHelpUrl: 'https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm',//DE36183
+        helpUrl: 'http://www2.microstrategy.com/producthelp/10.4/AnalyticsDesktop/',
+        userHelpPage: 'index.html#context/analytics_desktop/',
+        enableEmbeddedImages: true,
+        features: {
+            "edit-ive": true
+        },
+        customization: {
+            getCustomThresholds: function () {
+                if (window.FormWrapper.getCustomThresholds) {
+                    return JSON.parse(window.FormWrapper.getCustomThresholds());
+                }
+            }
+        },
+        modalEditorChange: function modalEditorChange(id, isOpen) {
+        },
+
+        menubarModelData: {
+            "items": [
+                {
+                    "n": "file", "desc": mstrmojo.desc(489, "file"),
+                    "items": [
+                        {"n": "newVI", "desc": mstrmojo.desc(4996, "New"), "cmd": "newVisualizationPlugin"},
+                        {"n": "openVI", "desc": mstrmojo.desc(2309, "Open"), "cmd": "openVisualizationPlugin"},
+                        {"n": "di", "desc": mstrmojo.desc(12537, "Data Import"), "cmd": "importFile"},
+                        {"n": "dlmt"},
+                        {"n": "save", "desc": mstrmojo.desc(118, "Save"), "cmd": "showSaveVisualization"},
+                        {"n": "saveAs", "desc": mstrmojo.desc(628, "Save As"), "cmd": "showSaveAsVisualization"},
+                        {"n": "dlmt"},
+                        {"n": "download", "desc": "Download Plugin", "cmd": "exportVisualization"},
+                        {"n": "dlmt"},
+                        {"n": "closeVI", "desc": mstrmojo.desc(2102, "Close"), "cmd": "close"}
+
+                    ]
+                },
+                {
+                    "n": "view", "desc": mstrmojo.desc(8090, "View"), "visibleFeatures": "edit-ive", "pm": 0,
+                    "items": [
+                        {"n": "datasetsPanel", "desc": "Dataset Panel", "cmd": "DisplayPanel"},
+                        {"n": "editPanel", "desc": "Editor Panel", "cmd": "DisplayPanel"},
+                        {"n": "propertiesPanel", "desc": "Properties Panel", "cmd": "DisplayPanel"},
+                        {"n": "filterPanel", "desc": "Filter Panel", "cmd": "DisplayPanel"}
+                    ]
+                },
+
+                {
+                    "n": "style", "desc": "Format", "pm": 0,
+                    "items": [
+                        {"n": "SwitchTheme", "desc": "Themes", "hasRadioGroup": true},
+                        {"n": "dlmt"},
+                        {"n": "SwitchPalette", "desc": "palettes", "hasRadioGroup": true},
+                        {"n": "dlmt"},
+                        {"n": "formatObject", "desc": "Format Object", "cmd": "formatObject"},
+                        {"n": "dashboardStyles", "desc": "Dashboard Formating...", "cmd": "dashboardStyles"}
+                    ],
+                    "visibleFeatures": "edit-ive"
+                }
+            ]
+
+        },
+        tbModelData: {
+            "items": [
+                {"n": "save", "desc": mstrmojo.desc(118, "Save"), "cmd": "showSaveVisualization"},
+                {"n": "save", "desc": mstrmojo.desc(628, "Save As"), "cmd": "showSaveAsVisualization"},
+                {
+                    "n": "addDS", "desc": mstrmojo.desc(11780, "Add Data"),
+                    "items": [
+                        {"n": "importFile", "desc": mstrmojo.desc(7972, "Import Data"), "cmd": "importFile"},
+                        {"n": "newDS", "desc": "Create New Report...", "cmd": "editDataset"}
+                    ]
+                },
+                {"n": "close", "desc": mstrmojo.desc(2102, "Close"), "cmd": "close"},
+                {
+                    "n": "visBuilderHelp", "desc": mstrmojo.desc(1143, "Help"), "pm": 1, "items": [
+                    {"n": "helpLink", "desc": mstrmojo.desc(1143, "Help"), "cmd": "showVisBuilderHelp"},//DE36183 change cmd different from VI dashboard
+                    {"n": "aboutVisBuilder", "desc": "About Visualization Builder", "cmd": "showVersion"}
+                ]
+                },
+                {
+                    "n": "presentationMode",
+                    "desc": "Exit Presentation Mode",
+                    "cmd": "togglePresentationMode",
+                    "pm": 1,
+                    "descOff": "Presentation Mode"
+                }
+            ]
+        }
+    });
+
+    var g;
+    function mm(res) {
+        g(res);
+    }
+    ;
+
+    function getDocModelData(callback) {
+        g = callback;
+        window.FormWrapper.serverRequest("TBD", "{\"taskId\":\"loadDocument\"}", "mm");
+    }
+</script>
+
+<script src="../plugins/_VisBuilder/javascript/VisBuilder.js" language="javascript"></script>
+<link rel="stylesheet" type="text/css" href="../plugins/_VisBuilder/style/VisBuilderPage.css"/>
+<link rel="stylesheet" type="text/css" href="../plugins/_VisBuilder/style/global.css"/>
+
+</body>
+</html>
+ 

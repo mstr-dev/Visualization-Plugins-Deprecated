@@ -63,13 +63,15 @@
                             <block name="MojoToolbarButtonModel">
                                 <property name="n">helpLink</property>
                                 <property name="desc">{desc:mstrWeb.1143|Help}</property>
-                                <property name="cmd">showHelpTopic</property>
+                                <property name="cmd">showVisBuilderHelp</property>
                             </block>
+                            <!-- DE23687 remove Welcome Screen
                             <block name="MojoToolbarButtonModel">
-                            	<property name="n">welcome</property>
+                                <property name="n">welcome</property>
                                 <property name="desc">{desc:mstrWeb.13354|Welcome Screen}</property>
                                 <property name="cmd">showWelcome</property>
                             </block>
+                            -->
                             <block name="MojoToolbarButtonModel">
                                 <property name="n">tips</property>
                                 <property name="desc">{desc:mstrWeb.10096|Quick Tips}</property>

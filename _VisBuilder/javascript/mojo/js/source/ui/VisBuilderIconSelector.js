@@ -45,7 +45,7 @@
             '<input class="mstrmojo-FileUploadBox-input mstrmojo-TextBox" type="text" size="30" mstrAttach:focus,blur,change/>' +
             '<div class="mstrmojo-FileUploadBox-buttonDiv">' +
             '<div class="mstrmojo-FileUploadBox-button">{@browseLabel}</div>' +
-            '<input class="mstrmojo-FileUploadBox-file" type="file" {@multiple} size="30" style="font-size:4em;" name="{@fileFieldName}" onchange="mstrmojo.all.{@id}.synValue();"/>' +
+            '<input class="mstrmojo-FileUploadBox-file" type="file" {@multiple} size="30"   accept="image/png" style="font-size:4em;" name="{@fileFieldName}" onchange="mstrmojo.all.{@id}.synValue();"/>' +
             '</div>' +
             '<div style="display:none;"></div>' +
             '</form>' +
@@ -60,12 +60,15 @@
                     }
                 },
                 onvalueChange: function () {
-                    if (this.value) {
+                     if (/\.png$/.test(this.value.toLowerCase())) {
                         hideEmpty.call(this);
                         this.inputNode.value = this.value;
                         this.changeUploadCallback();
-                    } else {
+                    } else if(this.value == ''){
                         showEmpty.call(this);
+                    }else{
+                        //showEmpty.call(this);
+                        mstrmojo.alert("Please select an image with .png extension.");
                     }
                 }
             },
@@ -88,6 +91,33 @@
             },
             //overwrite this one to change taskEnd to JSON instead of jsonp2
             submit: function (ps, callbacks) {
+                if(mstrApp.isSingleTier){
+                  var params = {
+                        taskId:this.uploadTaskId,//"VisBuilderIconUpload",
+                        baseData:this.fileNode.baseDataValue,
+                        drk:this.params.drk,
+                        fld:this.params.fld},
+                        me = this;
+                    mstrApp.serverRequest(params, {
+                        success: function () {
+                            me.set('status','successful');
+                            if (callbacks) {
+                                callbacks.success();
+                            };
+                        },
+
+                        failure: function(){
+                            me.set('status','failed');
+                            if (callbacks) {
+                                callbacks.failure();
+                            };
+                        }
+                    }
+                    );
+                    me.set('status', 'loading');
+                    return;
+                }
+
                 var r = true;
                 if (this.onsubmit) {
                     r = this.onsubmit();
@@ -126,3 +156,4 @@
             }
         });
 }())
+//@ sourceURL=VisBuilderIconSelector.js

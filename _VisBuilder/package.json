@@ -1,1 +1,1 @@
-{ "version" : "v1.3.0", "commit": "094ec35d7f2f656068adde4022ce210d8fec3c62","require": "MSTR 10.3 or higher","others":   "JDK 1.6 or higher and Tomcat 6 or higher"}
+{ "version" : "v1.0.0", "commit": "No commit","require": "10.4 release WebServer","others":   "JDK 1.8 and Tomcat 8"}

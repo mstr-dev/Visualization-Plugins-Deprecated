@@ -46,7 +46,7 @@
             hrefToReturn = hrefToReturn.substr(0, end) + "/" +  packageName;
         }
 
-        path = hrefToReturn+'?tstp='+ Date.now() ;
+        path = hrefToReturn ; //remove +'?tstp='+ Date.now(), as VisBuilder will add tstp for all loadSyncFile, referred to VisbuilderCustomVisBase.js
         if (path !== "") {
             if (mstrmojo.loadFileSync) {
                 content = mstrmojo.loadFileSync(path);
@@ -139,12 +139,63 @@
         return new mstrmojo.plugins._VisBuilder.ui.VisBuilderSelectVizEditor();
     }
 
+    //DE35752 reConfigure pluginsVisList
+    function configurePluginsVisList() {
+        var newList = {}, key;
+        newList.VisBuilderNew = {
+            c: "plugins._VisBuilder.VisBuilderNew",
+            d: "New Visualization",
+            s: "VisBuilderNew",
+            scp: 19,
+            wtp: "7",
+            dz: "vi.models.BaseVisDropZones",
+            em: "vi.models.editors.BaseEditorModel"
+        };
+        for (key in mstrConfig.pluginsVisList) {
+            if (mstrConfig.pluginsVisList.hasOwnProperty(key)) {
+                var vis = mstrConfig.pluginsVisList[key], path = vis.c.split('.');
+
+                /*
+                 * Lets check path to see if plugin is valid for edition
+                 * if path has 3 elements
+                 * if first element is plugins
+                 * if folder and js name is same - editor requires that
+                 * */
+
+                if (path.length !== 3 || path[0] !== "plugins" || path[1] !== path[2]) {
+                    continue;
+                }
+
+                /*
+                 * Path is correct, lets load code to do more checks:
+                 * if visualization extends CustomVisBase
+                 * if plot function is present
+                 * if plot function does not uses this._super - this breaks editor
+                 */
+                if (mstrmojo.loader.load("mstrmojo." + vis.c)) {
+                    var pseudoObj = mstrmojo[path[0]][path[1]][path[2]].prototype,
+                        instanceCheck = pseudoObj instanceof mstrmojo.CustomVisBase,
+                        plotCheck = (pseudoObj.hasOwnProperty('plot') && (String(pseudoObj.plot)).indexOf('superwrap') === -1);
+                    if (instanceCheck && plotCheck) {
+                        newList[key] = vis;
+                    }
+                }
+            }
+        }
+        mstrConfig.pluginsVisList = newList;
+    }
+
     mstrmojo.plugins._VisBuilder.VisBuilderDocumentController = mstrmojo.declare(
         mstrmojo.vi.controllers.DocumentController,
         null,
         {
             scriptClass: 'mstrmojo.plugins._VisBuilder.VisBuilderDocumentController',
             start: function start(documentData) {
+
+                //DE35752 reConfigure pluginsVisList
+                //extract code from VisBuilder.js here for desktop to work
+                //As desktop load custom visualizations, during mstrApp.start
+                configurePluginsVisList();
 
                 // Create model...
                 var model = new mstrmojo.vi.models.DocModel(documentData),
@@ -197,6 +248,19 @@
                 // this.addDataset();
                 gallery.vizList.singleSelect(0);
             },
+
+            /**
+             * Delegate the close document function.
+             */
+            close: function () {
+                if(mstrApp.isSingleTier){
+                    //this.rootCtrl.destroy();
+                    window.FormWrapper.toggleVisBuilderMode(false);
+                }else{
+                    this._super();
+                }
+            },
+
             saveBeforeClosing: function (saveCB, target) {
                 var fnDirectRun = function () {
                     if (saveCB && saveCB.success) {
@@ -253,6 +317,21 @@
                     taskId: 'VisExpDefined'
                 }, cb);
             },
+
+            //DE36183 change toolbar menu 'help' command, use hard code visBuidlerHelpUrl
+            showVisBuilderHelp: function () {
+
+                // Build URL.
+                var helpUrl = mstrApp.visBuidlerHelpUrl;
+
+                // Open the help.
+                if (mstrApp.isSingleTier) {
+                    window.FormWrapper.openPage(helpUrl);
+                } else {
+                    mstrApp.openPage(helpUrl);
+                }
+                return false;
+            },
             /**
              * Get Visualization Builder version Information
              */
@@ -273,7 +352,18 @@
                 getSelectVizEditor().open(gallery);
             },
             exportVisualization: function () {
-                mstrmojo.form.send({ taskId: 'VisExport', sc: window.currentVis.scriptClass}, mstrConfig.taskURL, null, '_blank');
+                var scriptClass = window.currentVis.scriptClass;
+                if(mstrApp.isSingleTier){
+                    /*mstrApp.serverRequest({
+                        taskId: 'VisExport',
+                        sc: scriptClass
+                    }, null);*/
+                     window.FormWrapper.doVisExport(scriptClass) ;
+
+                }else{
+                    mstrmojo.form.send({ taskId: 'VisExport', sc: scriptClass}, mstrConfig.taskURL, null, '_blank');    
+                }
+                
             },
             isDocChanged: function isDocChanged() {
                 return false;

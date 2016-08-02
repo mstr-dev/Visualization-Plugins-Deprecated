@@ -17,7 +17,6 @@
         "mstrmojo.Label",
         "mstrmojo.hash",
         "mstrmojo.RadioButton",
-        "mstrmojo.TextAreaWithLabel",
         "mstrmojo.ValidationTextBox",
         "mstrmojo.plugins._VisBuilder.ui.CodeMirror",
         "mstrmojo.vi.ui.editors.EditorGroup");
