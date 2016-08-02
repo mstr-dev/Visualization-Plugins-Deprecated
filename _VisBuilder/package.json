@@ -1,1 +1,1 @@
-{ "version" : "v1.0.0", "commit": "No commit","require": "10.4 release WebServer","others":   "JDK 1.8 and Tomcat 8"}
+{ "version" : "v1.4.0", "commit": "8ba39a3199b82ee74fd98d5d5d708aba59afedd5","require": "Microstrategy WebServer 10.4 or Microstrategy Desktop","others":   "JDK 1.7 or above"}
