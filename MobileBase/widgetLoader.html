@@ -405,7 +405,7 @@ function setupWidgetLoader() {
                     if (!window.mstrApp) {
                         window.mstrApp = {};
                      }
-                    window.mstrApp.isVI = window.docDef.isVI;
+                    window.mstrApp.isVI = window.docDef.isVI === 'true' ? true : false;
                     document.body.style.height = window.widgetHeight + 'px';
                     document.body.style.width = window.widgetWidth + 'px';
                     loadModelAndRenderWidget();
@@ -547,7 +547,7 @@ if (window.isUsingMockupData) {
         if (!window.mstrApp) {
             window.mstrApp = {};
         }
-        window.mstrApp.isVI = window.docDef.isVI;
+        window.mstrApp.isVI = window.docDef.isVI === 'true' ? true : false;
         document.body.style.height = window.widgetHeight + 'px';
         document.body.style.width = window.widgetWidth + 'px';
         loadBundle();
