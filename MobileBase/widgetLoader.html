@@ -261,7 +261,8 @@ function setupWidgetLoader() {
                         if (!docModel) {
                             docModel = new mstrmojo.DocModel({
                                 defn:{epm : visConfig.docDef.epm},
-                                plt: visConfig.docDef.plt
+                                plt: visConfig.docDef.plt,
+                                datasets: {}
                             });
                             window.mstrApp.docModel = docModel;
                         }
@@ -277,7 +278,8 @@ function setupWidgetLoader() {
                         if (!docModel) {
                             docModel = new mstrmojo.DocModel({
                                 defn:{epm : visConfig.docDef.epm},
-                                plt: visConfig.docDef.plt
+                                plt: visConfig.docDef.plt,
+                                datasets: {}
                             });
                             window.mstrApp.docModel = docModel;
                         }
