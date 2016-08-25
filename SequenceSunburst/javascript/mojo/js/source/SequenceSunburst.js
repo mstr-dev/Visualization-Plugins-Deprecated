@@ -4,14 +4,13 @@
     }
 
     mstrmojo.requiresCls(
-        "mstrmojo.plugins.SequenceSunburst.CustomVisBase",
+        "mstrmojo.CustomVisBase",
         "mstrmojo.models.template.DataInterface",
         "mstrmojo.hash"
-
     );
 
     mstrmojo.plugins.SequenceSunburst.SequenceSunburst = mstrmojo.declare(
-        mstrmojo.plugins.SequenceSunburst.CustomVisBase,
+        mstrmojo.CustomVisBase,
         null,
         {
             scriptClass: "mstrmojo.plugins.SequenceSunburst.SequenceSunburst",
@@ -25,30 +24,6 @@
             useRichTooltip: true,
 
             reuseDOMNode: true,
-
-            //by pluto 7/21/2015
-            //rewrite this function to set time out for plot function
-            //The problem is that the unit container get the correct width but paint the wrong size.
-            //I cannot figure out the root cause.  But add timeout seems work well.  To limit the influence of this modification, rewrite it in the widget.
-            renderVisualization: function renderVisualization() {
-                try {
-                    this.toggleError(false);
-
-                    this.dataInterface = new mstrmojo.models.template.DataInterface(this.getData());
-
-                    var me = this;
-
-                     window.setTimeout(function () {
-                     me.plot();
-                     me.plotted = true;
-                     }, 0);
-
-
-                } catch (e) {
-                    this.displayError();
-                    this.plotted = false;
-                }
-            },
 
             //this is for those who haven't got newest version of customvisbase
             flareJson: function (consumer) {
