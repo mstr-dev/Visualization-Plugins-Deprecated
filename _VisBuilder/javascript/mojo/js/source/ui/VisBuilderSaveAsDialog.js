@@ -64,36 +64,49 @@
 
     function sendSaveAsRequest(editor) {
         editor.close();
-        var newFolderName = editor.d1.nameBox.value, host = editor.host, params = {taskId: 'VisExpSaveAs'};//to support Desktop VisBuilder, as desktop serverProxy needs a requst id created from taskId, referred to ServerProxy.js
+        var newFolderName = editor.d1.nameBox.value,
+            host = editor.host,
+            params = {taskId: 'VisExpSaveAs'};//to support Desktop VisBuilder, as desktop serverProxy needs a requst id created from taskId, referred to ServerProxy.js
         params = host.vbGetSaveAsParameters(params, newFolderName);
         mstrApp.showWait({'message': 'Creating visualization, please wait'});
         mstrApp.serverRequest(params, {
-            success: function (res) {
-                mstrmojo.alert(res.name + ' created with class: ' + res.sc);
+            success: function (res, request) {
+                var data ={},//DE35243, move changeSelectedVisType in complete, instead of success
+                    VisBuilderGallery = mstrmojo.all.VisBuilderGallery,
+                    scriptClass = res.sc,
+                    styleName =res.name;
+
+                mstrmojo.alert(styleName + ' created with class: ' + scriptClass);
                 // Insert pluginCSS to document.
-                insertCSSLinks(res.name);
-                var data ={},
-                    VisBuilderGallery = mstrmojo.all.VisBuilderGallery;
-                data.c = res.sc;
+                insertCSSLinks(styleName);
+
+                data.s = host.styleName =styleName;
+                data.c = host.scriptClass = "mstrmojo." + scriptClass;
+                host.pluginFolder = newFolderName; //scriptClass && scriptClass.split(".")[2];
+                host.stylePrefix = '.custom-vis-layout.' + host.pluginFolder.toLowerCase() + ' ';
+
                 data.d = host.vbGetDescription();
-                data.ma=host.vbGetMinAttributes();
-                data.mm=host.vbGetMinMetrics();
-                data.s = res.name;
+                data.ma= host.vbGetMinAttributes();
+                data.mm= host.vbGetMinMetrics();
+
                 data.scp=host.scope;
-                data.dz = data.c + "DropZones";
-                data.em = data.c + "EditorModel";//Add to support property API
+                data.dz =  data.c + "DropZones";
+                data.em =  data.c + "EditorModel";//Add to support property API
                 data.wtp = "7";
                 mstrConfig.pluginsVisList[res.name]=data;
+                console.log("pluginsVisList:\t" + res.name + ":\tscope:\t" + mstrConfig.pluginsVisList[res.name].scope );
                 VisBuilderGallery.update();
                 VisBuilderGallery.vizList.refresh();
                 VisBuilderGallery.refresh();
-                console.log("VisBuilderSaveAsDialog:\t host.scope" + host.scope);
-                //DE31330 start to work in the latest save-as visualization instead of original version
-                VisBuilderGallery.model.changeSelectedVisType(res.name , -1 , mstrConfig.pluginsVisList[res.name].wtp || "7", mstrConfig.pluginsVisList[res.name].dz);
-
+                //this._super(res, request);
             },
+
             complete: function () {
                 mstrApp.hideWait();
+                //DE31330 start to work in the latest save-as visualization instead of original version
+                //DE35243 since desktop response, state is BUSY, then can not submit changeVisSelect. And complete state would be idle, ready for new submit.
+                //VisBuilderGallery.model.changeSelectedVisType(data.s , -1 , mstrConfig.pluginsVisList[data.s].wtp || "7", mstrConfig.pluginsVisList[data.s].dz);
+
             }
         });
 

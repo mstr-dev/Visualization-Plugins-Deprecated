@@ -436,7 +436,6 @@
         mstrmojo.plugins._VisBuilder.VisBuilderCustomVisBase.ENUM_EXTERNAL_LIBS = mstrmojo.CustomVisBase.ENUM_EXTERNAL_LIBS;
     }
 
-
     mstrmojo.CustomVisBase = mstrmojo.plugins._VisBuilder.VisBuilderCustomVisBase;
 
 

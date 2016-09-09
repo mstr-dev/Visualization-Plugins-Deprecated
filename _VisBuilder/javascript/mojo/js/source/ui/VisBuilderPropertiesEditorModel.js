@@ -247,6 +247,7 @@
                 }
 
                 host.vbSetScope(getScope.call(this));
+
                 host.vbSetIcons(lighIconSettings.tp, lighIconSettings.vl, darkIconSettings.tp, darkIconSettings.vl);
                 host.vbSetJSLibs(jslibsarray);
                 host.vbSetDescription(this.descField.value);
