@@ -71,7 +71,7 @@
         mstrApp.showWait({'message': 'Creating visualization, please wait'});
         mstrApp.serverRequest(params, {
             success: function (res, request) {
-                var data ={},//DE35243, move changeSelectedVisType in complete, instead of success
+                var data ={},
                     VisBuilderGallery = mstrmojo.all.VisBuilderGallery,
                     scriptClass = res.sc,
                     styleName =res.name;
@@ -94,19 +94,16 @@
                 data.em =  data.c + "EditorModel";//Add to support property API
                 data.wtp = "7";
                 mstrConfig.pluginsVisList[res.name]=data;
-                console.log("pluginsVisList:\t" + res.name + ":\tscope:\t" + mstrConfig.pluginsVisList[res.name].scope );
                 VisBuilderGallery.update();
                 VisBuilderGallery.vizList.refresh();
                 VisBuilderGallery.refresh();
-                //this._super(res, request);
+
+                //DE31330 start to work in the latest save-as visualization instead of original version
+                VisBuilderGallery.model.changeSelectedVisType(data.s , -1 , mstrConfig.pluginsVisList[data.s].wtp || "7", mstrConfig.pluginsVisList[data.s].dz);
             },
 
             complete: function () {
                 mstrApp.hideWait();
-                //DE31330 start to work in the latest save-as visualization instead of original version
-                //DE35243 since desktop response, state is BUSY, then can not submit changeVisSelect. And complete state would be idle, ready for new submit.
-                //VisBuilderGallery.model.changeSelectedVisType(data.s , -1 , mstrConfig.pluginsVisList[data.s].wtp || "7", mstrConfig.pluginsVisList[data.s].dz);
-
             }
         });
 
