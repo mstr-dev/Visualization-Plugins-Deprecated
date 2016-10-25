@@ -443,8 +443,8 @@
             return mstrApp.rootCtrl.docCtrl.model.mid;
         },
         visBuidlerHelpUrl: 'https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm',//DE36183
-        helpUrl: 'http://www2.microstrategy.com/producthelp/10.4/AnalyticsDesktop/',
-        userHelpPage: 'index.html#context/analytics_desktop/',
+        helpUrl: 'http://www2.microstrategy.com/producthelp/10.5/AnalyticsDesktop/',
+        userHelpPage: 'index.htm#cshid=',
         enableEmbeddedImages: true,
         features: {
             "edit-ive": true
@@ -471,10 +471,7 @@
                         {"n": "save", "desc": mstrmojo.desc(118, "Save"), "cmd": "showSaveVisualization"},
                         {"n": "saveAs", "desc": mstrmojo.desc(628, "Save As"), "cmd": "showSaveAsVisualization"},
                         {"n": "dlmt"},
-                        {"n": "download", "desc": "Download Plugin", "cmd": "exportVisualization"},
-                        {"n": "dlmt"},
-                        {"n": "closeVI", "desc": mstrmojo.desc(2102, "Close"), "cmd": "close"}
-
+                        {"n": "download", "desc": "Download Plugin", "cmd": "exportVisualization"}
                     ]
                 },
                 {
@@ -513,7 +510,6 @@
                         {"n": "newDS", "desc": "Create New Report...", "cmd": "editDataset"}
                     ]
                 },
-                {"n": "close", "desc": mstrmojo.desc(2102, "Close"), "cmd": "close"},
                 {
                     "n": "visBuilderHelp", "desc": mstrmojo.desc(1143, "Help"), "pm": 1, "items": [
                     {"n": "helpLink", "desc": mstrmojo.desc(1143, "Help"), "cmd": "showVisBuilderHelp"},//DE36183 change cmd different from VI dashboard

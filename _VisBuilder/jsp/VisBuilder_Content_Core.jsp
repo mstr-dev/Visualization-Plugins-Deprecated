@@ -61,6 +61,9 @@
 
 <web:resource type="javascript" name="libraries/modernizr.js"/>
 
+    <!-- Load libraries for annotations feature, for automation testing -->
+<web:resource type="javascript" name="libraries/jquery-2.0.3.min.js"/>
+
 
 <web:resource type="jsbundle" bundleName="html5-vi" debugBundleName="html5-vi-debug"/>
 <web:ifFeature type="misc" name="jsBundleDebug"><web:then>

@@ -52,6 +52,8 @@
     </web:mthen></web:ifFeature>
 </script>
 <web:resource runat="server" type="javascript" name="libraries/modernizr.js"/>
+    <!-- Load libraries for annotations feature, for automation testing -->
+<web:resource runat="server" type="javascript" name="libraries/jquery-2.0.3.min.js"/>
 <web:resource runat="server" type="jsbundle" bundleName="html5-vi" debugBundleName="html5-vi-debug"/>
 <web:ifFeature runat="server" type="misc" name="jsBundleDebug"><web:mthen runat="server">
 	<web:resource runat="server" type="jsbundle" bundleName="vi-gm" />

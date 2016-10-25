@@ -249,18 +249,6 @@
                 gallery.vizList.singleSelect(0);
             },
 
-            /**
-             * Delegate the close document function.
-             */
-            close: function () {
-                if(mstrApp.isSingleTier){
-                    //this.rootCtrl.destroy();
-                    window.FormWrapper.toggleVisBuilderMode(false);
-                }else{
-                    this._super();
-                }
-            },
-
             saveBeforeClosing: function (saveCB, target) {
                 var fnDirectRun = function () {
                     if (saveCB && saveCB.success) {
