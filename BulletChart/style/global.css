@@ -57,7 +57,7 @@
 .mstrmojo-Chart.bulletchart  .bulletchart-canvas-div  table{
     border-width: 1px;
     border-style: solid none none solid;
-    border-color: #E5E5E5;
+    border-color: #c8c8c8;
 
 
 }
@@ -72,7 +72,7 @@
 .mstrmojo-Chart.bulletchart  .bulletchart-canvas-div  td{
     border-width: 1px;
     border-style: none solid solid none;
-    border-color: #E5E5E5;
+    border-color: #c8c8c8;
     font-family: Arial,regular;
     font-weight: normal;
     font-style: normal;

@@ -220,8 +220,8 @@
                     this.bandColor2 = "#5EB3F0";//medium
                     this.bandColor3 = "#95D1FE";//high
 
-                    this.refLinePosColor = "rgba(255,153,0, 0.6)";//"#FF9900";//Reference Line Color #333333
-                    this.refLineNegColor = "rgba(255,153,0, 0.6)";//"#FF9900";
+                    this.refLinePosColor = "#333333";//"#FF9900";//Reference Line Color #333333 "rgba(255,153,0, 0.6)"
+                    this.refLineNegColor = "#333333"; //"rgba(255,153,0, 0.6)";//"#FF9900";
                     this.refLineWidth = REFLINE_WIDTH; //width set to 4 instead of  2
                     this.blueBarPosColor = "#F08108";//bar color
                     this.blueBarNegColor = '#F08108';//negative color
