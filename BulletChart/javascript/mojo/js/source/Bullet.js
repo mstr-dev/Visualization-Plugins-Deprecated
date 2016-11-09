@@ -45,7 +45,7 @@
 
             tooltip: null,
 
-            markupString: '<div id="{@id}" class="mstrmojo-Chart {@cssClass}" style="width:{@width};height:{@height};position:relative;" ' +
+            markupString: '<div id="{@id}" class="mstrmojo-Chart {@cssClass}" style="width:{@width}px;height:{@height}px;position:relative;" ' +
             ' mstrAttach:mousedown,mouseup,mousemove,mouseover,mouseout,click ' +
             '><canvas width="{@width}" height="{@height}"></canvas>' +
             '<div style="position:absolute;left:0px;bottom:0px;display:none;font:7px Arial;text-align:left;line-height:7px;"></div>' +
@@ -220,8 +220,8 @@
                     this.bandColor2 = "#5EB3F0";//medium
                     this.bandColor3 = "#95D1FE";//high
 
-                    this.refLinePosColor = "#333333";//Reference Line Color
-                    this.refLineNegColor = "#333333";
+                    this.refLinePosColor = "rgba(255,153,0, 0.6)";//"#FF9900";//Reference Line Color #333333
+                    this.refLineNegColor = "rgba(255,153,0, 0.6)";//"#FF9900";
                     this.refLineWidth = REFLINE_WIDTH; //width set to 4 instead of  2
                     this.blueBarPosColor = "#F08108";//bar color
                     this.blueBarNegColor = '#F08108';//negative color
@@ -285,7 +285,7 @@
 
                     //TODO: for now remove threshold for world, will resume later
                     if(actualMetric.threshold){
-                        this.blueBarPosColor = this.blueBarNegColor =actualMetric.threshold.fillclr;
+                        this.blueBarPosColor = this.blueBarNegColor =actualMetric.threshold.fillColor;
                     }
                 }
                 if(hasRefLine){
