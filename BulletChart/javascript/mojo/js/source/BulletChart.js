@@ -522,11 +522,11 @@
                 me.colsInfo = [];
 
                 if(dzModel){//VI dashboard
-                    attsCategory = dzModel.getDropZoneObjectsByIndex(0);
-                    metActual = this.metActual = dzModel.getDropZoneObjectsByIndex(1);
-                    metTarget = this.metTarget = dzModel.getDropZoneObjectsByIndex(2);
-                    metsRange = this.metsRange = dzModel.getDropZoneObjectsByIndex(3);
-                    metsKPI = this.metsKPI = dzModel.getDropZoneObjectsByIndex(4);
+                    attsCategory = dzModel.getDropZoneObjectsByName("Category");
+                    metActual = this.metActual = dzModel.getDropZoneObjectsByName("Actual");
+                    metTarget = this.metTarget = dzModel.getDropZoneObjectsByName("Target");
+                    metsRange = this.metsRange = dzModel.getDropZoneObjectsByName("Range");
+                    metsKPI = this.metsKPI = dzModel.getDropZoneObjectsByName("KPI");
                 }else if(dataDz && validateDocumentDZ(dataDz)) {//converted document directly from dashboard
                     attsCategory = dataDz.XAxis.TemplateUnit;
                     metActual = this.metActual = dataDz.YAxis.TemplateMetric;
@@ -596,7 +596,7 @@
                         headerCssClass: " "
                     };
                     colInfo.type = CHART;
-                    colInfo.title = this.bulletProps.mstrHeader || (metricCount[1] > 0 && metricCount[0] > 0 ? (ID_NAME[metActual[0].id]+" VS " + ID_NAME[metTarget[0].id]) : ((metricCount[0] > 0) ? ID_NAME[metActual[0].id] + " VS Target": ""));
+                    colInfo.title = this.bulletProps.mstrHeader || (metricCount[1] > 0 && metricCount[0] > 0 ? (ID_NAME[metActual[0].id]+" & " + ID_NAME[metTarget[0].id]) : ((metricCount[0] > 0) ? ID_NAME[metActual[0].id] : ((metricCount[1] > 0)? ID_NAME[metTarget[0].id]: "")));
                     colInfo.titleAlign = textAlign.center;
                     colInfo.padding.left = 0;
                     colInfo.padding.right = 0;
@@ -659,7 +659,7 @@
                 bulletProps.bandColor2 = "#5EB3F0";//medium
                 bulletProps.bandColor3 = "#95D1FE";//high
 
-                bulletProps.mstrHeader = "[Bullet]";
+                bulletProps.mstrHeader = "";//NON Title
                 bulletProps.mstrAssMetric = "";
                 bulletProps.mstrBand1 = "Low";
                 bulletProps.mstrBand2 = "Medium";
@@ -694,7 +694,7 @@
 
                 //-1 for the height of the dividing line
                // ROW_HEIGHT = (otherProps.mRowHeight - 1) + 'px';
-                ROW_HEIGHT = (otherProps.mRowTitleHeight - 1) + 'px';
+                ROW_HEIGHT = (otherProps.mRowHeight - 1) + 'px';
                 ROW_HEIGHT_FOR_CHART = (otherProps.mRowHeight - 2) + 'px';
 
 
@@ -858,9 +858,9 @@
                 }
                 this.rowTemplate = rowTmpl;
 
-                var fnSD = function (e, width, nopadding) {
+                var fnSD = function (e, width, height, nopadding) {
                     e.style.width =  width  + 'px';//including padding
-                    e.style.height = ROW_HEIGHT;
+                    e.style.height = height + 'px';
                     if(!nopadding){
                         e.style.maxWidth = (width - 20)  + 'px';
                     }else{
@@ -893,11 +893,11 @@
                         this.bodyFontColorRGB = this.valueCssClass && $CLR.rgbStr2rgb(mstrmojo.css.getStyleValue(tds[i], 'color'));
                     }
                     if(colInfo.type !== CHART){
-                        fnSD(ths[i], colInfo.colWidth);
-                        fnSD(tds[i], colInfo.colWidth);
+                        fnSD(ths[i], colInfo.colWidth, this.otherProps.mRowTitleHeight-1); //-1 for the height of the dividing line
+                        fnSD(tds[i], colInfo.colWidth, this.otherProps.mRowHeight-1);
                     }else{
-                        fnSD(ths[i], colInfo.colWidth, true);
-                        fnSD(tds[i], colInfo.colWidth, true);
+                        fnSD(ths[i], colInfo.colWidth, this.otherProps.mRowTitleHeight-1, true);
+                        fnSD(tds[i], colInfo.colWidth, this.otherProps.mRowHeight-1, true);
                     }
 
 
@@ -1092,7 +1092,7 @@
                         tds[j].innerHTML = column.title;
                         //TODO: for now remove threshold for world, will resume later
                         if(colType === METRIC_VALUE && column.threshold){
-                            tds[j].style.backgroundColor = column.threshold.fillclr;
+                            tds[j].style.backgroundColor = column.threshold.fillColor;
                         }
                     }
                     else if (colType === CHART) {//Bullet Chart
@@ -1155,7 +1155,8 @@
                     dzModel = this.zonesModel,
                     dataDz = this.model.data.dz;
                 if(dzModel){
-                    metricCount = [dzModel.getDropZoneObjectsByIndex(1).length, dzModel.getDropZoneObjectsByIndex(2).length, dzModel.getDropZoneObjectsByIndex(3).length, dzModel.getDropZoneObjectsByIndex(4).length];//Actual,Target,Range,KPI
+                    //metricCount = [dzModel.getDropZoneObjectsByIndex(1).length, dzModel.getDropZoneObjectsByIndex(2).length, dzModel.getDropZoneObjectsByIndex(3).length, dzModel.getDropZoneObjectsByIndex(4).length];//Actual,Target,Range,KPI
+                    metricCount = [dzModel.getDropZoneObjectsByName("Actual").length, dzModel.getDropZoneObjectsByName("Target").length, dzModel.getDropZoneObjectsByName("Range").length, dzModel.getDropZoneObjectsByName("KPI").length];
                 }
                 else if(dataDz &&  validateDocumentDZ(dataDz)) {//converted document
                         //attsCategory = dataDz.XAxis.TemplateUnit;
@@ -1186,7 +1187,7 @@
                     }
                 }
                 //TODO: as 10.2 has not supported threshold, thus change back to no threshold status
-                this.advancedModel = (new $DI(this.model.data)).getRawData($DI.ENUM_RAW_DATA_FORMAT.ROWS_ADV, {hasTitleName:true, hasSelection:true, needDecode:true, hasThreshold: true});
+                this.advancedModel = this.dataInterface.getRawData($DI.ENUM_RAW_DATA_FORMAT.ROWS_ADV, {hasTitleName:true, hasSelection:true, needDecode:true, hasThreshold: true});
                 //this.advancedModel = (new $DI(this.model.data)).getRawData($DI.ENUM_RAW_DATA_FORMAT.ROWS_ADV, {hasTitleName:true, hasSelection:true, needDecode:true});
 
 

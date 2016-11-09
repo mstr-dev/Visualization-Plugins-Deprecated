@@ -59,6 +59,7 @@
     border-style: solid none none solid;
     border-color: #c8c8c8;
 
+
 }
 
 .mojo-theme-dark .mstrmojo-Chart.bulletchart  .bulletchart-canvas-div  table{
@@ -107,7 +108,7 @@
     box-sizing: border-box;
     border: 1px solid #29AAEE;
     content: '';
-    height: 100%;
+    height: inherit;
     left: 0;
     position: absolute;
     top: 0;
@@ -139,7 +140,7 @@
     box-sizing: border-box;
     border: 1px solid #29AAEE;
     content: '';
-    height: 100%;
+    height: inherit;
     left: 0;
     position: absolute;
     top: 0;
