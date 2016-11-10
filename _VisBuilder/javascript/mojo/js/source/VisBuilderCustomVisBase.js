@@ -95,20 +95,20 @@
         doc.body.appendChild(styleElement);
         var styles = styleElement.sheet.cssRules, i = styles.length,
             rePrefix = prefix.replace(/([\.\-])/g, "\\$1"),//replace special signal[.-]
-            ignoreLabel = new RegExp("InsertDHTMLWidgetMenuLayoutxml|"+ rePrefix );// rwd insert menu icon and already contain prefixcan not be added prefix
+            ignoreLabel = new RegExp("InsertDHTMLWidget|" + rePrefix.trim());// rwd insert menu icon and already contain prefixcan not be added prefix
         while (i) {
             i--;
             var txt = styles[i].selectorText,
                 subTxts = txt.split(","),//special process for comma, add prefix before both labels besides comma
                 cssText = styles[i].cssText;
-            if(txt.search(ignoreLabel) >= 0){//find non-need prefix string
-                continue;
+            if (txt.search(ignoreLabel) < 0) {//find need to add prefix string
+                subTxts.forEach(function (subTxt) {
+                    subTxt = subTxt.trim();
+                    cssText = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
+                });
             }
-            subTxts.forEach(function(subTxt){
-                subTxt = subTxt.trim();
-                cssText  = cssText.replace(subTxt, prefix + subTxt); //not use content to replace, to avoid that subTxt occurs on other labels, like{ .svg.... .div.svg...}, will replace both {.svg}
-            });
-            cssText = cssText.replace(/{/g, "{\n").replace(/;/g,";\n");
+
+            cssText = cssText.replace(/{/g, "{\n").replace(/;/g, ";\n");
             result = cssText + "\n\n" + result;
         }
         return result;
