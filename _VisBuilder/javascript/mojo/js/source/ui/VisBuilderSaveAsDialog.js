@@ -81,7 +81,7 @@
                 insertCSSLinks(styleName);
 
                 data.s = host.styleName =styleName;
-                data.c = host.scriptClass = "mstrmojo." + scriptClass;
+                data.c = host.scriptClass = scriptClass;
                 host.pluginFolder = newFolderName; //scriptClass && scriptClass.split(".")[2];
                 host.stylePrefix = '.custom-vis-layout.' + host.pluginFolder.toLowerCase() + ' ';
 
