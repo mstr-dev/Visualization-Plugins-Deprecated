@@ -266,7 +266,8 @@ Add CSS style for Menu Help toolbar button
 }
 
 .mstrmojo-vi-PropEditor .mstrmojo-FileUploadBox-button {
-    width: 30px;
+    padding: 0px;
+    border: 0px;
     margin: 0px 0px !important;
     -webkit-box-shadow: #FFFFFF 0 0 4px inset;
     -moz-box-shadow: #FFFFFF 0 0 4px inset;
@@ -280,11 +281,20 @@ Add CSS style for Menu Help toolbar button
     font-weight: normal;
     height: 18px;
     line-height: 18px;
-    padding: 0 8px;
     text-shadow: 0 1px 1px rgba(255, 255, 255, 0.3);
     background: rgba(0, 0, 0, 0.3);
     background-color: transparent;
     background-repeat: no-repeat border-style : none;
+}
+
+.mstrmojo-vi-PropEditor .mstrmojo-FileUploadBox-button .mstrmojo-WebButton{
+    padding: 0px;
+    border: 0px;
+    margin: 0px 0px !important;
+    min-width: 30px;
+    display: block;
+    height: 18px;
+    line-height: 18px;
 }
 
 
