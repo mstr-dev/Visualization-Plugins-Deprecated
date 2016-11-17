@@ -26,9 +26,10 @@
         // Set a flag on it to denote it's empty.
         inputNode.mstrmojoEmpty = true;
     }
-    var  widget;
 
-    mstrmojo.requiresCls("mstrmojo.Container", "mstrmojo.FileUploadBox", 'mstrmojo.TextBox', 'mstrmojo.Image', 'mstrmojo.vi.ui.rw._ValidInputLocalImage');
+    var widget;
+
+    mstrmojo.requiresCls("mstrmojo.Container", "mstrmojo.FileUploadBox", 'mstrmojo.TextBox', 'mstrmojo.Image');
     mstrmojo.plugins._VisBuilder.ui.VisBuilderIconSelector = mstrmojo.declare(
         mstrmojo.FileUploadBox,
         [mstrmojo._HasChildren],
@@ -42,16 +43,16 @@
             changeTxtCallback: mstrmojo.emptyFn(),
             changeUploadCallback: mstrmojo.emptyFn(),
             markupString: '<div id={@id} class="mstrmojo-FileUploadBox {@cssClass}" style="{@cssText}">' +
-                            '<form class="mstrmojo-FileUploadBox-form" target="{@id}_iframe" enctype="multipart/form-data" method="post" action="{@action}">' +
-                                '<input class="mstrmojo-FileUploadBox-input mstrmojo-TextBox" type="text" size="30" mstrAttach:focus,blur,change/>' +
-                                '<label class="mstrmojo-FileUploadBox-buttonDiv" >' +
-                                    '<input class="mstrmojo-FileUploadBox-file" type="file" {@multiple} size="30"   accept="image/png" style="position: absolute; left: -10000px; font-size:4em; width: 30px" name="{@fileFieldName}" onchange="mstrmojo.all.{@id}.synValue();"/>' +
-                                    '<div class="mstrmojo-FileUploadBox-button" ></div>' +
-                                '</label>' +
-                                '<div style="display:none;"></div>' +
-                            '</form>' +
-                            '<iframe id="{@id}_iframe" + name="{@id}_iframe" style="display:none;" src="about:blank"></iframe>' +
-                         '</div>',
+            '<form class="mstrmojo-FileUploadBox-form" target="{@id}_iframe" enctype="multipart/form-data" method="post" action="{@action}">' +
+            '<input class="mstrmojo-FileUploadBox-input mstrmojo-TextBox" type="text" size="30" mstrAttach:focus,blur,change/>' +
+            '<label class="mstrmojo-FileUploadBox-buttonDiv" >' +
+            '<input class="mstrmojo-FileUploadBox-file" type="file" {@multiple} size="30"   accept="image/png" style="position: absolute; left: -10000px; font-size:4em; width: 30px" name="{@fileFieldName}" onchange="mstrmojo.all.{@id}.synValue();"/>' +
+            '<div class="mstrmojo-FileUploadBox-button" ></div>' +
+            '</label>' +
+            '<div style="display:none;"></div>' +
+            '</form>' +
+            '<iframe id="{@id}_iframe" + name="{@id}_iframe" style="display:none;" src="about:blank"></iframe>' +
+            '</div>',
             markupMethods: {
                 onstatusChange: function () {
                     if (this.status === 'init') {
@@ -61,13 +62,13 @@
                     }
                 },
                 onvalueChange: function () {
-                     if (/\.png$/.test(this.value.toLowerCase())) {
+                    if (/\.png$/.test(this.value.toLowerCase())) {
                         hideEmpty.call(this);
                         this.inputNode.value = this.value;
                         this.changeUploadCallback();
-                    } else if(this.value == ''){
+                    } else if (this.value == '') {
                         showEmpty.call(this);
-                    }else{
+                    } else {
                         //showEmpty.call(this);
                         mstrmojo.alert("Please select an image with .png extension.");
                     }
@@ -75,7 +76,7 @@
             },
 
             children: [
-                mstrmojo.Button.newWebButton("...", function (){
+                mstrmojo.Button.newWebButton(this.browseLabel, function () {
                         if (mstrApp.isSingleTier) {
                             widget = this.parent;
                             var formWrapper = window.FormWrapper;
@@ -90,11 +91,21 @@
             ],
 
             markupSlots: {
-                formNode: function(){return this.domNode.firstChild;},
-                inputNode: function(){return this.domNode.firstChild.firstChild;},
-                fileNode: function(){return this.domNode.firstChild.childNodes[1].firstChild;},
-                buttonNode: function(){return this.domNode.firstChild.childNodes[1].childNodes[1];},
-                paramsNode: function(){return this.domNode.firstChild.lastChild;}
+                formNode: function () {
+                    return this.domNode.firstChild;
+                },
+                inputNode: function () {
+                    return this.domNode.firstChild.firstChild;
+                },
+                fileNode: function () {
+                    return this.domNode.firstChild.childNodes[1].firstChild;
+                },
+                buttonNode: function () {
+                    return this.domNode.firstChild.childNodes[1].childNodes[1];
+                },
+                paramsNode: function () {
+                    return this.domNode.firstChild.lastChild;
+                }
             },
 
             /**
@@ -267,7 +278,7 @@
                     });
                 }
             },
-            
+
 
             prefocus: function prefocus() {
                 hideEmpty.call(this);
@@ -288,28 +299,31 @@
             },
             //overwrite this one to change taskEnd to JSON instead of jsonp2
             submit: function (ps, callbacks) {
-                if(mstrApp.isSingleTier){
-                  var params = {
-                        taskId:this.uploadTaskId,//"VisBuilderIconUpload",
-                        baseData:this.fileNode.baseDataValue,
-                        drk:this.params.drk,
-                        fld:this.params.fld},
+                if (mstrApp.isSingleTier) {
+                    var params = {
+                            taskId: this.uploadTaskId,//"VisBuilderIconUpload",
+                            baseData: this.fileNode.baseDataValue,
+                            drk: this.params.drk,
+                            fld: this.params.fld
+                        },
                         me = this;
                     mstrApp.serverRequest(params, {
-                        success: function () {
-                            me.set('status','successful');
-                            if (callbacks) {
-                                callbacks.success();
-                            };
-                        },
+                            success: function () {
+                                me.set('status', 'successful');
+                                if (callbacks) {
+                                    callbacks.success();
+                                }
+                                ;
+                            },
 
-                        failure: function(){
-                            me.set('status','failed');
-                            if (callbacks) {
-                                callbacks.failure();
-                            };
+                            failure: function () {
+                                me.set('status', 'failed');
+                                if (callbacks) {
+                                    callbacks.failure();
+                                }
+                                ;
+                            }
                         }
-                    }
                     );
                     me.set('status', 'loading');
                     return;
@@ -371,7 +385,7 @@
             widget.inputNode.value = res.filename;
             parent.iconType = 2;//Enum_ICON_TYPE.UPLOAD
 
-            if(mstrApp.isSingleTier){
+            if (mstrApp.isSingleTier) {
                 selector.fileNode.baseDataValue = data;
             }
             preview.set('src', data);

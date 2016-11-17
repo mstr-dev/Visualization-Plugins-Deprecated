@@ -6,8 +6,7 @@
     var defaultIcon = '/javascript/mojo/css/vi/images/viz_gallery_sprite.png', ENUM_ICON_TYPE = {
         DEFAULT: 1,
         UPLOADED: 2,
-        HREF: 3,
-        SINGLETIER: 4
+        HREF: 3
     };
 
     function handleIconChange(type) {
@@ -41,7 +40,6 @@
             preview.set('src', selector.value);
             this.iconValue = selector.value;
             break;
-
         default:
             console.log('unknown action');
         }
@@ -86,7 +84,6 @@
                     scriptClass: "mstrmojo.plugins._VisBuilder.ui.VisBuilderIconSelector",
                     cssClass: "VisBuilderIconSectionFUB",
                     browseLabel: '...',
-                    imageBox: this.previewNode,
                     changeTxtCallback: function () {
                         handleIconChange.call(this.parent, ENUM_ICON_TYPE.HREF);
                     },
