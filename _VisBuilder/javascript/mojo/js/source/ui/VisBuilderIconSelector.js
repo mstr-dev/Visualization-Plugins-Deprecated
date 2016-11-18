@@ -382,7 +382,7 @@
 
 
             hideEmpty.call(widget);
-            widget.inputNode.value = res.filename;
+            widget.value = widget.inputNode.value = res.filename;
             parent.iconType = 2;//Enum_ICON_TYPE.UPLOAD
 
             if (mstrApp.isSingleTier) {
