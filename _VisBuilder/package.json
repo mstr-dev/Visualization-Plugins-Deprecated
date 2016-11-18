@@ -1,1 +1,1 @@
-{ "version" : "v1.5.0", "commit": "850fbb00ed6ca172bd65a1625ab6b5bbff5c3720","require": "10.5 Microstrategy","others":   "JDK 1.7 and Tomcat 7"}
+{ "version" : "v1.6.0", "commit": "XX","require": "10.6 Microstrategy","others":   "JDK 1.7 and Tomcat 7"}
