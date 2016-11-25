@@ -130,6 +130,46 @@
 
 
 
-   }
+   },
+               /**
+             * Sample code that shows how to write custom drop zones transition.
+             * Rules (US43713):
+             *   All attributes should be moved to 'Category' dropzone in order.
+             *   First metric should be moved to 'Actual'
+             *   Second metric should be moved to ‘Target'.
+             *   All other metric should be moved to 'KPI'
+             *   Special case: metric from 'Tooltips' dropzone should always moved to 'KPI' dropzone.
+             *
+             * @param {Array} attributes
+             * @param {Array} metrics
+             */
+            customDropZonesTransition: function customDropZonesTransition(attributes, metrics) {
+                var noTooltipsArr,
+                    tooltipsArr;
+
+                // Transit all attributes to "Category".
+                this.transitionObjectsToZone('Category', attributes);
+
+                // Find all metrics not from "Tooltips" (In OOTB it is called "AdditionalMetrics").
+                noTooltipsArr = metrics.filter(function (metric) {
+                    return metric.fromZone !== 'Tooltips' && metric.fromZone !== 'AdditionalMetrics';
+                });
+
+                // Transit first metric (not from "Tooltips") to "Actual".
+                this.transitionObjectsToZone('Actual', noTooltipsArr[0]);
+                // Transit second metric (not from "Tooltips") to "Target".
+                this.transitionObjectsToZone('Target', noTooltipsArr[1]);
+                // Transit all other metrics (not from "Tooltips") to "KPI".
+                this.transitionObjectsToZone('KPI', noTooltipsArr.slice(2));
+
+                // Find all metrics from "Tooltips" (In OOTB it is called "AdditionalMetrics").
+                tooltipsArr = metrics.filter(function (metric) {
+                    return metric.fromZone === 'Tooltips' || metric.fromZone === 'AdditionalMetrics';
+                });
+
+                // Transit all metrics from "Tooltips" to "KPI".
+                this.transitionObjectsToZone('KPI', tooltipsArr);
+
+            }
 })}());
 //@ sourceURL= BulletChartDropZones.js
