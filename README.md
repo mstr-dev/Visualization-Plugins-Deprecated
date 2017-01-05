@@ -11,5 +11,5 @@ Installing the Visualization Builder please refer to [DEVELOP ZONE](https://lw.m
 ##MobileBase
 Get MobileBase plug-in please refer to [MSDZ](https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm#topics/HTML5/Deploying_a_custom_visualization.htm). 
 
-##License
+#License
 The MicroStrategy Visualizations Sites terms and conditions at [http://www.microstrategy.com/us/licensing](http://www.microstrategy.com/us/licensing) apply to your access and use of this site.
