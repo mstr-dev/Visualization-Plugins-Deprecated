@@ -1,5 +1,5 @@
 ### Description
-This repository has been deprecated from January 2017 and will be removed permanently later. Since Microstrategy has provided other places to share and collect independently created custom visualizations that can be used in MicroStrategy dashboards and documents.
+This repository has been **deprecated** from January 2017 and will be removed permanently later. Since Microstrategy has provided other places to share and collect independently created custom visualizations that can be used in MicroStrategy dashboards and documents.
 
 #####Custom Visualizations
 1. Public custom visualizations please refer to [Visualization Gallery](https://community.microstrategy.com/t5/Visualization-Library/bg-p/vizgallery). 
