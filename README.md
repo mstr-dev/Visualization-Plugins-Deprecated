@@ -3,7 +3,7 @@
 
 ##Custom Visualizations
 1. Public custom visualizations please refer to [Visualization Gallery](https://community.microstrategy.com/t5/Visualization-Library/bg-p/vizgallery). 
-###2. Internal plugin repository please refer to [AnalyticsSDK Visualizations](https://github.microstrategy.com/AnalyticsSDK/Visualizations)
+2. Internal plugin repository please refer to [AnalyticsSDK Visualizations](https://github.microstrategy.com/AnalyticsSDK/Visualizations)
 
 ##VisBuilder
 Installing the Visualization Builder please refer to [DEVELOP ZONE](https://lw.microstrategy.com/msdz/MSDL/_CurrentGARelease/docs/projects/VisSDK_All/default.htm#topics/HTML5/Installing the Visualization Builder.htm).
