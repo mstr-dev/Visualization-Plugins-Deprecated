@@ -1,5 +1,0 @@
-<visualizations>
-    <visualization-list name="ajax">
-        <visualization id="GoogleTimeLine" desc="Google Time Line" scope="19" projects="" style-name="GoogleTimeLine" is-mojo="true" attribute-minimum="1" metric-minimum="1"/>
-    </visualization-list>
-</visualizations>

@@ -1,5 +1,0 @@
-<visualizations>
-  <visualization-list name="ajax" show-in-web="true" view-mode="51">
-    <visualization attribute-minimum="4" desc="SimpleGantt" is-mojo="true" metric-minimum="0" scope="19" style-name="SimpleGantt"/>
-  </visualization-list>
-</visualizations>

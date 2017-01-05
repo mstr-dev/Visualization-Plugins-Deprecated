@@ -1,9 +1,0 @@
-<!DOCTYPE mstrlayout:layout SYSTEM "mstrlayout.dtd">
-<mstrlayout:layout>
-	<mstrlayout:bContext defaultContentType="JSON" />
-
-	<mstrlayout:block name="VBMenubarModel">
-		<mstrlayout:bEditBlock path="" method="toolbarTaskLoad"/>
-	</mstrlayout:block>
-
-</mstrlayout:layout>
